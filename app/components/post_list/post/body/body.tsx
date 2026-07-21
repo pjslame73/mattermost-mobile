@@ -1,6 +1,8 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import SecuenciaHtmlPost from '@secuencia/components/secuencia_html_post';
+import {SECUENCIA_HTML_POST_TYPE} from '@secuencia/constants/plugin';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {type LayoutChangeEvent, type StyleProp, View, type ViewStyle} from 'react-native';
@@ -12,8 +14,6 @@ import ErrorBoundary from '@components/markdown/error_boundary';
 import {Screens} from '@constants';
 import StatusUpdatePost from '@playbooks/components/status_update_post';
 import {PLAYBOOKS_UPDATE_STATUS_POST_TYPE} from '@playbooks/constants/plugin';
-import SecuenciaHtmlPost from '@secuencia/components/secuencia_html_post';
-import {SECUENCIA_HTML_POST_TYPE} from '@secuencia/constants/plugin';
 import {isEdited as postEdited, isPostFailed} from '@utils/post';
 import {makeStyleSheetFromTheme} from '@utils/theme';
 

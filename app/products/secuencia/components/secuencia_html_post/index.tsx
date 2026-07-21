@@ -1,11 +1,11 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import {isSecuenciaHtmlProps} from '@secuencia/utils/types';
 import React, {useMemo, useState} from 'react';
 import {WebView, type WebViewMessageEvent} from 'react-native-webview';
 
 import Markdown from '@components/markdown';
-import {isSecuenciaHtmlProps} from '@secuencia/utils/types';
 import {makeStyleSheetFromTheme} from '@utils/theme';
 
 import {construirDocumentoHtml} from './build_document';
