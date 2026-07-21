@@ -62,6 +62,7 @@
             "@queries/*": ["app/queries/*"],
             "@routes/*": ["app/routes/*"],
             "@screens/*": ["app/screens/*"],
+            "@secuencia/*": ["app/products/secuencia/*"],
             "@selectors/*": ["app/selectors/*"],
             "@share/*": ["share_extension/*"],
             "@store": ["app/store/index"],

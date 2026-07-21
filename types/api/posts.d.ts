@@ -33,6 +33,7 @@ type PostType = PostTypesUserCreatable
     | 'custom_calls'
     | 'custom_calls_recording'
     | 'custom_run_update'
+    | 'custom_secuencia_html'
     | 'custom_llmbot'
     | 'custom_llm_postback';
 

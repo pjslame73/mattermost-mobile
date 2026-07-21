@@ -12,6 +12,8 @@ import ErrorBoundary from '@components/markdown/error_boundary';
 import {Screens} from '@constants';
 import StatusUpdatePost from '@playbooks/components/status_update_post';
 import {PLAYBOOKS_UPDATE_STATUS_POST_TYPE} from '@playbooks/constants/plugin';
+import SecuenciaHtmlPost from '@secuencia/components/secuencia_html_post';
+import {SECUENCIA_HTML_POST_TYPE} from '@secuencia/constants/plugin';
 import {isEdited as postEdited, isPostFailed} from '@utils/post';
 import {makeStyleSheetFromTheme} from '@utils/theme';
 
@@ -163,6 +165,14 @@ const Body = ({
     } else if (post.type === PLAYBOOKS_UPDATE_STATUS_POST_TYPE && post.props != null) {
         message = (
             <StatusUpdatePost
+                location={location}
+                post={post}
+                theme={theme}
+            />
+        );
+    } else if (post.type === SECUENCIA_HTML_POST_TYPE && post.props != null) {
+        message = (
+            <SecuenciaHtmlPost
                 location={location}
                 post={post}
                 theme={theme}

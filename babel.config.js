@@ -35,6 +35,7 @@ module.exports = {
                 '@queries': './app/queries',
                 '@routes': './app/routes',
                 '@screens': './app/screens',
+                '@secuencia': './app/products/secuencia',
                 '@share': './share_extension',
                 '@store': './app/store',
                 '@telemetry': './app/telemetry',
