@@ -266,3 +266,26 @@ export function getLocalizedMessage(lang: string, id: string, defaultMessage?: s
 
     return translations[id] || defaultMessage || '';
 }
+
+/**
+ * Handler de errores para los IntlProvider.
+ *
+ * Sin esto, react-intl usa su onError por defecto, que hace console.error en
+ * cada clave sin traducir. Eso dispara el LogBox rojo que se ve al abrir la
+ * app ("[@formatjs/intl] Error MISSING_TRANSLATION").
+ *
+ * Los idiomas de Mattermost vienen incompletos de upstream: es.json tiene 1112
+ * claves contra 1703 de en.json, o sea 591 sin traducir. No es un bug nuestro
+ * ni algo que rompa nada: react-intl cae al defaultMessage que esta en el
+ * codigo, asi que el texto se renderiza igual, en ingles.
+ *
+ * Silenciamos MISSING_TRANSLATION y dejamos pasar todo lo demas, que si son
+ * errores reales (sintaxis ICU rota, formatos invalidos, etc.).
+ */
+export function handleIntlError(error: {code?: string; message?: string}) {
+    if (error?.code === 'MISSING_TRANSLATION') {
+        return;
+    }
+
+    logError('[i18n]', error?.message ?? error);
+}

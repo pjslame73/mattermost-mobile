@@ -110,7 +110,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mattermost.rnbeta"
+        // Solo el applicationId. El `namespace` de arriba se deja en
+        // com.mattermost.rnbeta a proposito: el lane update_identifiers de
+        // Fastlane lo reescribe y mueve el paquete Java desde esa ruta hardcodeada.
+        // Si lo cambiaramos aca, el build de release se romperia.
+        applicationId "site.conversa.chat"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 787

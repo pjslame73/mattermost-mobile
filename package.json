@@ -181,6 +181,7 @@
   },
   "scripts": {
     "android": "react-native run-android",
+    "brand": "./branding/apply-native-assets.sh",
     "build:android": "./scripts/build.sh apk",
     "build:android-unsigned": "./scripts/build.sh apk unsigned",
     "build:ios": "./scripts/build.sh ipa",

@@ -524,10 +524,16 @@ platform :ios do
         new_string: app_bundle_id
     )
 
-    update_icloud_container_identifiers(
-        entitlements_file: './ios/Mattermost/Mattermost.entitlements',
-        icloud_container_identifiers: [icloud_container]
-    )
+    # Socratix no usa iCloud: sacamos esas claves de Mattermost.entitlements.
+    # Esta accion las volveria a agregar, y con eso el build exigiria la
+    # capability de iCloud en el App ID. Solo corre si IOS_ICLOUD_CONTAINER
+    # esta seteado, que en .env.ios.socratix no lo esta.
+    unless ENV['IOS_ICLOUD_CONTAINER'].to_s.empty?
+      update_icloud_container_identifiers(
+          entitlements_file: './ios/Mattermost/Mattermost.entitlements',
+          icloud_container_identifiers: [icloud_container]
+      )
+    end
 
     update_app_group_identifiers(
         entitlements_file: './ios/Mattermost/Mattermost.entitlements',

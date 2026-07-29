@@ -7,7 +7,7 @@ import {IntlProvider} from 'react-intl';
 import {of as of$} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
-import {DEFAULT_LOCALE, getTranslations} from '@i18n';
+import {DEFAULT_LOCALE, getTranslations, handleIntlError} from '@i18n';
 import {observeCurrentUser} from '@queries/servers/user';
 
 import type Database from '@nozbe/watermelondb/Database';
@@ -30,6 +30,7 @@ const UserLocaleProvider = ({locale, children}: Props) => {
             <IntlProvider
                 locale={locale}
                 messages={getTranslations(locale)}
+                onError={handleIntlError}
             >
                 {children}
             </IntlProvider>
@@ -44,6 +45,7 @@ export function withUserLocale<T extends WithUserLocaleProps>(Component: Compone
                     <IntlProvider
                         locale={locale}
                         messages={getTranslations(locale)}
+                        onError={handleIntlError}
                     >
                         <Component
                             {...props}

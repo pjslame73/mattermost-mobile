@@ -1,8 +1,8 @@
 {
-  "name": "Mattermost",
-  "displayName": "Mattermost",
+  "name": "Socratix",
+  "displayName": "Socratix",
   "expo": {
-    "scheme": "mattermost",
+    "scheme": "socratix",
     "plugins": [
       "expo-router"
     ]

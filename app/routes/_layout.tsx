@@ -18,7 +18,7 @@ import {Screens} from '@constants';
 import {isEdgeToEdge} from '@constants/device';
 import {useThemeByAppearanceWithDefault} from '@context/theme';
 import useDidMount from '@hooks/did_mount';
-import {DEFAULT_LOCALE, getTranslations} from '@i18n';
+import {DEFAULT_LOCALE, getTranslations, handleIntlError} from '@i18n';
 import {cleanup, initialize} from '@init/app';
 import InAppNotificationContainer from '@screens/in_app_notification';
 import ReviewAppContainer from '@screens/review_app';
@@ -193,6 +193,7 @@ export default function RootLayout() {
                     <IntlProvider
                         locale={DEFAULT_LOCALE}
                         messages={getTranslations(DEFAULT_LOCALE)}
+                        onError={handleIntlError}
                     >
                         <PortalProvider>
                             <KeyboardProvider
