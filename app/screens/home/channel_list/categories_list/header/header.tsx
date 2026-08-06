@@ -11,6 +11,7 @@ import CompassIcon from '@components/compass_icon';
 import {ITEM_HEIGHT} from '@components/slide_up_panel_item';
 import TouchableWithFeedback from '@components/touchable_with_feedback';
 import {PUSH_PROXY_STATUS_NOT_AVAILABLE, PUSH_PROXY_STATUS_VERIFIED} from '@constants/push_proxy';
+import {SHOW_PLUS_MENU} from '@constants/socratix';
 import {HOME_PADDING} from '@constants/view';
 import {useServerDisplayName, useServerUrl} from '@context/server';
 import {useTheme} from '@context/theme';
@@ -258,6 +259,7 @@ const ChannelListHeader = ({
                         <LoadingUnreads/>
                     </View>
                 </View>
+                {SHOW_PLUS_MENU &&
                 <TouchableWithFeedback
                     hitSlop={hitSlop}
                     onPress={onPress}
@@ -270,6 +272,7 @@ const ChannelListHeader = ({
                         name={'plus'}
                     />
                 </TouchableWithFeedback>
+                }
             </View>
         );
     } else {
