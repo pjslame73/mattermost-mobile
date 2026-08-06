@@ -1,0 +1,13 @@
+{
+  "extension.no_memberships.description": "Per condividere i contenuti, è necessario essere membri di un team su un server Socratix.",
+  "extension.no_servers.description": "Per condividere i contenuti, è necessario effettuare l'accesso a un server Socratix.",
+  "invite_people_to_team.message": "Ecco il link per collaborare e comunicare con noi su Socratix.",
+  "mobile.calls_mic_error": "Per partecipare, aprire le Impostazioni per consentire a Socratix di accedere al microfono.",
+  "mobile.managed.not_secured.android": "Questo dispositivo deve essere protetto da un blocco schermo per utilizzare Socratix.",
+  "mobile.managed.not_secured.ios": "Questo dispositivo deve essere protetto da un codice per utilizzare Socratix.\n\nAprire Impostazioni > Face ID & codice.",
+  "mobile.server_upgrade.description": "\nPer utilizzare l'applicazione Socratix è necessario un aggiornamento del server. Chiedete al vostro amministratore di sistema per i dettagli.\n",
+  "onboaring.welcome_description": "Socratix è una piattaforma open source per la collaborazione tra sviluppatori. Sicura, flessibile e integrata con i vostri strumenti.",
+  "rate.title": "Ti piace Socratix?",
+  "share_extension.channel_error": "Non si è membri di una squadra sul server selezionato. Selezionare un altro server o aprire Socratix per unirsi a una squadra.",
+  "share_extension.share_screen.title": "Condividi con Socratix"
+}

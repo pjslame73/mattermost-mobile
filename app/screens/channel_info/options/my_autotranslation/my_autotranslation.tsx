@@ -18,7 +18,7 @@ const messages = defineMessages({
     },
     failed: {
         id: 'channel_info.my_autotranslation_failed',
-        defaultMessage: 'An error occurred trying to enable automatic translation for yourself in course {displayName}',
+        defaultMessage: 'An error occurred trying to enable automatic translation for yourself in channel {displayName}',
     },
     languageNotSupported: {
         id: 'channel_info.my_autotranslation_language_not_supported',
@@ -38,7 +38,7 @@ const messages = defineMessages({
     },
     turnOffDescription: {
         id: 'channel_info.turn_off_auto_translation.description',
-        defaultMessage: "Messages in this course will revert to their original language. This will only affect how you see this course. Other members won't be affected.",
+        defaultMessage: "Messages in this channel will revert to their original language. This will only affect how you see this channel. Other members won't be affected.",
     },
     turnOffCancel: {
         id: 'channel_info.turn_off_auto_translation.button.cancel',

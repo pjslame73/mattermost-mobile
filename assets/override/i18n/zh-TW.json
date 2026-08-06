@@ -1,0 +1,12 @@
+{
+  "extension.no_memberships.description": "您必須先成為 Socratix 伺服器上的團隊成員，才能分享內容。",
+  "extension.no_servers.description": "您必須先登入 Socratix 伺服器，才能分享內容。",
+  "invite_people_to_team.message": "透過此連結在 Socratix 上與我們協作及溝通。",
+  "mobile.calls_mic_error": "要參與會議，開啟設定來准許 Socratix 存取您的麥克風。",
+  "mobile.managed.not_secured.android": "此裝置必須設定螢幕鎖定，才能使用 Socratix。",
+  "mobile.managed.not_secured.ios": "此裝置必須設定密碼才能使用 Socratix。\n\n前往「設定」>「Face ID 與密碼」。",
+  "mobile.server_upgrade.description": "\n須進行伺服器升級才能使用 Socratix 應用程式。請洽詢您的系統管理者以取得更多詳細資訊。\n",
+  "onboaring.welcome_description": "Socratix 是一款專為開發者協作打造的開放源碼平台。安全、彈性，且整合您的工具。",
+  "rate.title": "喜歡 Socratix 嗎？",
+  "share_extension.channel_error": "您尚未成為選定伺服器的任何團隊成員。選擇其他伺服器或開啟 Socratix 來加入團隊。"
+}

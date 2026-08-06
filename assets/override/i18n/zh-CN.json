@@ -1,0 +1,16 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "要分享内容，您需要先成为 Socratix 服务器上的团队成员。",
+  "extension.no_servers.description": "要分享内容，您需要先登录 Socratix 服务器。",
+  "invite_people_to_team.message": "通过此链接在 Socratix 中与我们协作和交流。",
+  "mobile.android.photos_permission_denied_description": "上传照片到 Socratix 或保存到您的设备。打开设置，并允许 {applicationName} 读写您的照片。",
+  "mobile.calls_mic_error": "打开设置，允许 Socratix 访问您的麦克风以加入通话。",
+  "mobile.managed.not_secured.android": "此设备必须开启屏幕锁才能使用 Socratix。",
+  "mobile.managed.not_secured.ios": "此设备必须开启生物识别或密码锁才能使用 Socratix。\n\n前往设置 > 面容 ID 与密码。",
+  "mobile.server_upgrade.description": "\n需要更新服务器才能使用 Socratix。请联系系统管理员了解更多信息。\n",
+  "mobile.storage_permission_denied_description": "上传文件到 Socratix。打开设置，并允许 {applicationName} 读写此设备上的文件。",
+  "onboarding.integrations_description": "通过面向常用开发流程的紧密集成，让 Socratix 不只是聊天工具。",
+  "onboaring.welcome_description": "Socratix 是面向开发者的开源协作平台。安全、灵活，并可与您的工具集成。",
+  "rate.title": "喜欢 Socratix 吗？",
+  "share_extension.channel_error": "您不是当前所选服务器中任何团队的成员。请选择其他服务器，或打开 Socratix 加入团队。"
+}

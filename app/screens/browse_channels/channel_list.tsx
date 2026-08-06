@@ -108,7 +108,7 @@ export default function ChannelList({
             <View style={noResutsStyle}>
                 <FormattedText
                     id='browse_channels.noMore'
-                    defaultMessage='No more courses to join'
+                    defaultMessage='No more channels to join'
                     style={style.noResultText}
                 />
             </View>

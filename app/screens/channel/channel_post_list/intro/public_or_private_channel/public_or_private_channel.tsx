@@ -58,23 +58,23 @@ const getStyleSheet = makeStyleSheetFromTheme((theme: Theme) => ({
 const messages = defineMessages({
     publicChannel: {
         id: 'intro.public_channel',
-        defaultMessage: 'Public Course',
+        defaultMessage: 'Public Channel',
     },
     privateChannel: {
         id: 'intro.private_channel',
-        defaultMessage: 'Private Course',
+        defaultMessage: 'Private Channel',
     },
     welcomePublic: {
         id: 'intro.welcome.public',
-        defaultMessage: 'Add some more team members to the course or start a conversation below.',
+        defaultMessage: 'Add some more team members to the channel or start a conversation below.',
     },
     welcomePrivate: {
         id: 'intro.welcome.private',
-        defaultMessage: 'Only invited members can see messages posted in this private course.',
+        defaultMessage: 'Only invited members can see messages posted in this private channel.',
     },
     welcome: {
         id: 'intro.welcome',
-        defaultMessage: 'Welcome to {displayName} course.',
+        defaultMessage: 'Welcome to {displayName} channel.',
     },
     createdBy: {
         id: 'intro.created_by',

@@ -22,7 +22,7 @@ const SetHeaderBox = ({channelId, containerStyle, isHeaderSet, inModal, testID}:
     const intl = useIntl();
 
     const onSetHeader = useCallback(async () => {
-        const title = intl.formatMessage({id: 'screens.channel_edit_header', defaultMessage: 'Edit Course Header'});
+        const title = intl.formatMessage({id: 'screens.channel_edit_header', defaultMessage: 'Edit Channel Header'});
         if (inModal) {
             navigateToScreenWithBaseRoute(`(modals)/${Screens.BROWSE_CHANNELS}`, Screens.CREATE_OR_EDIT_CHANNEL, {channelId, headerOnly: true, title});
             return;

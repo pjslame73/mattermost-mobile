@@ -1,0 +1,4 @@
+{
+  "mobile.managed.not_secured.android": "برای استفاده از Socratix، این دستگاه باید با قفل صفحه ایمن شود.",
+  "mobile.managed.not_secured.ios": "برای استفاده از Socratix، این دستگاه باید با یک رمز عبور ایمن شود.\n\nبه Settings > Face ID & Passcode بروید."
+}

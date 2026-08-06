@@ -45,11 +45,11 @@ const messages = defineMessages({
     },
     emailHeaderCRTText: {
         id: 'notification_settings.email.crt.send',
-        defaultMessage: 'Conversation reply notifications',
+        defaultMessage: 'Thread reply notifications',
     },
     emailFooterCRTText: {
         id: 'notification_settings.email.crt.emailInfo',
-        defaultMessage: "When enabled, any reply to a conversation you're following will send an email notification",
+        defaultMessage: "When enabled, any reply to a thread you're following will send an email notification",
     },
 });
 
@@ -181,7 +181,7 @@ const NotificationEmail = ({currentUser, emailInterval, enableEmailBatching, isC
                 >
                     <SettingOption
                         action={setEmailThreads}
-                        label={intl.formatMessage({id: 'user.settings.notifications.email_threads.description', defaultMessage: 'Notify me about all replies to conversations I\'m following'})}
+                        label={intl.formatMessage({id: 'user.settings.notifications.email_threads.description', defaultMessage: 'Notify me about all replies to threads I\'m following'})}
                         selected={emailThreads}
                         testID='email_notification_settings.email_threads.option'
                         type='toggle'

@@ -80,11 +80,11 @@ const errorCodeToErrorMessage = defineMessages<ScheduledPostErrorCode>({
     },
     channel_archived: {
         id: 'scheduled_post.error_code.channel_archived',
-        defaultMessage: 'Course Archived',
+        defaultMessage: 'Channel Archived',
     },
     channel_not_found: {
         id: 'scheduled_post.error_code.channel_removed',
-        defaultMessage: 'Course Removed',
+        defaultMessage: 'Channel Removed',
     },
     user_missing: {
         id: 'scheduled_post.error_code.user_missing',
@@ -100,11 +100,11 @@ const errorCodeToErrorMessage = defineMessages<ScheduledPostErrorCode>({
     },
     no_channel_member: {
         id: 'scheduled_post.error_code.no_channel_member',
-        defaultMessage: 'Not In Course',
+        defaultMessage: 'Not In Channel',
     },
     thread_deleted: {
         id: 'scheduled_post.error_code.thread_deleted',
-        defaultMessage: 'Conversation Deleted',
+        defaultMessage: 'Thread Deleted',
     },
     unable_to_send: {
         id: 'scheduled_post.error_code.unable_to_send',
@@ -172,7 +172,7 @@ export async function canPostDraftInChannelOrThread({
             intl.formatMessage({id: 'scheduled_post.channel_archived', defaultMessage: 'Sending post failed'}),
             intl.formatMessage({
                 id: 'scheduled_post.channel_archived.message',
-                defaultMessage: 'You cannot post to an archived course.',
+                defaultMessage: 'You cannot post to an archived channel.',
             }),
             [{
                 text: intl.formatMessage({id: 'mobile.post.cancel', defaultMessage: 'Cancel'}),
@@ -188,7 +188,7 @@ export async function canPostDraftInChannelOrThread({
             intl.formatMessage({id: 'scheduled_post.channel_read_only', defaultMessage: 'Sending post failed'}),
             intl.formatMessage({
                 id: 'scheduled_post.channel_read_only.message',
-                defaultMessage: 'You cannot post to a read-only course.',
+                defaultMessage: 'You cannot post to a read-only channel.',
             }),
             [{
                 text: intl.formatMessage({id: 'mobile.post.cancel', defaultMessage: 'Cancel'}),
@@ -204,7 +204,7 @@ export async function canPostDraftInChannelOrThread({
             intl.formatMessage({id: 'scheduled_post.channel_deactivated', defaultMessage: 'Sending post failed'}),
             intl.formatMessage({
                 id: 'scheduled_post.channel_deactivated.message',
-                defaultMessage: 'You cannot post to a deactivated course.',
+                defaultMessage: 'You cannot post to a deactivated channel.',
             }),
             [{
                 text: intl.formatMessage({id: 'mobile.post.cancel', defaultMessage: 'Cancel'}),
@@ -220,7 +220,7 @@ export async function canPostDraftInChannelOrThread({
             intl.formatMessage({id: 'scheduled_post.no_permission', defaultMessage: 'Sending post failed'}),
             intl.formatMessage({
                 id: 'scheduled_post.no_permission.message',
-                defaultMessage: 'You do not have permission to post in this course.',
+                defaultMessage: 'You do not have permission to post in this channel.',
             }),
             [{
                 text: intl.formatMessage({id: 'mobile.post.cancel', defaultMessage: 'Cancel'}),

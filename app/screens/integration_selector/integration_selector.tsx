@@ -164,7 +164,7 @@ const getStyleSheet = makeStyleSheetFromTheme((theme: Theme) => {
 const messages = defineMessages({
     loadingChannels: {
         id: 'mobile.integration_selector.loading_channels',
-        defaultMessage: 'Loading courses...',
+        defaultMessage: 'Loading channels...',
     },
     loadingOptions: {
         id: 'mobile.integration_selector.loading_options',

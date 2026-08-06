@@ -1,0 +1,13 @@
+{
+    "DefaultServerUrl": "https://chat.conversa.site",
+    "DefaultServerName": "Socratix",
+    "AutoSelectServerUrl": true,
+
+    "AuthUrlScheme": "socratixauth://",
+    "AuthUrlSchemeDev": "socratixauthbeta://",
+
+    "WebsiteURL": "https://chat.conversa.site",
+
+    "ShowOnboarding": false,
+    "ShowReview": false
+}

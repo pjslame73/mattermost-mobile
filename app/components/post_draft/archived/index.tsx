@@ -60,11 +60,11 @@ const edges: Edge[] = ['bottom'];
 const messages = defineMessages({
     archivedChannelMessage: {
         id: 'archivedChannelMessage',
-        defaultMessage: 'You are viewing an **archived course**. New messages cannot be posted.',
+        defaultMessage: 'You are viewing an **archived channel**. New messages cannot be posted.',
     },
     deactivatedChannelMessage: {
         id: 'create_post.deactivated',
-        defaultMessage: 'You are viewing an archived course with a deactivated user.',
+        defaultMessage: 'You are viewing an archived channel with a deactivated user.',
     },
 });
 
@@ -112,7 +112,7 @@ export default function Archived({
             >
                 <FormattedText
                     id='center_panel.archived.closeChannel'
-                    defaultMessage='Close Course'
+                    defaultMessage='Close Channel'
                     style={style.closeButtonText}
                 />
             </Button>

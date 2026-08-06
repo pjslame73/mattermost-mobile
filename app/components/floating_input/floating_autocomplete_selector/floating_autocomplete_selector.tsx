@@ -82,11 +82,11 @@ async function getItemName(serverUrl: string, selected: string, teammateNameDisp
         }
         case ViewConstants.DATA_SOURCE_CHANNELS: {
             if (!database) {
-                return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown course'});
+                return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown channel'});
             }
 
             const channel = await getChannelById(database, selected);
-            return channel?.displayName || intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown course'});
+            return channel?.displayName || intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown channel'});
         }
     }
 

@@ -51,11 +51,11 @@ const Header = ({tabsProps, teamId, testID, hasUnreads}: Props) => {
         Alert.alert(
             intl.formatMessage({
                 id: 'global_threads.markAllRead.title',
-                defaultMessage: 'Are you sure you want to mark all conversations as read?',
+                defaultMessage: 'Are you sure you want to mark all threads as read?',
             }),
             intl.formatMessage({
                 id: 'global_threads.markAllRead.message',
-                defaultMessage: 'This will clear any unread status for all of your conversations shown here',
+                defaultMessage: 'This will clear any unread status for all of your threads shown here',
             }),
             [{
                 text: intl.formatMessage({

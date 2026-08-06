@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "Чтобы обмениваться контентом, вам необходимо быть участником команды на сервере Socratix.",
+  "extension.no_servers.description": "Чтобы поделиться контентом, вам необходимо войти на сервер Socratix.",
+  "invite_people_to_team.message": "Вот ссылка для сотрудничества и общения с нами в Socratix.",
+  "mobile.calls_mic_error": "Для участия откройте \"Настройки\", чтобы предоставить Socratix доступ к вашему микрофону.",
+  "mobile.managed.not_secured.android": "Это устройство должно быть защищено с помощью блокировки экрана, чтобы использовать Socratix.",
+  "mobile.managed.not_secured.ios": "Это устройство должно быть защищено биометрией или паролем, чтобы использовать Socratix.\n\nПерейди в Настройки > Face ID & Passcode.",
+  "mobile.server_upgrade.description": "\nДля продолжения работы требуется обновление сервера Socratix. Пожалуйста, обратитесь к системному администратору за подробностями.\n",
+  "onboaring.welcome_description": "Socratix - это платформа с открытым исходным кодом для совместной работы разработчиков. Безопасная, гибкая и интегрированная с вашими инструментами.",
+  "rate.title": "Нравится Socratix?",
+  "share_extension.channel_error": "Вы не являетесь членом команды на выбранном сервере. Выберите другой сервер или откройте Socratix, чтобы присоединиться к команде."
+}

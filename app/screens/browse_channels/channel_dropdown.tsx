@@ -75,11 +75,11 @@ export default function ChannelDropdown({
         bottomSheet(renderContent, [1, itemsSnap]);
     };
 
-    let channelDropdownText = intl.formatMessage({id: 'browse_channels.showPublicChannels', defaultMessage: 'Show: Public Courses'});
+    let channelDropdownText = intl.formatMessage({id: 'browse_channels.showPublicChannels', defaultMessage: 'Show: Public Channels'});
     if (typeOfChannels === SHARED) {
-        channelDropdownText = intl.formatMessage({id: 'browse_channels.showSharedChannels', defaultMessage: 'Show: Shared Courses'});
+        channelDropdownText = intl.formatMessage({id: 'browse_channels.showSharedChannels', defaultMessage: 'Show: Shared Channels'});
     } else if (typeOfChannels === ARCHIVED) {
-        channelDropdownText = intl.formatMessage({id: 'browse_channels.showArchivedChannels', defaultMessage: 'Show: Archived Courses'});
+        channelDropdownText = intl.formatMessage({id: 'browse_channels.showArchivedChannels', defaultMessage: 'Show: Archived Channels'});
     }
     return (
         <View testID='browse_channels.channel_dropdown'>

@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "コンテンツを共有するには、Socratixサーバー上のメンバになる必要があります。",
+  "extension.no_servers.description": "コンテンツを共有するには、Socratixサーバーにログインする必要があります。",
+  "invite_people_to_team.message": "Socratixでコラボレーションやコミュニケーションを行うためのリンクはこちらです。",
+  "mobile.calls_mic_error": "参加するには、設定を開いて、Socratix にマイクへのアクセスを許可してください。",
+  "mobile.managed.not_secured.android": "このデバイスでSocratixを使うにはスクリーンロックを設定する必要があります。",
+  "mobile.managed.not_secured.ios": "このデバイスでSocratixを使うには生体認証かパスコードを設定する必要があります。\n\n設定 > Face IDとパスコード から設定してください。",
+  "mobile.server_upgrade.description": "\nSocratix appを使用するにはサーバーのアップグレードが必要です。詳しくはシステム管理者に問い合わせてください。\n",
+  "onboaring.welcome_description": "Socratixは開発者のコラボレーションのためのオープンソースのプラットフォームです。セキュアで、柔軟で、さまざまなツールと連携することができます。",
+  "rate.title": "Socratixを楽しんでいますか？",
+  "share_extension.channel_error": "あなたは選択したサーバーのチームのメンバーではありません。他のサーバーを選択するか、Socratixを開いてチームに参加してください。"
+}

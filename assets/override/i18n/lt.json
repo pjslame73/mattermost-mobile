@@ -1,0 +1,6 @@
+{
+  "mobile.android.photos_permission_denied_description": "Įkelkite nuotraukas į Socratix arba išsaugokite jas savo prietaise. Atidarykite nustatymus, kad suteiktumėte {applicationName} skaitymo ir rašymo prieigą prie savo nuotraukų bibliotekos.",
+  "mobile.camera_photo_permission_denied_description": "Darykite nuotraukas ir įkelkite jas į savo Socratix arba išsaugokite jas savo prietaise. Atidarykite nustatymus, kad suteiktumėte {applicationName} skaitymo ir rašymo prieigą prie fotoaparato.",
+  "mobile.managed.not_secured.android": "Kad galėtumėte naudoti Socratix, šis įrenginys turi būti apsaugotas ekrano užraktu.",
+  "mobile.managed.not_secured.ios": "Šis įrenginys turi būti apsaugotas slaptažodžiu, kad galėtumėte naudoti Socratix.\n\nEikite į Nustatymai > Veido ID ir slaptažodis."
+}

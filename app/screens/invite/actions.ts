@@ -178,11 +178,11 @@ async function sendGuestInviteForUsers(serverUrl: string, teamId: string, select
         }
 
         if (channelsFailed > 0) {
-            notSent.push({userId, reason: formatMessage({id: 'invite.summary.guest_invite_failed', defaultMessage: 'Unable to add user to {channelsFailed, plural, one {# course} other {# courses}}'}, {channelsFailed})});
+            notSent.push({userId, reason: formatMessage({id: 'invite.summary.guest_invite_failed', defaultMessage: 'Unable to add user to {channelsFailed, plural, one {# channel} other {# channels}}'}, {channelsFailed})});
             continue;
         }
 
-        sent.push({userId, reason: formatMessage({id: 'invite.summary.guest_invite', defaultMessage: 'This guest has been added to the team and {count, plural, one {# course} other {# courses}}.'}, {count: channelsAdded})});
+        sent.push({userId, reason: formatMessage({id: 'invite.summary.guest_invite', defaultMessage: 'This guest has been added to the team and {count, plural, one {# channel} other {# channels}}.'}, {count: channelsAdded})});
     }
     return {sent, notSent};
 }

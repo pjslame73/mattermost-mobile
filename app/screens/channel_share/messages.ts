@@ -14,11 +14,11 @@ export const messages = defineMessages({
     },
     addWorkspaceSheetSubtitle: {
         id: 'channel_share.add_workspace_sheet.subtitle',
-        defaultMessage: 'Select a connected workspace to share this course with',
+        defaultMessage: 'Select a connected workspace to share this channel with',
     },
     addWorkspaceSheetAllConnected: {
         id: 'channel_share.add_workspace_sheet.all_connected',
-        defaultMessage: 'All connected workspaces are already sharing this course.',
+        defaultMessage: 'All connected workspaces are already sharing this channel.',
     },
     pendingSave: {
         id: 'channel_share.status.pending_save',
@@ -42,11 +42,11 @@ export const messages = defineMessages({
     },
     workspacesSharingThisChannel: {
         id: 'channel_share.workspaces_sharing_this_channel',
-        defaultMessage: 'Workspaces this course is shared with',
+        defaultMessage: 'Workspaces this channel is shared with',
     },
     noWorkspacesSharingThisChannel: {
         id: 'channel_share.no_workspaces_sharing_this_channel',
-        defaultMessage: 'This course is not shared with any connected workspaces yet.',
+        defaultMessage: 'This channel is not shared with any connected workspaces yet.',
     },
     unshareConfirmTitle: {
         id: 'channel_share.unshare_confirm_title',
@@ -58,7 +58,7 @@ export const messages = defineMessages({
     },
     unshareConfirmMessage: {
         id: 'channel_share.unshare_confirm_message',
-        defaultMessage: 'This will unshare the course {channelName} with the {workspaceList} connected {count, plural, one {workspace} other {workspaces}}. Are you sure you want to unshare?',
+        defaultMessage: 'This will unshare the channel {channelName} with the {workspaceList} connected {count, plural, one {workspace} other {workspaces}}. Are you sure you want to unshare?',
     },
     remove: {
         id: 'channel_share.remove',
@@ -90,7 +90,7 @@ export const messages = defineMessages({
     },
     shareWithConnectedWorkspacesDescription: {
         id: 'channel_share.share_with_connected_workspaces_description',
-        defaultMessage: 'Collaborate with trusted organizations in this course. Connections must be defined by a system admin.',
+        defaultMessage: 'Collaborate with trusted organizations in this channel. Connections must be defined by a system admin.',
     },
     noRemotesWarning: {
         id: 'channel_share.no_remotes_warning',

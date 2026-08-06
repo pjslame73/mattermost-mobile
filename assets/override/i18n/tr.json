@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "İçerik paylaşabilmek için bir Socratix sunucusundaki bir takımın üyesi olmalısınız.",
+  "extension.no_servers.description": "İçerik paylaşabilmek için bir Socratix sunucusundaki oturum açmış olmalısınız.",
+  "invite_people_to_team.message": "Socratix üzerine bizimle işbirliği yapmak ve iletişim kurmak için bağlantı.",
+  "mobile.calls_mic_error": "Katılmak için, Ayarlar bölümüne giderek Socratix için mikrofona erişme izni verin.",
+  "mobile.managed.not_secured.android": "Bu aygıtta Socratix kullanılabilmesi için ekran kilidi güvenliğinin etkinleştirilmesi gerekir.",
+  "mobile.managed.not_secured.ios": "Bu aygıtta Socratix kullanılabilmesi için biyometri veya parola güvenliği açık olmalıdır.\n\nAyarlar > Face ID ve Parola bölümünden ayarlayabilirsiniz.",
+  "mobile.server_upgrade.description": "\nSocratix uygulamasını kullanmak için sunucunun güncellenmesi gerekiyor. Lütfen ayrıntılı bilgi almak için sistem yöneticiniz ile görüşün.\n",
+  "onboaring.welcome_description": "Socratix, geliştiriciler arasında işbirliği sağlamayı amaçlayan açık kaynaklı bir platformdur. Güvenlidir, esnektir ve araçlarınızla bütünleşik çalışır.",
+  "rate.title": "Socratix hoşunuza gidiyor mu?",
+  "share_extension.channel_error": "Seçilmiş sunucuda bir takımın üyesi değilsiniz. Başka bir sunucu seçin ya da bir takıma katılmak için Socratix uygulamasını açın."
+}

@@ -24,11 +24,11 @@ type NotifPrefOptions = {
 const messages = defineMessages({
     threadReplies: {
         id: 'channel_notification_preferences.thread_replies',
-        defaultMessage: 'Conversation replies',
+        defaultMessage: 'Thread replies',
     },
     threadRepliesDescription: {
         id: 'channel_notification_preferences.notification.thread_replies',
-        defaultMessage: 'Notify me about replies to conversations I’m following in this course',
+        defaultMessage: 'Notify me about replies to threads I’m following in this channel',
     },
 });
 

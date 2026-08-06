@@ -134,11 +134,11 @@ export default function ChannelInfoForm({
     const labelHeader = formatMessage({id: 'channel_modal.header', defaultMessage: 'Header'}) + ' ' + optionalText;
 
     const placeholderDisplayName = formatMessage({id: 'channel_modal.nameEx', defaultMessage: 'Bugs, Marketing'});
-    const placeholderPurpose = formatMessage({id: 'channel_modal.purposeEx', defaultMessage: 'A course to file bugs and improvements'});
+    const placeholderPurpose = formatMessage({id: 'channel_modal.purposeEx', defaultMessage: 'A channel to file bugs and improvements'});
     const placeholderHeader = formatMessage({id: 'channel_modal.headerEx', defaultMessage: 'Use Markdown to format header text'});
 
     const makePrivateLabel = formatMessage({id: 'channel_modal.makePrivate.label', defaultMessage: 'Make Private'});
-    const makePrivateDescription = formatMessage({id: 'channel_modal.makePrivate.description', defaultMessage: 'When a course is set to private, only invited team members can access and participate in that course'});
+    const makePrivateDescription = formatMessage({id: 'channel_modal.makePrivate.description', defaultMessage: 'When a channel is set to private, only invited team members can access and participate in that channel'});
 
     const displayHeaderOnly = headerOnly || channelType === General.DM_CHANNEL || channelType === General.GM_CHANNEL;
     const showSelector = !displayHeaderOnly && !editing && (canCreatePrivateChannels);
@@ -322,7 +322,7 @@ export default function ChannelInfoForm({
                                     <FormattedText
                                         style={styles.helpText}
                                         id='channel_modal.descriptionHelp'
-                                        defaultMessage='Describe how this course should be used.'
+                                        defaultMessage='Describe how this channel should be used.'
                                         testID='channel_info_form.purpose.description'
                                     />
                                 </View>
@@ -347,7 +347,7 @@ export default function ChannelInfoForm({
                             <FormattedText
                                 style={styles.helpText}
                                 id='channel_modal.headerHelp'
-                                defaultMessage={'Specify text to appear in the course header beside the course name. For example, include frequently used links by typing link text [Link Title](http://example.com).'}
+                                defaultMessage={'Specify text to appear in the channel header beside the channel name. For example, include frequently used links by typing link text [Link Title](http://example.com).'}
                                 testID='channel_info_form.header.description'
 
                             />

@@ -335,7 +335,7 @@ const CallScreen = ({
     const numSessions = Object.keys(sessionsDict).length;
     const showIncomingCalls = incomingCalls.incomingCalls.length > 0;
 
-    const callThreadOptionTitle = intl.formatMessage({id: 'mobile.calls_call_thread', defaultMessage: 'Call Conversation'});
+    const callThreadOptionTitle = intl.formatMessage({id: 'mobile.calls_call_thread', defaultMessage: 'Call Thread'});
     const recordOptionTitle = intl.formatMessage({id: 'mobile.calls_record', defaultMessage: 'Record'});
     const stopRecordingOptionTitle = intl.formatMessage({id: 'mobile.calls_stop_recording', defaultMessage: 'Stop Recording'});
     const showCCTitle = intl.formatMessage({id: 'mobile.calls_show_cc', defaultMessage: 'Show live captions'});
@@ -827,7 +827,7 @@ const CallScreen = ({
                                     />
                                     <FormattedText
                                         id={'mobile.calls_thread'}
-                                        defaultMessage={'Conversation'}
+                                        defaultMessage={'Thread'}
                                         style={style.buttonText}
                                     />
                                 </Pressable>

@@ -153,7 +153,7 @@ export default function BrowseChannels(props: Props) {
                 result.error,
                 {
                     id: 'mobile.join_channel.error',
-                    defaultMessage: "We couldn't join the course {displayName}.",
+                    defaultMessage: "We couldn't join the channel {displayName}.",
                 },
                 {
                     displayName: channel.display_name,

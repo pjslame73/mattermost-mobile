@@ -33,7 +33,7 @@ const IgnoreMentions = ({channelId, ignoring, displayName}: Props) => {
                 result.error,
                 defineMessage({
                     id: 'channel_info.channel_auto_follow_threads_failed',
-                    defaultMessage: 'An error occurred trying to auto follow all conversations in course {displayName}',
+                    defaultMessage: 'An error occurred trying to auto follow all threads in channel {displayName}',
                 }),
                 {displayName},
             );

@@ -1,0 +1,8 @@
+{
+  "mobile.android.photos_permission_denied_description": "Foto’s oplade nei jo Socratix of se bewarje op jo apparaat. Iepenje de Ynstellingen om Socratix Lês- en Skriuwtagong te jaan ta jo fotobiblioteek.",
+  "mobile.camera_photo_permission_denied_description": "Nim foto’s en laad se op nei jo Socratix of bewarje se op jo apparaat. Iepenje Ynstellingen om Socratix Lês- en Skriuwtagong te jaan ta jo kamera.",
+  "mobile.ios.photos_permission_denied_description": "Upload foto's en video's naar jouw Socratix of bewaar ze op jouw apparaat. Open Instellingen om Socratix Lezen en Schrijftoegang te geven tot jouw foto-en videobibliotheek.",
+  "mobile.managed.not_secured.android": "Dit apparaat moet beveiligd zijn met een schermvergrendeling om Socratix te gebruiken.",
+  "mobile.managed.not_secured.ios": "Dit apparaat moet worden beveiligd met een toegangscode om Socratix te gebruiken.\n\nGa naar Instellingen > Face ID & Wachtwoord.",
+  "mobile.storage_permission_denied_description": "Upload bestanden naar jouw Socratix-installatie. Open Instellingen voor het verlenen van Socratix Lees- en Schrijftoegang tot bestanden op dit apparaat."
+}

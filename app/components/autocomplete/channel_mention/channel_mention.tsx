@@ -60,11 +60,11 @@ const reduceChannelsForAutocomplete = (channels: Array<Channel | ChannelModel>, 
 const channelMentionMessages = defineMessages({
     public: {
         id: 'suggestion.search.public',
-        defaultMessage: 'Public Courses',
+        defaultMessage: 'Public Channels',
     },
     private: {
         id: 'suggestion.search.private',
-        defaultMessage: 'Private Courses',
+        defaultMessage: 'Private Channels',
     },
     direct: {
         id: 'suggestion.search.direct',
@@ -72,11 +72,11 @@ const channelMentionMessages = defineMessages({
     },
     channels: {
         id: 'suggestion.mention.channels',
-        defaultMessage: 'My Courses',
+        defaultMessage: 'My Channels',
     },
     morechannels: {
         id: 'suggestion.mention.morechannels',
-        defaultMessage: 'Other Courses',
+        defaultMessage: 'Other Channels',
     },
 });
 

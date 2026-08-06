@@ -46,7 +46,7 @@ const Channels = ({theme}: Props) => {
 
     useEffect(() => {
         navigator.setOptions({
-            title: intl.formatMessage({id: 'share_extension.channels_screen.title', defaultMessage: 'Select course'}),
+            title: intl.formatMessage({id: 'share_extension.channels_screen.title', defaultMessage: 'Select channel'}),
         });
 
     // We only care about changes in the locale

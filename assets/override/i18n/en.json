@@ -1,0 +1,15 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "To share content, you'll need to be a member of a team on a Socratix server.",
+  "extension.no_servers.description": "To share content, you'll need to be logged in to a Socratix server.",
+  "invite_people_to_team.message": "Here’s a link to collaborate and communicate with us on Socratix.",
+  "mobile.calls.foreground_service.channel_name": "Socratix Calls",
+  "mobile.calls.foreground_service.title": "Socratix",
+  "mobile.calls_mic_error": "To participate, open Settings to grant Socratix access to your microphone.",
+  "mobile.managed.not_secured.android": "This device must be secured with a screen lock to use Socratix.",
+  "mobile.managed.not_secured.ios": "This device must be secured with biometrics or passcode to use Socratix.\n\nGo to Settings > Face ID & Passcode.",
+  "mobile.server_upgrade.description": "\nA server upgrade is required to use the Socratix app. Please ask your System Administrator for details.\n",
+  "onboaring.welcome_description": "Socratix is an open source platform for developer collaboration. Secure, flexible, and integrated with your tools.",
+  "rate.title": "Enjoying Socratix?",
+  "share_extension.channel_error": "You are not a member of a team on the selected server. Select another server or open Socratix to join a team."
+}

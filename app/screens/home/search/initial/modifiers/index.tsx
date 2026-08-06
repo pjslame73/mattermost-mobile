@@ -57,7 +57,7 @@ const getModifiersSectionsData = (intl: IntlShape, teamId: string): ModifierItem
         }, {
             term: 'In:',
             testID: 'search.modifier.in',
-            description: formatMessage({id: 'mobile.search.modifier.in', defaultMessage: 'a specific course'}),
+            description: formatMessage({id: 'mobile.search.modifier.in', defaultMessage: 'a specific channel'}),
         });
     }
 

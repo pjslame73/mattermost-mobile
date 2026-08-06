@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "For å dele innhold, må du være medlem av et team på en Socratix-server.",
+  "extension.no_servers.description": "For å dele innhold, må du være pålogget en Socratix-server.",
+  "invite_people_to_team.message": "Her er en lenke for å samarbeide og kommunisere med oss på Socratix.",
+  "mobile.calls_mic_error": "For å delta, åpne Innstillinger for å gi Socratix tilgang til mikrofonen din.",
+  "mobile.managed.not_secured.android": "Denne enheten må sikres med en skjermlås for å bruke Socratix.",
+  "mobile.managed.not_secured.ios": "Denne enheten må sikres med biometri eller adgangskode for å bruke Socratix.\n\nGå til Innstillinger > Face ID og adgangskode.",
+  "mobile.server_upgrade.description": "\nEn serveroppgradering kreves for å bruke Socratix-appen. Spør systemadministratoren din for detaljer.\n",
+  "onboaring.welcome_description": "Socratix er en åpen kildekode-plattform for utviklersamarbeid. Sikker, fleksibel og integrert med verktøyene dine.",
+  "rate.title": "Liker du Socratix?",
+  "share_extension.channel_error": "Du er ikke medlem av et team på den valgte serveren. Velg en annen server eller åpne Socratix for å bli med i et team."
+}

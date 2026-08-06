@@ -67,7 +67,7 @@ export default function DropdownSlideup({
             <SlideUpPanelItem
                 onPress={handlePublicPress}
                 testID='browse_channels.dropdown_slideup_item.public_channels'
-                text={intl.formatMessage({id: 'browse_channels.publicChannels', defaultMessage: 'Public Courses'})}
+                text={intl.formatMessage({id: 'browse_channels.publicChannels', defaultMessage: 'Public Channels'})}
                 rightIcon={selected === PUBLIC ? 'check' : undefined}
                 rightIconStyles={style.checkIcon}
             />
@@ -75,7 +75,7 @@ export default function DropdownSlideup({
                 <SlideUpPanelItem
                     onPress={handleArchivedPress}
                     testID='browse_channels.dropdown_slideup_item.archived_channels'
-                    text={intl.formatMessage({id: 'browse_channels.archivedChannels', defaultMessage: 'Archived Courses'})}
+                    text={intl.formatMessage({id: 'browse_channels.archivedChannels', defaultMessage: 'Archived Channels'})}
                     rightIcon={selected === ARCHIVED ? 'check' : undefined}
                     rightIconStyles={style.checkIcon}
                 />
@@ -84,7 +84,7 @@ export default function DropdownSlideup({
                 <SlideUpPanelItem
                     onPress={handleSharedPress}
                     testID='browse_channels.dropdown_slideup_item.shared_channels'
-                    text={intl.formatMessage({id: 'browse_channels.sharedChannels', defaultMessage: 'Shared Courses'})}
+                    text={intl.formatMessage({id: 'browse_channels.sharedChannels', defaultMessage: 'Shared Channels'})}
                     rightIcon={selected === SHARED ? 'check' : undefined}
                     rightIconStyles={style.checkIcon}
                 />

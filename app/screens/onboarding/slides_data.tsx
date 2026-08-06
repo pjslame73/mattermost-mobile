@@ -61,12 +61,12 @@ const useSlidesData = () => {
         },
         {
             title: intl.formatMessage({id: 'onboarding.realtime_collaboration', defaultMessage: 'Collaborate in real‑time'}),
-            description: intl.formatMessage({id: 'onboarding.realtime_collaboration_description', defaultMessage: 'Persistent courses, direct messaging, and file sharing works seamlessly so you can stay connected, wherever you are.'}),
+            description: intl.formatMessage({id: 'onboarding.realtime_collaboration_description', defaultMessage: 'Persistent channels, direct messaging, and file sharing works seamlessly so you can stay connected, wherever you are.'}),
             image: teamCommunicationSvg,
         },
         {
             title: intl.formatMessage({id: 'onboarding.calls', defaultMessage: 'Start secure audio calls instantly'}),
-            description: intl.formatMessage({id: 'onboarding.calls_description', defaultMessage: 'When typing isn’t fast enough, switch from course-based chat to secure audio calls with a single tap.'}),
+            description: intl.formatMessage({id: 'onboarding.calls_description', defaultMessage: 'When typing isn’t fast enough, switch from channel-based chat to secure audio calls with a single tap.'}),
             image: callsSvg,
         },
         {

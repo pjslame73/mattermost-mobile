@@ -25,7 +25,7 @@ const ReplySettings = ({replyNotificationType, setReplyNotificationType}: ReplyS
         >
             <SettingOption
                 action={setReplyNotificationType}
-                label={intl.formatMessage({id: 'notification_settings.threads_start_participate', defaultMessage: 'Conversations that I start or participate in'})}
+                label={intl.formatMessage({id: 'notification_settings.threads_start_participate', defaultMessage: 'Threads that I start or participate in'})}
                 selected={replyNotificationType === 'any'}
                 testID='mention_notification_settings.threads_start_participate.option'
                 type='select'
@@ -34,7 +34,7 @@ const ReplySettings = ({replyNotificationType, setReplyNotificationType}: ReplyS
             <SettingSeparator/>
             <SettingOption
                 action={setReplyNotificationType}
-                label={intl.formatMessage({id: 'notification_settings.threads_start', defaultMessage: 'Conversations that I start'})}
+                label={intl.formatMessage({id: 'notification_settings.threads_start', defaultMessage: 'Threads that I start'})}
                 selected={replyNotificationType === 'root'}
                 testID='mention_notification_settings.threads_start.option'
                 type='select'
@@ -43,7 +43,7 @@ const ReplySettings = ({replyNotificationType, setReplyNotificationType}: ReplyS
             <SettingSeparator/>
             <SettingOption
                 action={setReplyNotificationType}
-                label={intl.formatMessage({id: 'notification_settings.threads_mentions', defaultMessage: 'Mentions in conversations'})}
+                label={intl.formatMessage({id: 'notification_settings.threads_mentions', defaultMessage: 'Mentions in threads'})}
                 selected={replyNotificationType === 'never'}
                 testID='mention_notification_settings.threads_mentions.option'
                 type='select'

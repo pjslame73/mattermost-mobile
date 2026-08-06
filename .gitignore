@@ -1,4 +1,8 @@
-assets/override
+# Upstream ignora assets/override para que cada fork ponga su marca sin
+# conflictos. En Socratix ahi vive el white-label completo (R01, OBLIGATORIO):
+# traducciones al español, iconos y splash screens. Sin versionar, un clone
+# limpio compila con la marca Mattermost y en ingles.
+# assets/override
 dist
 build-ios
 *.zip

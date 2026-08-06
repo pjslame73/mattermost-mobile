@@ -415,7 +415,7 @@ const ToolCard = ({
                                     </View>
                                     <FormattedText
                                         id='agents.tool_call.approval_warning'
-                                        defaultMessage='Approving lets Agents use this response in their next message. That message will be visible to everyone in the course — only approve results you are comfortable sharing.'
+                                        defaultMessage='Approving lets Agents use this response in their next message. That message will be visible to everyone in the channel — only approve results you are comfortable sharing.'
                                         style={styles.warningBodyText}
                                     />
                                 </View>

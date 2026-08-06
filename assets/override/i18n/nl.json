@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "Om inhoud te delen moet je lid zijn van een team op een Socratix-server.",
+  "extension.no_servers.description": "Om inhoud te delen, moet je ingelogd zijn op een Socratix-server.",
+  "invite_people_to_team.message": "Hier is een link om met ons samen te werken en te communiceren op Socratix.",
+  "mobile.calls_mic_error": "Om deel te nemen, open Instellingen om Socratix toegang te geven tot jouw microfoon.",
+  "mobile.managed.not_secured.android": "Dit apparaat moet eerst beveiligd worden met een schermvergrendeling, zodat je Socratix kunt gebruiken.",
+  "mobile.managed.not_secured.ios": "Dit apparaat moet beveiligd zijn met biometrie of een wachtwoord om Socratix te kunnen gebruiken.\n\nGa naar Instellingen > Face ID & Wachtwoordcode.",
+  "mobile.server_upgrade.description": "\nEen server upgrade is vereist om de Socratix app te gebruiken. Vraag jouw systeembeheerder voor details.\n",
+  "onboaring.welcome_description": "Socratix is een open source platform voor samenwerking tussen ontwikkelaars. Veilig, flexibel en geïntegreerd met jouw tools.",
+  "rate.title": "Vind je Socratix fijn?",
+  "share_extension.channel_error": "Je bent geen lid van een team op de geselecteerde server. Selecteer een andere server of open Socratix om lid te worden van een team."
+}

@@ -88,7 +88,7 @@ const AddBookmark = ({bookmarksCount, channelId, currentUserId, canUploadFiles, 
                 formatMessage({id: 'channel_info.add_bookmark', defaultMessage: 'Add a bookmark'}),
                 formatMessage({
                     id: 'channel_info.add_bookmark.max_reached',
-                    defaultMessage: 'This course has reached the maximum number of bookmarks.',
+                    defaultMessage: 'This channel has reached the maximum number of bookmarks.',
                 }),
             );
             return;

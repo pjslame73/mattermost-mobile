@@ -1,0 +1,5 @@
+{
+  "mobile.managed.not_secured.android": "Kjo pajisje duhet të sigurohet me një kyçje të ekranit për të përdorur Socratix.",
+  "mobile.managed.not_secured.ios": "Kjo pajisje duhet të sigurohet me një kodkalim për të përdorur Socratix.\n\nShkoni te Settings> Face ID & Passcode.",
+  "mobile.storage_permission_denied_description": "Ngarko skedarët në instancën tuaj Socratix. Hapni Cilësimet për t'i dhënë Lexim dhe Shkrim Socratix në skedarët në këtë pajisje."
+}

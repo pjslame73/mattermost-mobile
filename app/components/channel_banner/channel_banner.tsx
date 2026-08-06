@@ -80,7 +80,7 @@ export function ChannelBanner({bannerInfo, isTopItem, skipHeaderOffset}: Props) 
 
         const expandedChannelBannerTitle = intl.formatMessage({
             id: 'channel.banner.bottom_sheet.title',
-            defaultMessage: 'Course Banner',
+            defaultMessage: 'Channel Banner',
         });
 
         const renderContent = () => (

@@ -100,7 +100,7 @@ const ChannelMention = ({
             if (result.error || !result.channel) {
                 const joinFailedMessage = defineMessage({
                     id: 'mobile.join_channel.error',
-                    defaultMessage: "We couldn't join the course {displayName}.",
+                    defaultMessage: "We couldn't join the channel {displayName}.",
                 });
                 alertErrorWithFallback(intl, result.error || {}, joinFailedMessage, {displayName: c.display_name});
             } else if (result.channel) {

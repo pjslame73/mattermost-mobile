@@ -14,7 +14,7 @@ type AlertCallback = (value?: string) => void;
 export function errorBadChannel(intl: IntlShape) {
     const message = defineMessage({
         id: 'mobile.server_link.unreachable_channel.error',
-        defaultMessage: 'This link belongs to a deleted course or to a course to which you do not have access.',
+        defaultMessage: 'This link belongs to a deleted channel or to a channel to which you do not have access.',
     });
 
     return alertErrorWithFallback(intl, {}, message);
@@ -128,7 +128,7 @@ export function buildChannelWideMentionMessage(intl: IntlShape, membersCount: nu
 export function alertChannelWideMention(intl: IntlShape, notifyAllMessage: string, accept: AlertCallback, cancel: AlertCallback) {
     const message = intl.formatMessage({
         id: 'mobile.post_textbox.entire_channel.title',
-        defaultMessage: 'Confirm sending notifications to entire course',
+        defaultMessage: 'Confirm sending notifications to entire channel',
     });
     alertMessage(intl, message, notifyAllMessage, accept, cancel);
 }

@@ -1,0 +1,7 @@
+{
+  "extension.no_memberships.description": "내용을 공유하려면 Socratix 서버에서 팀의 구성원이어야 합니다.",
+  "extension.no_servers.description": "내용을 공유하려면 Socratix 서버에 로그인해야 합니다.",
+  "invite_people_to_team.message": "다음은 Socratix에서 우리와 협력하고 소통할 수 있는 링크입니다.",
+  "mobile.managed.not_secured.android": "Socratix를 사용하려면 이 장치를 화면 잠금으로 보호해야 합니다.",
+  "onboaring.welcome_description": "Socratix는 개발자 협업을 위한 오픈 소스 플랫폼입니다. 안전하고 유연하며 도구와 통합되어 있습니다."
+}

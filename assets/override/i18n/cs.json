@@ -1,0 +1,13 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "K sdílení obsahu musíte být členem týmu na serveru Socratix.",
+  "extension.no_servers.description": "K sdílení obsahu musíte být přihlášen na server Socratix.",
+  "invite_people_to_team.message": "Zde je odkaz pro spolupráci a komunikaci s námi na Socratixu.",
+  "mobile.calls_mic_error": "Pro účast otevřete Nastavení a udělte Socratix přístup k vašemu mikrofonu.",
+  "mobile.managed.not_secured.android": "Toto zařízení musí být zabezpečeno uzamčením obrazovky, aby bylo možné používat Socratix.",
+  "mobile.managed.not_secured.ios": "Toto zařízení musí být zabezpečeno pomocí biometrie nebo kódu pro použití Socratix.\n\nPřejděte do Nastavení > Face ID a kód.",
+  "mobile.server_upgrade.description": "\nPro použití aplikace Socratix je vyžadována aktualizace serveru. Prosím, požádejte svého správce systému o podrobnosti.\n",
+  "onboaring.welcome_description": "Socratix je open source platforma pro spolupráci vývojářů. Bezpečná, flexibilní a integrovaná s vašimi nástroji.",
+  "rate.title": "Baví vás Socratix?",
+  "share_extension.channel_error": "Nejste členem týmu na zvoleném serveru. Zvolte jiný server nebo otevřete Socratix pro připojení k týmu."
+}

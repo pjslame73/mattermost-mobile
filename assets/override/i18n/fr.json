@@ -1,0 +1,14 @@
+{
+  "extension.no_memberships.description": "Pour partager du contenu, vous devez être membre d'une équipe sur un serveur Socratix.",
+  "extension.no_servers.description": "Pour partager du contenu, vous devez être connecté à un serveur Socratix.",
+  "invite_people_to_team.message": "Voici un lien pour collaborer et communiquer avec nous sur Socratix.",
+  "mobile.calls_mic_error": "Pour participer, ouvrez les paramètres pour autoriser Socratix à accéder à votre micro.",
+  "mobile.ios.plist.NSBluetoothAlwaysUsageDescription": "Autoriser l'accès Blutooth signifie que vous pouvez synchroniser du contenu entre les appareils et clients Socratix.",
+  "mobile.ios.plist.NSBluetoothPeripheralUsageDescription": "Autoriser l'accès Bluetooth signifie que vous pouvez connecter des périphériques audio pour vos appels, et synchroniser du contenu entre les appareils et clients Socratix.",
+  "mobile.managed.not_secured.android": "Cet appareil doit être sécurisé avec un verrouillage d'écran pour pouvoir utiliser Socratix.",
+  "mobile.managed.not_secured.ios": "Cet appareil doit être sécurisé avec un code pour pouvoir utiliser Socratix.\n\nAllez dans Réglages > Face ID et code.",
+  "mobile.server_upgrade.description": "\nUne mise à niveau du serveur est requise pour utiliser l'application Socratix. Veuillez contacter votre administrateur système pour en savoir plus.\n",
+  "onboaring.welcome_description": "Socratix est une plateforme open source pour la collaboration entre développeurs. Sécurisée, flexible et intégrée à vos outils.",
+  "rate.title": "Vous aimez Socratix ?",
+  "share_extension.channel_error": "Vous n'êtes pas encore membre d'une équipe sur le serveur sélectionné. Sélectionnez un autre serveur ou ouvrez Socratix pour rejoindre une équipe."
+}

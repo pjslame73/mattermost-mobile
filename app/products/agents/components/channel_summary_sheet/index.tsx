@@ -330,7 +330,7 @@ const ChannelSummarySheet = ({channelId}: Props) => {
 
                 <View style={styles.promptWrapper}>
                     <FloatingTextInput
-                        label={intl.formatMessage({id: 'agents.channel_summary.ai_prompt_placeholder', defaultMessage: 'Ask AI about this course'})}
+                        label={intl.formatMessage({id: 'agents.channel_summary.ai_prompt_placeholder', defaultMessage: 'Ask AI about this channel'})}
                         theme={theme}
                         value={customPrompt}
                         onChangeText={setCustomPrompt}

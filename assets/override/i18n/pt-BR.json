@@ -1,0 +1,6 @@
+{
+  "extension.no_memberships.description": "Para compartilhar conteúdo, você precisará ser um membro de uma equipe no servidor do Socratix.",
+  "extension.no_servers.description": "Para compartilhar conteúdo, você precisará estar conectado a um servidor Socratix.",
+  "mobile.managed.not_secured.android": "Este dispositivo deve ser protegido com um bloqueio de tela para usar o Socratix.",
+  "mobile.managed.not_secured.ios": "Este dispositivo deve ser protegido por uma senha para usar o Socratix.\n\nVá para Configurações > Face ID & Passcode."
+}

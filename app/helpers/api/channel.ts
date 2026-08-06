@@ -10,11 +10,11 @@ export function privateChannelJoinPrompt(displayName: string, intl: IntlShape): 
         Alert.alert(
             intl.formatMessage({
                 id: 'permalink.show_dialog_warn.title',
-                defaultMessage: 'Join private course',
+                defaultMessage: 'Join private channel',
             }),
             intl.formatMessage({
                 id: 'permalink.show_dialog_warn.description',
-                defaultMessage: 'You are about to join {channel} without explicitly being added by the course admin. Are you sure you wish to join this private course?',
+                defaultMessage: 'You are about to join {channel} without explicitly being added by the channel admin. Are you sure you wish to join this private channel?',
             }, {
                 channel: displayName,
             }),

@@ -44,15 +44,15 @@ const messages = defineMessages({
     },
     leaveChannel: {
         id: 'channel_info.leave_channel',
-        defaultMessage: 'Leave course',
+        defaultMessage: 'Leave channel',
     },
     leavePrivateChannel: {
         id: 'channel_info.leave_private_channel',
-        defaultMessage: "Are you sure you want to leave the private course {displayName}? You cannot rejoin the course unless you're invited again.",
+        defaultMessage: "Are you sure you want to leave the private channel {displayName}? You cannot rejoin the channel unless you're invited again.",
     },
     leavePublicChannel: {
         id: 'channel_info.leave_public_channel',
-        defaultMessage: 'Are you sure you want to leave the public course {displayName}? You can always rejoin.',
+        defaultMessage: 'Are you sure you want to leave the public channel {displayName}? You can always rejoin.',
     },
     cancel: {
         id: 'mobile.post.cancel',

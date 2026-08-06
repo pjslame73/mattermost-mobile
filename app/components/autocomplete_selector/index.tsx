@@ -112,7 +112,7 @@ async function getItemName(serverUrl: string, selected: string, teammateNameDisp
         }
         case ViewConstants.DATA_SOURCE_CHANNELS: {
             if (!database) {
-                return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown course'});
+                return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown channel'});
             }
 
             const channel = await getChannelById(database, selected);
@@ -127,13 +127,13 @@ async function getItemName(serverUrl: string, selected: string, teammateNameDisp
                 if (activeServerUrl) {
                     const client = NetworkManager.getClient(activeServerUrl);
                     const serverChannel = await client.getChannel(selected);
-                    return serverChannel?.display_name || intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown course'});
+                    return serverChannel?.display_name || intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown channel'});
                 }
             } catch (error) {
                 logDebug('[AutoCompleteSelector.getItemName] Failed to fetch channel from server', error);
             }
 
-            return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown course'});
+            return intl.formatMessage({id: 'autocomplete_selector.unknown_channel', defaultMessage: 'Unknown channel'});
         }
     }
 

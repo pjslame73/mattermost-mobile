@@ -16,7 +16,7 @@ type Props = {
 const messages = defineMessages({
     openInChannel: {
         id: 'global_threads.options.open_in_channel',
-        defaultMessage: 'Open in Course',
+        defaultMessage: 'Open in Channel',
     },
 });
 const OpenInChannelOption = ({threadId}: Props) => {

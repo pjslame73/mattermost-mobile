@@ -18,7 +18,7 @@ export default function FindChannelsRoute() {
     useEffect(() => {
         navigation.setOptions({
             headerShown: true,
-            headerTitle: intl.formatMessage({id: 'find_channels.title', defaultMessage: 'Find Courses'}),
+            headerTitle: intl.formatMessage({id: 'find_channels.title', defaultMessage: 'Find Channels'}),
             ...getModalHeaderOptions(theme, navigateBack, 'close.find_channels.button'),
         });
     }, [intl, navigation, theme]);

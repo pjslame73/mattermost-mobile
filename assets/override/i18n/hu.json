@@ -1,0 +1,7 @@
+{
+  "about.mattermost": "Socratix",
+  "extension.no_memberships.description": "Tartalmak megosztásához egy Socratix kiszolgálón lévő csapat tagjának kell lennie.",
+  "extension.no_servers.description": "Tartalom megosztásához be kell jelentkeznie egy Socratix kiszolgálóra.",
+  "mobile.managed.not_secured.android": "A Socratix használatához a készüléket képernyőzárral kell beállítani.",
+  "mobile.managed.not_secured.ios": "A Socratix használatához ezt az eszközt zárolási mintával kell védeni.\n\nLépjen a Beállítások > Face ID és jelkód menüpontba."
+}

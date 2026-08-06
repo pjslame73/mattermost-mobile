@@ -47,11 +47,11 @@ export function alertChannelRemove(displayName: string, intl: IntlShape) {
     Alert.alert(
         intl.formatMessage({
             id: 'alert.removed_from_channel.title',
-            defaultMessage: 'Removed from course',
+            defaultMessage: 'Removed from channel',
         }),
         intl.formatMessage({
             id: 'alert.removed_from_channel.description',
-            defaultMessage: 'You have been removed from course {displayName}.',
+            defaultMessage: 'You have been removed from channel {displayName}.',
         }, {displayName}),
         [{
             style: 'cancel',
@@ -64,11 +64,11 @@ export function alertChannelArchived(displayName: string, intl: IntlShape) {
     Alert.alert(
         intl.formatMessage({
             id: 'alert.channel_deleted.title',
-            defaultMessage: 'Archived course',
+            defaultMessage: 'Archived channel',
         }),
         intl.formatMessage({
             id: 'alert.channel_deleted.description',
-            defaultMessage: 'The course {displayName} has been archived.',
+            defaultMessage: 'The channel {displayName} has been archived.',
         }, {displayName}),
         [{
             style: 'cancel',

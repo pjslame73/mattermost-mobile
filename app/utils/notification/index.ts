@@ -57,7 +57,7 @@ export const notificationError = (intl: IntlShape, type: 'Team' | 'Channel' | 'C
         case 'Channel':
             message = intl.formatMessage({
                 id: 'notification.not_channel_member',
-                defaultMessage: 'This message belongs to a course where you are not a member.',
+                defaultMessage: 'This message belongs to a channel where you are not a member.',
             });
             break;
         case 'Team':

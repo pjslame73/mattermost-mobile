@@ -43,15 +43,15 @@ export const getMatchTermForAtMention = (() => {
 const specialMentionsMessages = defineMessages({
     all: {
         id: 'suggestion.mention.all',
-        defaultMessage: 'Notifies everyone in this course',
+        defaultMessage: 'Notifies everyone in this channel',
     },
     channel: {
         id: 'suggestion.mention.channel',
-        defaultMessage: 'Notifies everyone in this course',
+        defaultMessage: 'Notifies everyone in this channel',
     },
     here: {
         id: 'suggestion.mention.here',
-        defaultMessage: 'Notifies everyone online in this course',
+        defaultMessage: 'Notifies everyone online in this channel',
     },
 });
 
@@ -151,7 +151,7 @@ const sectionMessages = defineMessages({
     },
     nonmembers: {
         id: 'suggestion.mention.nonmembers',
-        defaultMessage: 'Not in Course',
+        defaultMessage: 'Not in Channel',
     },
 });
 

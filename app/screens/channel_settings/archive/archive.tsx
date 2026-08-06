@@ -25,11 +25,11 @@ type Props = {
 const messages = defineMessages({
     publicChannel: {
         id: 'channel_info.public_channel',
-        defaultMessage: 'Public Course',
+        defaultMessage: 'Public Channel',
     },
     privateChannel: {
         id: 'channel_info.private_channel',
-        defaultMessage: 'Private Course',
+        defaultMessage: 'Private Channel',
     },
     alertNo: {
         id: 'channel_info.alertNo',
@@ -45,15 +45,15 @@ const messages = defineMessages({
     },
     archiveDescriptionCanViewArchived: {
         id: 'channel_info.archive_description.can_view_archived',
-        defaultMessage: 'This will archive the course from the team. Course contents will still be accessible by course members.\n\nAre you sure you wish to archive the {term} {name}?',
+        defaultMessage: 'This will archive the channel from the team. Channel contents will still be accessible by channel members.\n\nAre you sure you wish to archive the {term} {name}?',
     },
     archiveDescriptionCannotViewArchived: {
         id: 'channel_info.archive_description.cannot_view_archived',
-        defaultMessage: 'This will archive the course from the team and remove it from the user interface. Archived courses can be unarchived if needed again.\n\nAre you sure you wish to archive the {term} {name}?',
+        defaultMessage: 'This will archive the channel from the team and remove it from the user interface. Archived channels can be unarchived if needed again.\n\nAre you sure you wish to archive the {term} {name}?',
     },
     archiveFailed: {
         id: 'channel_info.archive_failed',
-        defaultMessage: 'An error occurred trying to archive the course {displayName}',
+        defaultMessage: 'An error occurred trying to archive the channel {displayName}',
     },
     unarchiveTitle: {
         id: 'channel_info.unarchive_title',
@@ -65,7 +65,7 @@ const messages = defineMessages({
     },
     unarchiveFailed: {
         id: 'channel_info.unarchive_failed',
-        defaultMessage: 'An error occurred trying to unarchive the course {displayName}',
+        defaultMessage: 'An error occurred trying to unarchive the channel {displayName}',
     },
 });
 
@@ -151,7 +151,7 @@ const Archive = ({
         return (
             <OptionItem
                 action={onUnarchive}
-                label={intl.formatMessage({id: 'channel_info.unarchive', defaultMessage: 'Unarchive Course'})}
+                label={intl.formatMessage({id: 'channel_info.unarchive', defaultMessage: 'Unarchive Channel'})}
                 icon='archive-arrow-up-outline'
                 destructive={true}
                 type='default'
@@ -163,7 +163,7 @@ const Archive = ({
     return (
         <OptionItem
             action={onArchive}
-            label={intl.formatMessage({id: 'channel_info.archive', defaultMessage: 'Archive Course'})}
+            label={intl.formatMessage({id: 'channel_info.archive', defaultMessage: 'Archive Channel'})}
             icon='archive-outline'
             destructive={true}
             type='default'
