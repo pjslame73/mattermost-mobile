@@ -58,7 +58,7 @@ const SearchField = () => {
                     style={styles.icon}
                 />
                 <FormattedText
-                    defaultMessage='Find channels...'
+                    defaultMessage='Find courses...'
                     id='channel_list.find_channels'
                     style={styles.input}
                 />

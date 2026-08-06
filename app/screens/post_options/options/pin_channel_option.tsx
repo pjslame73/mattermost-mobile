@@ -17,11 +17,11 @@ type PinChannelProps = {
 const messages = defineMessages({
     pin: {
         id: 'mobile.post_info.pin',
-        defaultMessage: 'Pin to Channel',
+        defaultMessage: 'Pin to Course',
     },
     unpin: {
         id: 'mobile.post_info.unpin',
-        defaultMessage: 'Unpin from Channel',
+        defaultMessage: 'Unpin from Course',
     },
 });
 

@@ -10,7 +10,7 @@ import SettingSeparator from '@components/settings/separator';
 
 const headerText = defineMessage({
     id: 'notification_settings.push_threads.replies',
-    defaultMessage: 'Thread replies',
+    defaultMessage: 'Conversation replies',
 });
 
 type MobilePushThreadProps = {
@@ -27,7 +27,7 @@ const MobilePushThread = ({pushThread, onMobilePushThreadChanged}: MobilePushThr
         >
             <SettingOption
                 action={onMobilePushThreadChanged}
-                label={intl.formatMessage({id: 'notification_settings.push_threads.following', defaultMessage: 'Notify me about replies to threads I\'m following in this channel'})}
+                label={intl.formatMessage({id: 'notification_settings.push_threads.following', defaultMessage: 'Notify me about replies to conversations I\'m following in this course'})}
                 selected={pushThread === 'all'}
                 testID='push_notification_settings.push_threads_following.option'
                 type='toggle'

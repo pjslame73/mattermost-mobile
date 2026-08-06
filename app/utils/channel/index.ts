@@ -86,15 +86,15 @@ export function sortChannelsModelByDisplayName(locale: string, a: ChannelModel, 
 const displayNameValidationMessages = defineMessages({
     display_name_required: {
         id: 'mobile.rename_channel.display_name_required',
-        defaultMessage: 'Channel name is required',
+        defaultMessage: 'Course name is required',
     },
     display_name_maxLength: {
         id: 'mobile.rename_channel.display_name_maxLength',
-        defaultMessage: 'Channel name must be less than {maxLength, number} characters',
+        defaultMessage: 'Course name must be less than {maxLength, number} characters',
     },
     display_name_minLength: {
         id: 'mobile.rename_channel.display_name_minLength',
-        defaultMessage: 'Channel name must be {minLength, number} or more characters',
+        defaultMessage: 'Course name must be {minLength, number} or more characters',
     },
 });
 

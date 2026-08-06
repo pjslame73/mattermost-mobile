@@ -51,7 +51,7 @@ function NoResults({isFilterEnabled}: Props) {
                         testID={`${TEST_ID}.empty.title`}
                     />
                     <FormattedText
-                        defaultMessage={'Files posted in this channel will show here.'}
+                        defaultMessage={'Files posted in this course will show here.'}
                         id='channel_files.empty.paragraph'
                         style={styles.paragraph}
                         testID={`${TEST_ID}.empty.paragraph`}
@@ -67,7 +67,7 @@ function NoResults({isFilterEnabled}: Props) {
                         testID={`${TEST_ID}.empty.title`}
                     />
                     <FormattedText
-                        defaultMessage={'This channel doesn\'t contain any files with the applied filters'}
+                        defaultMessage={'This course doesn\'t contain any files with the applied filters'}
                         id='channel_files.noFiles.paragraph'
                         style={styles.paragraph}
                         testID={`${TEST_ID}.empty.paragraph`}

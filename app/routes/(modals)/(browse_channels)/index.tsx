@@ -16,7 +16,7 @@ export default function BrowseChannelsRoute() {
     useNavigationHeader({
         showWhenPushed: true,
         headerOptions: {
-            headerTitle: intl.formatMessage({id: 'browse_channels.title', defaultMessage: 'Browse channels'}),
+            headerTitle: intl.formatMessage({id: 'browse_channels.title', defaultMessage: 'Browse courses'}),
             ...getModalHeaderOptions(theme, navigation.goBack, 'close.browse_channels.button'),
         },
     });

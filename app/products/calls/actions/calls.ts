@@ -513,7 +513,7 @@ export const handleCallsSlashCommand = async (value: string, serverUrl: string, 
                 return {
                     error: intl.formatMessage({
                         id: 'mobile.calls_start_call_exists',
-                        defaultMessage: 'A call is already ongoing in the channel.',
+                        defaultMessage: 'A call is already ongoing in the course.',
                     }),
                 };
             }
@@ -543,7 +543,7 @@ export const handleCallsSlashCommand = async (value: string, serverUrl: string, 
             return {
                 error: intl.formatMessage({
                     id: 'mobile.calls_not_connected',
-                    defaultMessage: 'You\'re not connected to a call in the current channel.',
+                    defaultMessage: 'You\'re not connected to a call in the current course.',
                 }),
             };
         case 'recording': {
@@ -560,7 +560,7 @@ export const handleCallsSlashCommand = async (value: string, serverUrl: string, 
                 return {
                     error: intl.formatMessage({
                         id: 'mobile.calls_not_connected',
-                        defaultMessage: 'You\'re not connected to a call in the current channel.',
+                        defaultMessage: 'You\'re not connected to a call in the current course.',
                     }),
                 };
             }

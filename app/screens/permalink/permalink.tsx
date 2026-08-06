@@ -50,8 +50,8 @@ type Props = {
 const messages = defineMessages({
     joinTeamErrorTitle: {id: 'permalink.error.join_team.title', defaultMessage: 'Error joining the team'},
     joinTeamErrorMessage: {id: 'permalink.error.join_team.message', defaultMessage: 'There was an error trying to join the team'},
-    joinChannelErrorTitle: {id: 'permalink.error.join_channel.title', defaultMessage: 'Error joining the channel'},
-    joinChannelErrorMessage: {id: 'permalink.error.join_channel.message', defaultMessage: 'There was an error trying to join the channel'},
+    joinChannelErrorTitle: {id: 'permalink.error.join_channel.title', defaultMessage: 'Error joining the course'},
+    joinChannelErrorMessage: {id: 'permalink.error.join_channel.message', defaultMessage: 'There was an error trying to join the course'},
 });
 
 const edges: Edge[] = ['left', 'right', 'top'];
@@ -432,7 +432,7 @@ function Permalink({
                         {isCRTEnabled && rootId ? (
                             <FormattedText
                                 id='thread.header.thread'
-                                defaultMessage='Thread'
+                                defaultMessage='Conversation'
                                 numberOfLines={1}
                                 style={style.title}
                             />

@@ -241,7 +241,7 @@ const MentionSettings = ({currentUser, isCRTEnabled}: Props) => {
                 <SettingSeparator/>
                 <SettingOption
                     action={handleChannelToggle}
-                    description={intl.formatMessage({id: 'notification_settings.mentions.channelWide', defaultMessage: 'Channel-wide mentions'})}
+                    description={intl.formatMessage({id: 'notification_settings.mentions.channelWide', defaultMessage: 'Course-wide mentions'})}
                     label='@channel, @all, @here'
                     selected={channelMentionOn}
                     testID='mention_notification_settings.channel_wide_mentions.option'

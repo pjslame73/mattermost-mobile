@@ -1399,7 +1399,7 @@ export class AppCommandParser {
                     const setChannelError = (channelName: string) => {
                         errors[fieldName] = this.intl.formatMessage({
                             id: 'apps.error.command.unknown_channel',
-                            defaultMessage: 'Unknown channel for field `{fieldName}`: `{option}`.',
+                            defaultMessage: 'Unknown course for field `{fieldName}`: `{option}`.',
                         }, {
                             fieldName,
                             option: channelName,
@@ -1430,7 +1430,7 @@ export class AppCommandParser {
                             if (options.find((o) => o.value === channel.id)) {
                                 errors[fieldName] = this.intl.formatMessage({
                                     id: 'apps.error.command.same_channel',
-                                    defaultMessage: 'Channel repeated for field `{fieldName}`: `{option}`.',
+                                    defaultMessage: 'Course repeated for field `{fieldName}`: `{option}`.',
                                 }, {
                                     fieldName,
                                     option: channelName,

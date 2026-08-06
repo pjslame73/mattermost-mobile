@@ -1264,12 +1264,12 @@ describe('Actions.Calls', () => {
 
         expect(intl.formatMessage).toHaveBeenCalledWith({
             id: 'mobile.calls_user_left_channel_error_title',
-            defaultMessage: 'You left the channel',
+            defaultMessage: 'You left the course',
         });
 
         expect(intl.formatMessage).toHaveBeenCalledWith({
             id: 'mobile.calls_user_left_channel_error_message',
-            defaultMessage: 'You have left the channel, and have been disconnected from the call.',
+            defaultMessage: 'You have left the course, and have been disconnected from the call.',
         });
     });
 
@@ -1307,12 +1307,12 @@ describe('Actions.Calls', () => {
 
         expect(intl.formatMessage).toHaveBeenCalledWith({
             id: 'mobile.calls_user_removed_from_channel_error_title',
-            defaultMessage: 'You were removed from channel',
+            defaultMessage: 'You were removed from course',
         });
 
         expect(intl.formatMessage).toHaveBeenCalledWith({
             id: 'mobile.calls_user_removed_from_channel_error_message',
-            defaultMessage: 'You have been removed from the channel, and have been disconnected from the call.',
+            defaultMessage: 'You have been removed from the course, and have been disconnected from the call.',
         });
     });
 

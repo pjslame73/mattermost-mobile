@@ -37,7 +37,7 @@ const Options = ({channelDisplayName, hasChannels, serverDisplayName, theme}: Pr
     const channelLabel = useMemo(() => {
         return intl.formatMessage({
             id: 'share_extension.channel_label',
-            defaultMessage: 'Channel',
+            defaultMessage: 'Course',
         });
     }, [intl]);
 

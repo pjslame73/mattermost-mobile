@@ -50,7 +50,7 @@ const getStyleSheet = makeStyleSheetFromTheme((theme: Theme) => {
     };
 });
 
-const bottomSheetTitleMessage = defineMessage({id: 'mobile.participants.header', defaultMessage: 'Thread Participants'});
+const bottomSheetTitleMessage = defineMessage({id: 'mobile.participants.header', defaultMessage: 'Conversation Participants'});
 
 const ThreadFooter = ({author, channelId, location, participants, testID, thread}: Props) => {
     const theme = useTheme();

@@ -111,12 +111,12 @@ export const leaveAndJoinWithAlert = async (
 
         let joinMessage = formatMessage({
             id: 'mobile.leave_and_join_message',
-            defaultMessage: 'You are already on a channel call in ~{leaveChannelName}. Do you want to leave your current call and join the call in ~{joinChannelName}?',
+            defaultMessage: 'You are already on a course call in ~{leaveChannelName}. Do you want to leave your current call and join the call in ~{joinChannelName}?',
         }, {leaveChannelName, joinChannelName});
         if (newCall) {
             joinMessage = formatMessage({
                 id: 'mobile.leave_and_create_message',
-                defaultMessage: 'You are already on a channel call in ~{leaveChannelName}. Do you want to leave your current call and start a new call in ~{joinChannelName}?',
+                defaultMessage: 'You are already on a course call in ~{leaveChannelName}. Do you want to leave your current call and start a new call in ~{joinChannelName}?',
             }, {leaveChannelName, joinChannelName});
         }
 
@@ -346,7 +346,7 @@ export const stopRecordingConfirmationAlert = (intl: IntlShape, enableTranscript
         });
         let body = formatMessage({
             id: 'mobile.calls_host_rec_stop_body',
-            defaultMessage: 'The call recording will be processed and posted in the call thread. Are you sure you want to stop the recording?',
+            defaultMessage: 'The call recording will be processed and posted in the call conversation. Are you sure you want to stop the recording?',
         });
 
         if (enableTranscriptions) {
@@ -356,7 +356,7 @@ export const stopRecordingConfirmationAlert = (intl: IntlShape, enableTranscript
             });
             body = formatMessage({
                 id: 'mobile.calls_host_rec_trans_stop_body',
-                defaultMessage: 'The call recording and transcription files will be processed and posted in the call thread. Are you sure you want to stop the recording and transcription?',
+                defaultMessage: 'The call recording and transcription files will be processed and posted in the call conversation. Are you sure you want to stop the recording and transcription?',
             });
         }
 
@@ -403,7 +403,7 @@ export const recordingWillBePostedAlert = (intl: IntlShape) => {
         }),
         formatMessage({
             id: 'mobile.calls_host_rec_stopped',
-            defaultMessage: 'You can find the recording in this call\'s chat thread once it\'s finished processing.',
+            defaultMessage: 'You can find the recording in this call\'s chat conversation once it\'s finished processing.',
         }),
         [{
             text: formatMessage({
@@ -450,11 +450,11 @@ export const showErrorAlertOnClose = (err: Error, intl: IntlShape) => {
             Alert.alert(
                 intl.formatMessage({
                     id: 'mobile.calls_user_left_channel_error_title',
-                    defaultMessage: 'You left the channel',
+                    defaultMessage: 'You left the course',
                 }),
                 intl.formatMessage({
                     id: 'mobile.calls_user_left_channel_error_message',
-                    defaultMessage: 'You have left the channel, and have been disconnected from the call.',
+                    defaultMessage: 'You have left the course, and have been disconnected from the call.',
                 }),
             );
             break;
@@ -462,11 +462,11 @@ export const showErrorAlertOnClose = (err: Error, intl: IntlShape) => {
             Alert.alert(
                 intl.formatMessage({
                     id: 'mobile.calls_user_removed_from_channel_error_title',
-                    defaultMessage: 'You were removed from channel',
+                    defaultMessage: 'You were removed from course',
                 }),
                 intl.formatMessage({
                     id: 'mobile.calls_user_removed_from_channel_error_message',
-                    defaultMessage: 'You have been removed from the channel, and have been disconnected from the call.',
+                    defaultMessage: 'You have been removed from the course, and have been disconnected from the call.',
                 }),
             );
             break;

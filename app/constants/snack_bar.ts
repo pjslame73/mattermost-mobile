@@ -83,7 +83,7 @@ const messages = defineMessages({
     },
     FAVORITE_CHANNEL: {
         id: 'snack.bar.favorited.channel',
-        defaultMessage: 'This channel was favorited',
+        defaultMessage: 'This course was favorited',
     },
     FILE_DOWNLOAD_REJECTED: {
         id: 'snack.bar.file.download.rejected',
@@ -91,7 +91,7 @@ const messages = defineMessages({
     },
     FOLLOW_THREAD: {
         id: 'snack.bar.following.thread',
-        defaultMessage: 'Thread followed',
+        defaultMessage: 'Conversation followed',
     },
     INFO_COPIED: {
         id: 'snack.bar.info.copied',
@@ -111,11 +111,11 @@ const messages = defineMessages({
     },
     MUTE_CHANNEL: {
         id: 'snack.bar.mute.channel',
-        defaultMessage: 'This channel was muted',
+        defaultMessage: 'This course was muted',
     },
     REMOVE_CHANNEL_USER: {
         id: 'snack.bar.remove.user',
-        defaultMessage: '1 member was removed from the channel',
+        defaultMessage: '1 member was removed from the course',
     },
     TEXT_COPIED: {
         id: 'snack.bar.text.copied',
@@ -123,15 +123,15 @@ const messages = defineMessages({
     },
     UNFAVORITE_CHANNEL: {
         id: 'snack.bar.unfavorite.channel',
-        defaultMessage: 'This channel was unfavorited',
+        defaultMessage: 'This course was unfavorited',
     },
     UNMUTE_CHANNEL: {
         id: 'snack.bar.unmute.channel',
-        defaultMessage: 'This channel was unmuted',
+        defaultMessage: 'This course was unmuted',
     },
     UNFOLLOW_THREAD: {
         id: 'snack.bar.unfollow.thread',
-        defaultMessage: 'Thread unfollowed',
+        defaultMessage: 'Conversation unfollowed',
     },
     PLUGIN_TOAST: {
         id: 'snack.bar.plugin.toast',

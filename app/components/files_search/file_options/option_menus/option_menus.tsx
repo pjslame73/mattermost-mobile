@@ -56,7 +56,7 @@ const OptionMenus = ({
             <OptionItem
                 key={'permalink'}
                 action={handlePermalink}
-                label={intl.formatMessage({id: 'screen.search.results.file_options.open_in_channel', defaultMessage: 'Open in channel'})}
+                label={intl.formatMessage({id: 'screen.search.results.file_options.open_in_channel', defaultMessage: 'Open in course'})}
                 icon={'globe'}
                 type='default'
             />

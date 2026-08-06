@@ -91,15 +91,15 @@ const renderMessage = ({location, post, styles, intl, localeHolder, theme, value
 const headerMessages = defineMessages({
     updatedFrom: {
         id: 'mobile.system_message.update_channel_header_message_and_forget.updated_from',
-        defaultMessage: '{username} updated the channel header from: {oldHeader} to: {newHeader}',
+        defaultMessage: '{username} updated the course header from: {oldHeader} to: {newHeader}',
     },
     updatedTo: {
         id: 'mobile.system_message.update_channel_header_message_and_forget.updated_to',
-        defaultMessage: '{username} updated the channel header to: {newHeader}',
+        defaultMessage: '{username} updated the course header to: {newHeader}',
     },
     removed: {
         id: 'mobile.system_message.update_channel_header_message_and_forget.removed',
-        defaultMessage: '{username} removed the channel header (was: {oldHeader})',
+        defaultMessage: '{username} removed the course header (was: {oldHeader})',
     },
 });
 
@@ -140,15 +140,15 @@ const renderHeaderChangeMessage = ({post, author, location, styles, intl, theme}
 const purposeMessages = defineMessages({
     updatedFrom: {
         id: 'mobile.system_message.update_channel_purpose_message.updated_from',
-        defaultMessage: '{username} updated the channel purpose from: {oldPurpose} to: {newPurpose}',
+        defaultMessage: '{username} updated the course purpose from: {oldPurpose} to: {newPurpose}',
     },
     updatedTo: {
         id: 'mobile.system_message.update_channel_purpose_message.updated_to',
-        defaultMessage: '{username} updated the channel purpose to: {newPurpose}',
+        defaultMessage: '{username} updated the course purpose to: {newPurpose}',
     },
     removed: {
         id: 'mobile.system_message.update_channel_purpose_message.removed',
-        defaultMessage: '{username} removed the channel purpose (was: {oldPurpose})',
+        defaultMessage: '{username} removed the course purpose (was: {oldPurpose})',
     },
 });
 
@@ -189,7 +189,7 @@ const renderPurposeChangeMessage = ({post, author, location, styles, intl, theme
 const displaynameMessages = defineMessages({
     updatedFrom: {
         id: 'mobile.system_message.update_channel_displayname_message_and_forget.updated_from',
-        defaultMessage: '{username} updated the channel display name from: {oldDisplayName} to: {newDisplayName}',
+        defaultMessage: '{username} updated the course display name from: {oldDisplayName} to: {newDisplayName}',
     },
 });
 
@@ -211,7 +211,7 @@ const renderDisplayNameChangeMessage = ({post, author, location, styles, intl, t
 const archivedMessages = defineMessages({
     archived: {
         id: 'mobile.system_message.channel_archived_message',
-        defaultMessage: '{username} archived the channel',
+        defaultMessage: '{username} archived the course',
     },
 });
 
@@ -226,22 +226,22 @@ const renderArchivedMessage = ({post, author, location, styles, intl, theme}: Re
 const unarchivedMessages = defineMessages({
     unarchived: {
         id: 'mobile.system_message.channel_unarchived_message',
-        defaultMessage: '{username} unarchived the channel',
+        defaultMessage: '{username} unarchived the course',
     },
 });
 
 const sharedChannelStateMessages = defineMessages({
     nowShared: {
         id: 'shared_channel.system_message.now_shared',
-        defaultMessage: 'This channel is now shared with {workspaceName}.',
+        defaultMessage: 'This course is now shared with {workspaceName}.',
     },
     noLongerSharedUnknown: {
         id: 'shared_channel.system_message.no_longer_shared_unknown',
-        defaultMessage: 'This channel is no longer shared with another workspace.',
+        defaultMessage: 'This course is no longer shared with another workspace.',
     },
     noLongerShared: {
         id: 'shared_channel.system_message.no_longer_shared',
-        defaultMessage: 'This channel is no longer shared with {workspaceName}.',
+        defaultMessage: 'This course is no longer shared with {workspaceName}.',
     },
 });
 
@@ -304,7 +304,7 @@ const renderUnarchivedMessage = ({post, author, location, styles, intl, theme}: 
 const addGuestToChannelMessages = defineMessages({
     added: {
         id: 'api.channel.add_guest.added',
-        defaultMessage: '{addedUsername} added to the channel as a guest by {username}.',
+        defaultMessage: '{addedUsername} added to the course as a guest by {username}.',
     },
 });
 
@@ -325,7 +325,7 @@ const renderAddGuestToChannelMessage = ({post, location, styles, intl, theme}: R
 const guestJoinChannelMessages = defineMessages({
     joined: {
         id: 'api.channel.guest_join_channel.post_and_forget',
-        defaultMessage: '{username} joined the channel as a guest.',
+        defaultMessage: '{username} joined the course as a guest.',
     },
 });
 

@@ -26,7 +26,7 @@ export default function ChannelSettingsRoute() {
         headerOptions: {
             headerTitle: () => (
                 <NavigationHeaderTitle
-                    title={intl.formatMessage({id: 'channel_info.channel_settings', defaultMessage: 'Channel Settings'})}
+                    title={intl.formatMessage({id: 'channel_info.channel_settings', defaultMessage: 'Course Settings'})}
                     subtitle={subtitle}
                 />
             ),

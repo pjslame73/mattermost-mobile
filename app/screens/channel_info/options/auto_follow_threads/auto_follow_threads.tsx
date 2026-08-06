@@ -37,7 +37,7 @@ const AutoFollowThreads = ({channelId, displayName, followedStatus}: Props) => {
                 result.error,
                 defineMessage({
                     id: 'channel_info.channel_auto_follow_threads_failed',
-                    defaultMessage: 'An error occurred trying to auto follow all threads in channel {displayName}',
+                    defaultMessage: 'An error occurred trying to auto follow all conversations in course {displayName}',
                 }),
                 {displayName},
             );
@@ -48,7 +48,7 @@ const AutoFollowThreads = ({channelId, displayName, followedStatus}: Props) => {
     return (
         <OptionItem
             action={toggleFollow}
-            label={intl.formatMessage({id: 'channel_info.channel_auto_follow_threads', defaultMessage: 'Follow all threads in this channel'})}
+            label={intl.formatMessage({id: 'channel_info.channel_auto_follow_threads', defaultMessage: 'Follow all conversations in this course'})}
             icon='message-plus-outline'
             type='toggle'
             selected={autoFollow}

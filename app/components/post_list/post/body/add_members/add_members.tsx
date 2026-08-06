@@ -73,23 +73,23 @@ const getStyleSheet = makeStyleSheetFromTheme((theme: Theme) => {
 const definedMessages = defineMessages({
     linkIdPrivate: {
         id: 'post_body.check_for_out_of_channel_mentions.link.private',
-        defaultMessage: 'add them to this private channel',
+        defaultMessage: 'add them to this private course',
     },
     linkIdPublic: {
         id: 'post_body.check_for_out_of_channel_mentions.link.public',
-        defaultMessage: 'add them to the channel',
+        defaultMessage: 'add them to the course',
     },
     messageOne: {
         id: 'post_body.check_for_out_of_channel_mentions.message.one',
-        defaultMessage: 'was mentioned but is not in the channel. Would you like to ',
+        defaultMessage: 'was mentioned but is not in the course. Would you like to ',
     },
     messageMultiple: {
         id: 'post_body.check_for_out_of_channel_mentions.message.multiple',
-        defaultMessage: 'were mentioned but they are not in the channel. Would you like to ',
+        defaultMessage: 'were mentioned but they are not in the course. Would you like to ',
     },
     outOfGroupsMessage: {
         id: 'post_body.check_for_out_of_channel_groups_mentions.message',
-        defaultMessage: 'did not get notified by this mention because they are not in the channel. They are also not a member of the groups linked to this channel.',
+        defaultMessage: 'did not get notified by this mention because they are not in the course. They are also not a member of the groups linked to this course.',
     },
 });
 
@@ -119,7 +119,7 @@ const AddMembers = ({channelType, currentUser, location, post, theme}: AddMember
                     return intl.formatMessage(
                         {
                             id: 'api.channel.add_member.added',
-                            defaultMessage: '{addedUsername} added to the channel by {username}.',
+                            defaultMessage: '{addedUsername} added to the course by {username}.',
                         },
                         {
                             username: currentUser.username,

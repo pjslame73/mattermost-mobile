@@ -87,7 +87,7 @@ const CategoryHeader = ({category, hasChannels}: Props) => {
             displayName = formatMessage({id: 'channel_list.favorites_category', defaultMessage: 'Favorites'});
             break;
         case CHANNELS_CATEGORY:
-            displayName = formatMessage({id: 'channel_list.channels_category', defaultMessage: 'Channels'});
+            displayName = formatMessage({id: 'channel_list.channels_category', defaultMessage: 'Courses'});
             break;
         case DMS_CATEGORY:
             displayName = formatMessage({id: 'channel_list.dms_category', defaultMessage: 'Direct messages'});

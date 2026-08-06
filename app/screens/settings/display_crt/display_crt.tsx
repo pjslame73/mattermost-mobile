@@ -17,7 +17,7 @@ import EphemeralStore from '@store/ephemeral_store';
 
 const crtDescription = defineMessage({
     id: 'settings_display.crt.desc',
-    defaultMessage: 'When enabled, reply messages are not shown in the channel and you\'ll be notified about threads you\'re following in the "Threads" view.',
+    defaultMessage: 'When enabled, reply messages are not shown in the course and you\'ll be notified about conversations you\'re following in the "Conversations" view.',
 });
 
 type Props = {
@@ -57,7 +57,7 @@ const DisplayCRT = ({currentUserId, isCRTEnabled}: Props) => {
             >
                 <SettingOption
                     action={setIsEnabled}
-                    label={intl.formatMessage({id: 'settings_display.crt.label', defaultMessage: 'Collapsed Reply Threads'})}
+                    label={intl.formatMessage({id: 'settings_display.crt.label', defaultMessage: 'Grouped Replies'})}
                     selected={isEnabled}
                     testID='settings_display.crt.toggle'
                     type='toggle'

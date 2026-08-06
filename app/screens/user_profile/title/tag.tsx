@@ -25,7 +25,7 @@ const messages = defineMessages({
     },
     channelAdmin: {
         id: 'user_profile.channel_admin',
-        defaultMessage: 'Channel Admin',
+        defaultMessage: 'Course Admin',
     },
 });
 

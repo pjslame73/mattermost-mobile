@@ -16,7 +16,7 @@ export default function CreateOrEditChannelFromBrowseChannelsRoute() {
     useNavigationHeader({
         showWhenPushed: true,
         headerOptions: {
-            headerTitle: title ?? intl.formatMessage({id: 'mobile.create_channel.title', defaultMessage: 'New channel'}),
+            headerTitle: title ?? intl.formatMessage({id: 'mobile.create_channel.title', defaultMessage: 'New course'}),
             ...getHeaderOptions(theme),
         },
     });

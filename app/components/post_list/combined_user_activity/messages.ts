@@ -14,73 +14,73 @@ export const postTypeMessages = {
     [JOIN_CHANNEL]: defineMessages({
         one: {
             id: 'combined_system_message.joined_channel.one',
-            defaultMessage: '{firstUser} **joined the channel**.',
+            defaultMessage: '{firstUser} **joined the course**.',
         },
         one_you: {
             id: 'combined_system_message.joined_channel.one_you',
-            defaultMessage: 'You **joined the channel**.',
+            defaultMessage: 'You **joined the course**.',
         },
         two: {
             id: 'combined_system_message.joined_channel.two',
-            defaultMessage: '{firstUser} and {secondUser} **joined the channel**.',
+            defaultMessage: '{firstUser} and {secondUser} **joined the course**.',
         },
         many_expanded: {
             id: 'combined_system_message.joined_channel.many_expanded',
-            defaultMessage: '{users} and {lastUser} **joined the channel**.',
+            defaultMessage: '{users} and {lastUser} **joined the course**.',
         },
     }),
     [ADD_TO_CHANNEL]: defineMessages({
         one: {
             id: 'combined_system_message.added_to_channel.one',
-            defaultMessage: '{firstUser} **added to the channel** by {actor}.',
+            defaultMessage: '{firstUser} **added to the course** by {actor}.',
         },
         one_you: {
             id: 'combined_system_message.added_to_channel.one_you',
-            defaultMessage: 'You were **added to the channel** by {actor}.',
+            defaultMessage: 'You were **added to the course** by {actor}.',
         },
         two: {
             id: 'combined_system_message.added_to_channel.two',
-            defaultMessage: '{firstUser} and {secondUser} **added to the channel** by {actor}.',
+            defaultMessage: '{firstUser} and {secondUser} **added to the course** by {actor}.',
         },
         many_expanded: {
             id: 'combined_system_message.added_to_channel.many_expanded',
-            defaultMessage: '{users} and {lastUser} were **added to the channel** by {actor}.',
+            defaultMessage: '{users} and {lastUser} were **added to the course** by {actor}.',
         },
     }),
     [REMOVE_FROM_CHANNEL]: defineMessages({
         one: {
             id: 'combined_system_message.removed_from_channel.one',
-            defaultMessage: '{firstUser} was **removed from the channel**.',
+            defaultMessage: '{firstUser} was **removed from the course**.',
         },
         one_you: {
             id: 'combined_system_message.removed_from_channel.one_you',
-            defaultMessage: 'You were **removed from the channel**.',
+            defaultMessage: 'You were **removed from the course**.',
         },
         two: {
             id: 'combined_system_message.removed_from_channel.two',
-            defaultMessage: '{firstUser} and {secondUser} were **removed from the channel**.',
+            defaultMessage: '{firstUser} and {secondUser} were **removed from the course**.',
         },
         many_expanded: {
             id: 'combined_system_message.removed_from_channel.many_expanded',
-            defaultMessage: '{users} and {lastUser} were **removed from the channel**.',
+            defaultMessage: '{users} and {lastUser} were **removed from the course**.',
         },
     }),
     [LEAVE_CHANNEL]: defineMessages({
         one: {
             id: 'combined_system_message.left_channel.one',
-            defaultMessage: '{firstUser} **left the channel**.',
+            defaultMessage: '{firstUser} **left the course**.',
         },
         one_you: {
             id: 'combined_system_message.left_channel.one_you',
-            defaultMessage: 'You **left the channel**.',
+            defaultMessage: 'You **left the course**.',
         },
         two: {
             id: 'combined_system_message.left_channel.two',
-            defaultMessage: '{firstUser} and {secondUser} **left the channel**.',
+            defaultMessage: '{firstUser} and {secondUser} **left the course**.',
         },
         many_expanded: {
             id: 'combined_system_message.left_channel.many_expanded',
-            defaultMessage: '{users} and {lastUser} **left the channel**.',
+            defaultMessage: '{users} and {lastUser} **left the course**.',
         },
     }),
     [JOIN_TEAM]: defineMessages({
@@ -160,19 +160,19 @@ export const postTypeMessages = {
 export const systemMessages = defineMessages({
     [ADD_TO_CHANNEL]: {
         id: 'last_users_message.added_to_channel.type',
-        defaultMessage: 'were **added to the channel** by {actor}.',
+        defaultMessage: 'were **added to the course** by {actor}.',
     },
     [JOIN_CHANNEL]: {
         id: 'last_users_message.joined_channel.type',
-        defaultMessage: '**joined the channel**.',
+        defaultMessage: '**joined the course**.',
     },
     [LEAVE_CHANNEL]: {
         id: 'last_users_message.left_channel.type',
-        defaultMessage: '**left the channel**.',
+        defaultMessage: '**left the course**.',
     },
     [REMOVE_FROM_CHANNEL]: {
         id: 'last_users_message.removed_from_channel.type',
-        defaultMessage: 'were **removed from the channel**.',
+        defaultMessage: 'were **removed from the course**.',
     },
     [ADD_TO_TEAM]: {
         id: 'last_users_message.added_to_team.type',

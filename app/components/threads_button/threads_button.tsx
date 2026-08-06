@@ -125,7 +125,7 @@ const ThreadsButton = ({
                 />
                 <FormattedText
                     id='threads'
-                    defaultMessage='Threads'
+                    defaultMessage='Conversations'
                     style={textStyle}
                 />
                 <Badge

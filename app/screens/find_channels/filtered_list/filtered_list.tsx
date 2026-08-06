@@ -149,7 +149,7 @@ const FilteredList = ({
                 '',
                 formatMessage({
                     id: 'mobile.join_channel.error',
-                    defaultMessage: "We couldn't join the channel {displayName}.",
+                    defaultMessage: "We couldn't join the course {displayName}.",
                 }, {displayName}),
             );
             return;
@@ -258,7 +258,7 @@ const FilteredList = ({
     const threadLabel = useMemo(
         () => formatMessage({
             id: 'threads',
-            defaultMessage: 'Threads',
+            defaultMessage: 'Conversations',
         }).toLowerCase(),
         [formatMessage],
     );

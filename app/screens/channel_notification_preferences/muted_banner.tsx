@@ -73,13 +73,13 @@ const MutedBanner = ({channelId}: Props) => {
                 />
                 <FormattedText
                     id='channel_notification_preferences.muted_title'
-                    defaultMessage='This channel is muted'
+                    defaultMessage='This course is muted'
                     style={styles.title}
                 />
             </View>
             <FormattedText
                 id='channel_notification_preferences.muted_content'
-                defaultMessage='You can change the notification settings, but you will not receive notifications until the channel is unmuted.'
+                defaultMessage='You can change the notification settings, but you will not receive notifications until the course is unmuted.'
                 style={styles.contentText}
             />
             <View style={styles.button}>
@@ -87,7 +87,7 @@ const MutedBanner = ({channelId}: Props) => {
                     onPress={onPress}
                     text={formatMessage({
                         id: 'channel_notification_preferences.unmute_content',
-                        defaultMessage: 'Unmute channel',
+                        defaultMessage: 'Unmute course',
                     })}
                     theme={theme}
                     iconName='bell-outline'

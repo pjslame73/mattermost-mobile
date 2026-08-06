@@ -16,7 +16,7 @@ import ThreadScreen from '@screens/thread';
 const threadMessages = defineMessages({
     thread: {
         id: 'thread.header.thread',
-        defaultMessage: 'Thread',
+        defaultMessage: 'Conversation',
     },
     threadIn: {
         id: 'thread.header.thread_in',

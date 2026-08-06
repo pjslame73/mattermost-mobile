@@ -60,7 +60,7 @@ function EmptyUnreads() {
                 testID='unreads.empty.title'
             />
             <FormattedText
-                defaultMessage={'Turn off the unread filter to show all your channels.'}
+                defaultMessage={'Turn off the unread filter to show all your courses.'}
                 id='unreads.empty.paragraph'
                 style={styles.paragraph}
                 testID='unreads.empty.paragraph'

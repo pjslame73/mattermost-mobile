@@ -17,13 +17,13 @@ const PlusMenuItem = ({pickerAction, onPress}: PlusMenuItemProps) => {
     const menuItems: {[key: string]: Omit<React.ComponentProps<typeof SlideUpPanelItem>, 'onPress'>} = {
         browseChannels: {
             leftIcon: 'globe',
-            text: intl.formatMessage({id: 'plus_menu.browse_channels.title', defaultMessage: 'Browse Channels'}),
+            text: intl.formatMessage({id: 'plus_menu.browse_channels.title', defaultMessage: 'Browse Courses'}),
             testID: 'plus_menu_item.browse_channels',
         },
 
         createNewChannel: {
             leftIcon: 'plus',
-            text: intl.formatMessage({id: 'plus_menu.create_new_channel.title', defaultMessage: 'Create New Channel'}),
+            text: intl.formatMessage({id: 'plus_menu.create_new_channel.title', defaultMessage: 'Create New Course'}),
             testID: 'plus_menu_item.create_new_channel',
         },
 

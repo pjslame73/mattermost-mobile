@@ -286,7 +286,7 @@ export default function Selection({
     }, [theme.buttonBg, onSelectItem]);
 
     const goToSelectorScreen = useCallback((() => {
-        const title = intl.formatMessage({id: 'invite.selected_channels', defaultMessage: 'Selected channels'});
+        const title = intl.formatMessage({id: 'invite.selected_channels', defaultMessage: 'Selected courses'});
 
         const handleSelectChannels = (channels: Channel[]) => {
             SettingsStore.removeIntegrationsSelectCallback();
@@ -392,7 +392,7 @@ export default function Selection({
                     {canInviteGuests && (
                         <OptionItem
                             label={intl.formatMessage({id: 'invite.invite_as_guest', defaultMessage: 'Invite as guest'})}
-                            description={intl.formatMessage({id: 'invite.invite_as_guest_description', defaultMessage: 'Guests are limited to selected channels'})}
+                            description={intl.formatMessage({id: 'invite.invite_as_guest_description', defaultMessage: 'Guests are limited to selected courses'})}
                             type='toggle'
                             selected={inviteAsGuest}
                             action={handleInviteAsGuestChange}
@@ -402,10 +402,10 @@ export default function Selection({
                     {inviteAsGuest && (
                         <>
                             <OptionItem
-                                label={intl.formatMessage({id: 'invite.selected_channels', defaultMessage: 'Selected channels'})}
+                                label={intl.formatMessage({id: 'invite.selected_channels', defaultMessage: 'Selected courses'})}
                                 type='arrow'
                                 action={goToSelectorScreen}
-                                info={hasChannelsSelected ? intl.formatMessage({id: 'invite.selected_channels_count', defaultMessage: '{count} {count, plural, one{channel} other{channels}}'}, {count: selectedChannels.length}) : intl.formatMessage({id: 'invite.no_channels_selected', defaultMessage: 'Required for guests'})}
+                                info={hasChannelsSelected ? intl.formatMessage({id: 'invite.selected_channels_count', defaultMessage: '{count} {count, plural, one{course} other{courses}}'}, {count: selectedChannels.length}) : intl.formatMessage({id: 'invite.no_channels_selected', defaultMessage: 'Required for guests'})}
                                 isInfoDestructive={!hasChannelsSelected}
                                 testID='invite.selected_channels'
                                 icon={'globe'}

@@ -65,7 +65,7 @@ const ReadOnlyChannnel = ({testID}: ReadOnlyProps) => {
                     />
                     <FormattedText
                         id='mobile.create_post.read_only'
-                        defaultMessage='This channel is read-only.'
+                        defaultMessage='This course is read-only.'
                         style={style.text}
                     />
                 </View>

@@ -65,7 +65,7 @@ const GlobalThreads = ({globalThreadsTab, hasUnreads, teamId}: Props) => {
         {
             name: defineMessage({
                 id: 'global_threads.allThreads',
-                defaultMessage: 'All Your Threads',
+                defaultMessage: 'All Your Conversations',
             }),
             id: 'all',
             requiresUserAttention: false,
@@ -131,7 +131,7 @@ const GlobalThreads = ({globalThreadsTab, hasUnreads, teamId}: Props) => {
                 title={
                     intl.formatMessage({
                         id: 'threads',
-                        defaultMessage: 'Threads',
+                        defaultMessage: 'Conversations',
                     })
                 }
                 leftComponent={headerLeftComponent}

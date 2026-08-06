@@ -53,7 +53,7 @@ const TownSquare = ({channelId, displayName, roles, theme}: Props) => {
                 {displayName}
             </Text>
             <FormattedText
-                defaultMessage='Welcome to {name}. Everyone automatically becomes a member of this channel when they join the team.'
+                defaultMessage='Welcome to {name}. Everyone automatically becomes a member of this course when they join the team.'
                 id='intro.townsquare'
                 style={styles.message}
                 values={{name: displayName}}

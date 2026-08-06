@@ -74,7 +74,7 @@ const messages = defineMessages({
         id: 'mobile.display_settings.clockDisplay',
     },
     crt: {
-        defaultMessage: 'Collapsed Reply Threads',
+        defaultMessage: 'Grouped Replies',
         id: 'mobile.display_settings.crt',
     },
     theme: {

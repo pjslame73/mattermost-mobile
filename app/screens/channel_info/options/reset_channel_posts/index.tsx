@@ -24,7 +24,7 @@ const messages = defineMessages({
     },
     confirmBody: {
         id: 'channel_info.reset_posts.confirm.body',
-        defaultMessage: 'This clears the locally stored messages for this channel and downloads them again from the server. Use this if the channel looks empty or messages appear to be missing.',
+        defaultMessage: 'This clears the locally stored messages for this course and downloads them again from the server. Use this if the course looks empty or messages appear to be missing.',
     },
     cancel: {
         id: 'channel_info.reset_posts.confirm.cancel',

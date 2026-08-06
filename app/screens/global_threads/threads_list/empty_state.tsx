@@ -50,7 +50,7 @@ function EmptyState({isUnreads}: Props) {
     if (isUnreads) {
         title = intl.formatMessage({
             id: 'global_threads.emptyUnreads.title',
-            defaultMessage: 'No unread threads',
+            defaultMessage: 'No unread conversations',
         });
         subTitle = intl.formatMessage({
             id: 'global_threads.emptyUnreads.message',
@@ -59,11 +59,11 @@ function EmptyState({isUnreads}: Props) {
     } else {
         title = intl.formatMessage({
             id: 'global_threads.emptyThreads.title',
-            defaultMessage: 'No followed threads yet',
+            defaultMessage: 'No followed conversations yet',
         });
         subTitle = intl.formatMessage({
             id: 'global_threads.emptyThreads.message',
-            defaultMessage: 'Any threads you are mentioned in or have participated in will show here along with any threads you have followed.',
+            defaultMessage: 'Any conversations you are mentioned in or have participated in will show here along with any conversations you have followed.',
         });
     }
     return (

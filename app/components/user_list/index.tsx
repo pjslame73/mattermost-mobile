@@ -32,7 +32,7 @@ const SCROLL_EVENT_THROTTLE = 60;
 const messages = defineMessages({
     admins: {
         id: 'mobile.manage_members.section_title_admins',
-        defaultMessage: 'CHANNEL ADMINS',
+        defaultMessage: 'COURSE ADMINS',
     },
     members: {
         id: 'mobile.manage_members.section_title_members',

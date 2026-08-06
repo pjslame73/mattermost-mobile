@@ -30,7 +30,7 @@ const ChannelAutotranslation = ({channelId, displayName, enabled}: Props) => {
                 result.error,
                 defineMessage({
                     id: 'channel_settings.channel_autotranslation_failed',
-                    defaultMessage: 'An error occurred trying to enable automatic translation for channel {displayName}',
+                    defaultMessage: 'An error occurred trying to enable automatic translation for course {displayName}',
                 }),
                 {displayName},
             );
@@ -47,7 +47,7 @@ const ChannelAutotranslation = ({channelId, displayName, enabled}: Props) => {
             })}
             description={intl.formatMessage({
                 id: 'channel_settings.channel_autotranslation_description',
-                defaultMessage: 'When enabled, channel members can turn on auto-translation to view messages in their preferred language.',
+                defaultMessage: 'When enabled, course members can turn on auto-translation to view messages in their preferred language.',
             })}
             icon='translate'
             type='toggle'

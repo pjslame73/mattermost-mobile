@@ -64,7 +64,7 @@ function PermalinkError({
 
     if (error.notExist || error.unreachable) {
         const title = intl.formatMessage({id: 'permalink.error.access.title', defaultMessage: 'Message Not Found'});
-        const text = intl.formatMessage({id: 'permalink.error.access.text', defaultMessage: 'Permalink belongs to a deleted message or to a channel to which you do not have access.'});
+        const text = intl.formatMessage({id: 'permalink.error.access.text', defaultMessage: 'Permalink belongs to a deleted message or to a course to which you do not have access.'});
         return (
             <>
                 <View style={style.errorContainer}>
@@ -92,24 +92,24 @@ function PermalinkError({
     let button;
     if (isPrivate && showTeamJoin) {
         image = (<JoinPrivateChannel theme={theme}/>);
-        title = intl.formatMessage({id: 'permalink.error.private_channel_and_team.title', defaultMessage: 'Join private channel and team'});
-        text = intl.formatMessage({id: 'permalink.error.private_channel_and_team.text', defaultMessage: 'The message you are trying to view is in a private channel in a team you are not a member of. You have access as an admin. Do you want to join **{channelName}** and the **{teamName}** team to view it?'}, {channelName: error.channelName, teamName: error.teamName});
-        button = intl.formatMessage({id: 'permalink.error.private_channel_and_team.button', defaultMessage: 'Join channel and team'});
+        title = intl.formatMessage({id: 'permalink.error.private_channel_and_team.title', defaultMessage: 'Join private course and team'});
+        text = intl.formatMessage({id: 'permalink.error.private_channel_and_team.text', defaultMessage: 'The message you are trying to view is in a private course in a team you are not a member of. You have access as an admin. Do you want to join **{channelName}** and the **{teamName}** team to view it?'}, {channelName: error.channelName, teamName: error.teamName});
+        button = intl.formatMessage({id: 'permalink.error.private_channel_and_team.button', defaultMessage: 'Join course and team'});
     } else if (isPrivate) {
         image = (<JoinPrivateChannel theme={theme}/>);
-        title = intl.formatMessage({id: 'permalink.error.private_channel.title', defaultMessage: 'Join private channel'});
-        text = intl.formatMessage({id: 'permalink.error.private_channel.text', defaultMessage: 'The message you are trying to view is in a private channel you have not been invited to, but you have access as an admin. Do you still want to join **{channelName}**?'}, {channelName: error.channelName});
-        button = intl.formatMessage({id: 'permalink.error.private_channel.button', defaultMessage: 'Join channel'});
+        title = intl.formatMessage({id: 'permalink.error.private_channel.title', defaultMessage: 'Join private course'});
+        text = intl.formatMessage({id: 'permalink.error.private_channel.text', defaultMessage: 'The message you are trying to view is in a private course you have not been invited to, but you have access as an admin. Do you still want to join **{channelName}**?'}, {channelName: error.channelName});
+        button = intl.formatMessage({id: 'permalink.error.private_channel.button', defaultMessage: 'Join course'});
     } else if (showTeamJoin) {
         image = (<JoinPublicChannel theme={theme}/>);
-        title = intl.formatMessage({id: 'permalink.error.public_channel_and_team.title', defaultMessage: 'Join channel and team'});
-        text = intl.formatMessage({id: 'permalink.error.public_channel_and_team.text', defaultMessage: 'The message you are trying to view is in a channel you don’t belong and a team you are not a member of. Do you want to join **{channelName}** and the **{teamName}** team to view it?'}, {channelName: error.channelName, teamName: error.teamName});
-        button = intl.formatMessage({id: 'permalink.error.public_channel_and_team.button', defaultMessage: 'Join channel and team'});
+        title = intl.formatMessage({id: 'permalink.error.public_channel_and_team.title', defaultMessage: 'Join course and team'});
+        text = intl.formatMessage({id: 'permalink.error.public_channel_and_team.text', defaultMessage: 'The message you are trying to view is in a course you don’t belong and a team you are not a member of. Do you want to join **{channelName}** and the **{teamName}** team to view it?'}, {channelName: error.channelName, teamName: error.teamName});
+        button = intl.formatMessage({id: 'permalink.error.public_channel_and_team.button', defaultMessage: 'Join course and team'});
     } else {
         image = (<JoinPublicChannel theme={theme}/>);
-        title = intl.formatMessage({id: 'permalink.error.public_channel.title', defaultMessage: 'Join channel'});
-        text = intl.formatMessage({id: 'permalink.error.public_channel.text', defaultMessage: 'The message you are trying to view is in a channel you don’t belong to. Do you want to join **{channelName}** to view it?'}, {channelName: error.channelName});
-        button = intl.formatMessage({id: 'permalink.error.public_channel.button', defaultMessage: 'Join channel'});
+        title = intl.formatMessage({id: 'permalink.error.public_channel.title', defaultMessage: 'Join course'});
+        text = intl.formatMessage({id: 'permalink.error.public_channel.text', defaultMessage: 'The message you are trying to view is in a course you don’t belong to. Do you want to join **{channelName}** to view it?'}, {channelName: error.channelName});
+        button = intl.formatMessage({id: 'permalink.error.public_channel.button', defaultMessage: 'Join course'});
     }
     return (
         <>

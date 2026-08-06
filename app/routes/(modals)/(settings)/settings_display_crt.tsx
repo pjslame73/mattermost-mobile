@@ -14,7 +14,7 @@ export default function SettingsDisplayCRTRoute() {
     useNavigationHeader({
         showWhenPushed: true,
         headerOptions: {
-            headerTitle: intl.formatMessage({id: 'display_settings.crt', defaultMessage: 'Collapsed Reply Threads'}),
+            headerTitle: intl.formatMessage({id: 'display_settings.crt', defaultMessage: 'Grouped Replies'}),
             ...getHeaderOptions(theme),
         },
     });

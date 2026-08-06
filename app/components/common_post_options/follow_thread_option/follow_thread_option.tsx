@@ -20,11 +20,11 @@ type FollowThreadOptionProps = {
 const messages = defineMessages({
     unfollowThread: {
         id: 'threads.unfollowThread',
-        defaultMessage: 'Unfollow Thread',
+        defaultMessage: 'Unfollow Conversation',
     },
     followThread: {
         id: 'threads.followThread',
-        defaultMessage: 'Follow Thread',
+        defaultMessage: 'Follow Conversation',
     },
     followMessage: {
         id: 'threads.followMessage',

@@ -103,7 +103,7 @@ const ThreadOptions = ({
             <View style={style.listHeader}>
                 <FormattedText
                     id='global_threads.options.title'
-                    defaultMessage={'Thread Actions'}
+                    defaultMessage={'Conversation Actions'}
                     style={style.listHeaderText}
                 />
             </View>

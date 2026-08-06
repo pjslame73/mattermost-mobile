@@ -208,7 +208,7 @@ function StartARun({
                         <FloatingAutocompleteSelector
                             label={intl.formatMessage({
                                 id: 'playbooks.start_run.channel_label',
-                                defaultMessage: 'Channel',
+                                defaultMessage: 'Course',
                             })}
                             dataSource='channels'
                             selected={selectedChannelId}

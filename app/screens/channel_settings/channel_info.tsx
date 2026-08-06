@@ -16,7 +16,7 @@ type Props = {
 
 const ChannelInfoOption = ({channelId}: Props) => {
     const {formatMessage} = useIntl();
-    const title = formatMessage({id: 'screens.channel_info', defaultMessage: 'Channel info'});
+    const title = formatMessage({id: 'screens.channel_info', defaultMessage: 'Course info'});
 
     const goToChannelInfo = usePreventDoubleTap(useCallback(async () => {
         navigateToChannelInfoScreen(Screens.CREATE_OR_EDIT_CHANNEL, {channelId, title});

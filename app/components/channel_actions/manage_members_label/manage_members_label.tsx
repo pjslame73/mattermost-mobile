@@ -24,19 +24,19 @@ const messages = defineMessages({
     },
     make_channel_admin: {
         id: 'mobile.manage_members.make_channel_admin',
-        defaultMessage: 'Make Channel Admin',
+        defaultMessage: 'Make Course Admin',
     },
     make_channel_member: {
         id: 'mobile.manage_members.make_channel_member',
-        defaultMessage: 'Make Channel Member',
+        defaultMessage: 'Make Course Member',
     },
     remove_title: {
         id: 'mobile.manage_members.remove_member',
-        defaultMessage: 'Remove from Channel',
+        defaultMessage: 'Remove from Course',
     },
     remove_message: {
         id: 'mobile.manage_members.message',
-        defaultMessage: 'Are you sure you want to remove the selected member from the channel?',
+        defaultMessage: 'Are you sure you want to remove the selected member from the course?',
     },
     remove_cancel: {
         id: 'mobile.manage_members.cancel',
