@@ -54,6 +54,11 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+
+# Claves privadas de App Store Connect. get_apple_api_key() en el Fastfile
+# escribe IOS_API_KEY como <KEY_ID>.p8 en la raiz del repo en cada build, asi
+# que sin esta linea la clave queda a un `git add -A` de ser commiteada.
+*.p8
 android/app/bin
 android/app/build
 android/build

@@ -185,6 +185,7 @@
     "build:android": "./scripts/build.sh apk",
     "build:android-unsigned": "./scripts/build.sh apk unsigned",
     "build:ios": "./scripts/build.sh ipa",
+    "testflight:ios": "./scripts/testflight.sh",
     "build:ios-sim": "./scripts/build.sh ipa simulator",
     "build:ios-unsigned": "./scripts/build.sh ipa unsigned",
     "check": "npm run lint && npm run tsc",

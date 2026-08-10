@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 function execute() {
-    cd fastlane && NODE_ENV=production bundle exec fastlane $1 $2
+    # FASTLANE_ENV selecciona un fastlane/.env.<nombre>. Sin la variable, el
+    # comportamiento es el de siempre (solo .env y .env.default), asi que
+    # `npm run build:ios` no cambia. Lo usa scripts/testflight.sh para pedir
+    # ios.socratix sin duplicar el setup de este archivo.
+    cd fastlane && NODE_ENV=production bundle exec fastlane $1 $2 ${FASTLANE_ENV:+--env "$FASTLANE_ENV"}
 }
 
 function apk() {
