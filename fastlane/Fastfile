@@ -666,15 +666,18 @@ platform :ios do
 
     # Sync the provisioning profiles using match
     if ENV['SYNC_PROVISIONING_PROFILES'] == 'true'
-      if !ENV['MATCH_PASSWORD'].nil? && !ENV['MATCH_PASSWORD'].empty?
-        match(type: ENV['MATCH_TYPE'] || 'adhoc')
-      end
+      # MATCH_PASSWORD siempre esta seteada (es la que descifra el repo de match),
+      # asi que estos dos casos no pueden ser `if` independientes: correrian match
+      # dos veces, y la primera vuelta se autenticaria por Apple ID y frenaria el
+      # build pidiendo 2FA. Con API key disponible, esa es la que vale.
       if !ENV['IOS_API_KEY_ID'].nil? && !ENV['IOS_API_KEY_ID'].empty?
         api_key = get_apple_api_key()
         match(
             api_key: api_key,
             type: ENV['MATCH_TYPE'] || 'adhoc'
         )
+      elsif !ENV['MATCH_PASSWORD'].nil? && !ENV['MATCH_PASSWORD'].empty?
+        match(type: ENV['MATCH_TYPE'] || 'adhoc')
       end
     end
   end
