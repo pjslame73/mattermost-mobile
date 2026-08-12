@@ -41,7 +41,20 @@ const observeCategoryChannels = (category: CategoryModel, myChannels: Observable
             const categoryChannelMap = new Map<string, number>(sorted.map((s) => [s.channelId, s.sortOrder]));
             return my.reduce<ChannelWithMyChannel[]>((result, myChannel) => {
                 const channel = channelMap.get(myChannel.id);
-                if (channel) {
+
+                // Se descartan los archivados. El delete_at ya se observaba
+                // --ver el comentario de arriba-- pero nadie lo miraba, asi que
+                // un canal archivado seguia en la lista hasta la siguiente
+                // reconexion: la barra se arma desde CATEGORIAS, y el servidor
+                // no lista archivados en las suyas, asi que el canal recien se
+                // caia cuando se refrescaban. Lo mismo al reves: al restaurar,
+                // el evento pone delete_at en 0 pero el canal ya no esta en
+                // ninguna categoria local, y tampoco reaparecia.
+                //
+                // Esto no inventa comportamiento: aplica de entrada lo que el
+                // servidor ya hace, y lo adelanta del proximo reconecte al
+                // instante.
+                if (channel && !channel.deleteAt) {
                     const channelWithMyChannel: ChannelWithMyChannel = {
                         channel,
                         myChannel,

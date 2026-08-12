@@ -73,6 +73,24 @@ export async function handleChannelUnarchiveEvent(serverUrl: string, msg: any) {
         }
 
         await setChannelDeleteAt(serverUrl, msg.data.channel_id, 0);
+
+        // Limpiar delete_at NO alcanza para que el canal vuelva a la barra
+        // lateral, y esto costo encontrarlo: la barra se arma desde CATEGORIAS,
+        // no desde la tabla de canales. Cuando el canal se archivo, el servidor
+        // dejo de listarlo en las suyas --no incluye archivados-- y la primera
+        // sincronizacion borro el registro local de categoria. Restaurar
+        // limpiaba el campo de un canal que ya no estaba en ninguna, asi que no
+        // se renderizaba.
+        //
+        // Se comprobo en dispositivo: el evento channel_restored llega, el
+        // delete_at se limpia, y la barra no cambia hasta cerrar la app por
+        // completo, que es cuando se rearman las categorias desde el servidor.
+        // Para el alumno eso significa rematricularse y no ver su curso.
+        const {database} = DatabaseManager.getServerDatabaseAndOperator(serverUrl);
+        const channel = await getChannelById(database, msg.data.channel_id);
+        if (channel) {
+            await addChannelToDefaultCategory(serverUrl, channel);
+        }
     } catch {
         // do nothing
     }
