@@ -30,9 +30,26 @@ const getStyleSheet = makeStyleSheetFromTheme((theme: Theme) => {
 
 const ALTURA_INICIAL = 24;
 
+// Alturas ya medidas, por id de post.
+//
+// El WebView no puede saber cuanto mide hasta que renderiza: arranca en
+// ALTURA_INICIAL y crece cuando reporta la real por onMessage. Eso esta bien la
+// primera vez, pero la lista del hilo es INVERTIDA y el post raiz vive al final
+// del contenido: cuando varias respuestas crecen de golpe despues del layout, el
+// root se desplaza hacia arriba y queda fuera de la pantalla, sin forma de
+// traerlo con el scroll.
+//
+// Guardando la altura medida, la segunda vez que se monta el mismo post -- que es
+// el caso habitual, porque el alumno entra y sale del hilo -- arranca directo con
+// el valor bueno y no hay salto.
+//
+// El mapa crece con los posts vistos en la sesion y no se limpia: son un id y un
+// numero por post, y se va entero cuando se cierra la app.
+const alturasMedidas = new Map<string, number>();
+
 const SecuenciaHtmlPost = ({location, post, theme}: Props) => {
     const style = getStyleSheet(theme);
-    const [altura, setAltura] = useState(ALTURA_INICIAL);
+    const [altura, setAltura] = useState(() => alturasMedidas.get(post.id) ?? ALTURA_INICIAL);
 
     const documento = useMemo(() => {
         if (!isSecuenciaHtmlProps(post.props)) {
@@ -44,6 +61,7 @@ const SecuenciaHtmlPost = ({location, post, theme}: Props) => {
     const onMessage = (event: WebViewMessageEvent) => {
         const alturaReportada = Number(event.nativeEvent.data);
         if (!Number.isNaN(alturaReportada) && alturaReportada > 0) {
+            alturasMedidas.set(post.id, alturaReportada);
             setAltura(alturaReportada);
         }
     };

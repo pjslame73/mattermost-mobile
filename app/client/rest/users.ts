@@ -187,6 +187,12 @@ const ClientUsers = <TBase extends Constructor<ClientBase>>(superclass: TBase) =
         return resp?.data;
     };
 
+    // Canjea el enlace contra el plugin de Conversa en vez del endpoint nativo
+    // /users/login, que exige licencia y solo emite sesiones de invitado.
+    //
+    // La forma de la respuesta es la misma: cookies para la sesion (el cliente
+    // nativo maneja el cookie jar, y getCSRFFromCookie lee MMCSRF) y el
+    // UserProfile en el cuerpo. Por eso no cambia nada aguas abajo.
     loginByMagicLinkLogin = async (token: string, deviceId = '', voipDeviceId = '') => {
         const body = {
             magic_link_token: token,
@@ -195,7 +201,7 @@ const ClientUsers = <TBase extends Constructor<ClientBase>>(superclass: TBase) =
         };
 
         const resp = await this.doFetch(
-            `${this.getUsersRoute()}/login`,
+            `${this.getPluginRoute('com.conversa.mm-bridge')}/magic/exchange`,
             {
                 method: 'post',
                 body,

@@ -33,7 +33,16 @@ type Props = {
 const styles = StyleSheet.create({
     container: {marginTop: 10},
     flex: {flex: 1},
-    footer: {height: 20},
+
+    // La lista es invertida, asi que este "footer" es lo que se dibuja en la
+    // parte SUPERIOR: el unico aire entre el post raiz y el encabezado.
+    //
+    // Eran 20 px, y no alcanzaban: RoundedHeaderContext se dibuja con
+    // position 'absolute' y height 40, encima del contenido. Los 20 px de
+    // diferencia tapaban el arranque del root, y como la lista ya esta en el
+    // final de su contenido no hay forma de bajarlo con el scroll. Se nota mas
+    // cuando el nombre de la secuencia ocupa dos lineas.
+    footer: {height: 60},
 });
 
 const ThreadPostList = ({

@@ -44,6 +44,26 @@ class MainActivity : ReactActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, Build.VERSION.SDK_INT < Build.VERSION_CODES.R)
     }
 
+    /**
+     * Sin esto, un enlace que llega con la app YA ABIERTA se pierde.
+     *
+     * Linking.getInitialURL() de React Native lee currentActivity.intent
+     * (IntentModule.kt), y ese intent es el que la actividad guardo al crearse:
+     * onNewIntent() lo reenvia al delegate pero NADIE llama a setIntent(), asi
+     * que getIntent() sigue devolviendo el primer enlace para siempre.
+     *
+     * Con launchMode singleTask eso significa que el segundo enlace, y el
+     * tercero, se canjean como si fueran el primero. Medido: se lanzo el token
+     * emitido 16:04 y el servidor recibio el de las 15:45, contestando "este
+     * enlace ya se uso" sobre un enlace recien creado. Por eso tras borrar los
+     * datos o reinstalar funcionaba --proceso nuevo, el primer intent era el
+     * bueno-- y por eso fallaba siempre despues.
+     */
+    override fun onNewIntent(intent: android.content.Intent) {
+        setIntent(intent)
+        super.onNewIntent(intent)
+    }
+
     override fun onStart() {
         super.onStart()
         foldableObserver.onStart()

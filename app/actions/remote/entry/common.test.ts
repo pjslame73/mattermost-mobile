@@ -152,6 +152,39 @@ describe('actions/remote/entry/common', () => {
                 error: mockError,
             });
         });
+
+        it('should include deleted channels when fetching channels for the active team', async () => {
+            const mockConfig = {Version: '7.8.0'};
+            const mockLicense = {};
+            (fetchConfigAndLicense as jest.Mock).mockResolvedValue({error: false, config: mockConfig, license: mockLicense});
+
+            const mockPreferences = {preferences: []};
+            (fetchMyPreferences as jest.Mock).mockResolvedValue(mockPreferences);
+
+            const mockTeams = {teams: [{id: 'team1'}], memberships: [{team_id: 'team1', delete_at: 0}]};
+            (fetchMyTeams as jest.Mock).mockResolvedValue(mockTeams);
+
+            const mockUser = {user: {id: 'user1', roles: '', username: 'user1'}};
+            (fetchMe as jest.Mock).mockResolvedValueOnce(mockUser);
+
+            const mockChannels = {channels: [], memberships: [], categories: []};
+            (fetchMyChannelsForTeam as jest.Mock).mockResolvedValue(mockChannels);
+
+            (prepareEntryModels as jest.Mock).mockResolvedValue([]);
+
+            await entry(serverUrl, 'team1', '', 12345);
+
+            expect(fetchMyChannelsForTeam).toHaveBeenCalledWith(
+                serverUrl,
+                'team1',
+                true,
+                12345,
+                true,
+                false,
+                false,
+                undefined,
+            );
+        });
     });
 
     describe('entryInitialChannelId', () => {
@@ -183,6 +216,26 @@ describe('actions/remote/entry/common', () => {
             const result = await entryInitialChannelId(
                 mockDatabase as any,
                 '',
+                'team1',
+                'team1',
+                'en',
+                channels,
+                memberships,
+            );
+
+            expect(result).toBe('town-square');
+        });
+
+        it('should not return an archived requested channel', async () => {
+            const channels = [
+                {id: 'archived', name: 'archived', team_id: 'team1', type: 'O', delete_at: 12345},
+                {id: 'town-square', name: 'town-square', team_id: 'team1', type: 'O', delete_at: 0},
+            ] as Channel[];
+            const memberships = [{channel_id: 'archived'}, {channel_id: 'town-square'}] as ChannelMembership[];
+
+            const result = await entryInitialChannelId(
+                mockDatabase as any,
+                'archived',
                 'team1',
                 'team1',
                 'en',

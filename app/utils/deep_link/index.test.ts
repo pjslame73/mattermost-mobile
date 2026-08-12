@@ -6,6 +6,7 @@ import {Alert} from 'react-native';
 
 import {joinIfNeededAndSwitchToChannel, makeDirectChannel} from '@actions/remote/channel';
 import {showPermalink} from '@actions/remote/permalink';
+import {hasLiveSession, magicLinkLogin} from '@actions/remote/session';
 import {fetchUsersByUsernames} from '@actions/remote/user';
 import {DeepLink, Launch, Preferences, Screens} from '@constants';
 import DatabaseManager from '@database/manager';
@@ -15,7 +16,7 @@ import {getPlaybookRunById} from '@playbooks/database/queries/run';
 import {fetchIsPlaybooksEnabled} from '@playbooks/database/queries/version';
 import {goToPlaybookRun} from '@playbooks/screens/navigation';
 import {getActiveServerUrl} from '@queries/app/servers';
-import {queryUsersByUsername} from '@queries/servers/user';
+import {getCurrentUser, queryUsersByUsername} from '@queries/servers/user';
 import {navigateToRoot} from '@screens/navigation';
 import {NavigationStore} from '@store/navigation_store';
 import TestHelper from '@test/test_helper';
@@ -24,7 +25,7 @@ import {addNewServer} from '@utils/server';
 
 import {alertErrorWithFallback, errorBadChannel, errorUnkownUser} from '../draft';
 
-import {alertInvalidDeepLink, extractServerUrl, getLaunchPropsFromDeepLink, parseAndHandleDeepLink} from './index';
+import {alertInvalidDeepLink, extractServerUrl, getLaunchPropsFromDeepLink, parseAndHandleDeepLink, parseDeepLink} from './index';
 
 jest.mock('@actions/remote/user', () => ({
     fetchUsersByUsernames: jest.fn(),
@@ -81,6 +82,11 @@ jest.mock('@utils/draft', () => ({
 
 jest.mock('@utils/log', () => ({
     logError: jest.fn(),
+}));
+
+jest.mock('@actions/remote/session', () => ({
+    magicLinkLogin: jest.fn(() => ({error: undefined})),
+    hasLiveSession: jest.fn(() => true),
 }));
 
 jest.mock('@i18n', () => ({
@@ -351,5 +357,143 @@ describe('alertInvalidDeepLink', () => {
         alertInvalidDeepLink(intl);
 
         expect(alertErrorWithFallback).toHaveBeenCalledWith(intl, {}, message);
+    });
+});
+
+describe('parseDeepLink — acceso por enlace de Conversa', () => {
+    // Token real emitido por el PHP de Moodle (local_sms_start_mm\local\magic_link),
+    // el mismo fixture que usa magic_test.go del plugin. Se usa uno de verdad y
+    // no uno inventado para que el test pruebe el formato que va a llegar.
+    const TOKEN = 'eyJraWQiOjEsInN1YiI6InU0eDlrMm03bjFwM3E1cjhzMHQydjR3Nnk4IiwianRpIjoiYTFiMmMzZDRlNWY2MDcxODI5M2E0YjVjNmQ3ZThmOTAiLCJpYXQiOjE3ODAwMDAwMDAsImV4cCI6MTc4MDE3MjgwMH0.GUC0LkSiJCQFs2LyB1rnyGZ2MKUtT2i9DLD2MzX5yzo';
+    const BASE = 'https://chat.conversa.site/plugins/com.conversa.mm-bridge/magic';
+
+    it('rutea la URL del plugin como MagicLink y extrae el token de ?t=', () => {
+        const result = parseDeepLink(`${BASE}?t=${TOKEN}`);
+
+        expect(result.type).toBe(DeepLink.MagicLink);
+        const data = result.data as {serverUrl: string; token: string};
+        expect(data.token).toBe(TOKEN);
+        expect(data.serverUrl).toBe('chat.conversa.site');
+    });
+
+    it('rutea tambien por el esquema mattermost://, que es como se prueba sin assetlinks.json', () => {
+        const result = parseDeepLink(`mattermost://chat.conversa.site/plugins/com.conversa.mm-bridge/magic?t=${TOKEN}`);
+
+        expect(result.type).toBe(DeepLink.MagicLink);
+        const data = result.data as {serverUrl: string; token: string};
+        expect(data.token).toBe(TOKEN);
+        expect(data.serverUrl).toBe('chat.conversa.site');
+    });
+
+    it('sigue aceptando el formato nativo de Mattermost (64 hexadecimales)', () => {
+        const nativo = 'a'.repeat(64);
+        const result = parseDeepLink(`${BASE}?t=${nativo}`);
+
+        expect(result.type).toBe(DeepLink.MagicLink);
+        expect((result.data as {token: string}).token).toBe(nativo);
+    });
+
+    it('rechaza la URL sin token', () => {
+        expect(parseDeepLink(BASE).type).toBe(DeepLink.Invalid);
+    });
+
+    it('rechaza un token con caracteres fuera de base64url', () => {
+        expect(parseDeepLink(`${BASE}?t=no valido!.firma`).type).toBe(DeepLink.Invalid);
+    });
+
+    it('rechaza un token sin los dos segmentos', () => {
+        expect(parseDeepLink(`${BASE}?t=soloUnSegmento`).type).toBe(DeepLink.Invalid);
+    });
+
+    it('ya no rutea el endpoint nativo /login/one_time_link', () => {
+        const result = parseDeepLink(`https://chat.conversa.site/login/one_time_link?t=${TOKEN}`);
+
+        expect(result.type).not.toBe(DeepLink.MagicLink);
+    });
+});
+
+describe('handleDeepLink — canje del enlace de acceso de Conversa', () => {
+    const TOKEN = 'eyJraWQiOjEsInN1YiI6InU0eDlrMm03bjFwM3E1cjhzMHQydjR3Nnk4IiwianRpIjoiYTFiMmMzZDRlNWY2MDcxODI5M2E0YjVjNmQ3ZThmOTAiLCJpYXQiOjE3ODAwMDAwMDAsImV4cCI6MTc4MDE3MjgwMH0.GUC0LkSiJCQFs2LyB1rnyGZ2MKUtT2i9DLD2MzX5yzo';
+    const URL = `https://chat.conversa.site/plugins/com.conversa.mm-bridge/magic?t=${TOKEN}`;
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+        jest.mocked(getActiveServerUrl).mockResolvedValue('https://chat.conversa.site');
+    });
+
+    // El caso que estaba roto. La app se distribuye apuntando a un unico
+    // servidor propio, asi que queda registrado desde el primer ingreso: si el
+    // canje dependiera de que el servidor sea desconocido, el enlace serviria
+    // una sola vez por dispositivo.
+    it('canjea aunque el servidor ya este registrado, si no hay sesion', async () => {
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('https://chat.conversa.site');
+        jest.mocked(getCurrentUser).mockResolvedValueOnce(undefined);
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(magicLinkLogin).toHaveBeenCalledWith('chat.conversa.site', TOKEN);
+        expect(result).toEqual({error: false});
+    });
+
+    it('canjea tambien con el servidor sin registrar (primer ingreso)', async () => {
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('');
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(magicLinkLogin).toHaveBeenCalledWith('chat.conversa.site', TOKEN);
+        expect(addNewServer).not.toHaveBeenCalled();
+        expect(result).toEqual({error: false});
+    });
+
+    // El aviso queda reservado para la unica situacion en que es cierto. Antes
+    // salia con solo tener el servidor registrado, o sea tambien para el alumno
+    // que NO tenia sesion: le decia lo contrario de lo que pasaba y lo dejaba
+    // sin salida, porque nunca entra a Moodle.
+    it('avisa "ya iniciaste sesion" con sesion viva, y no quema el token', async () => {
+        const alertSpy = jest.spyOn(Alert, 'alert');
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('https://chat.conversa.site');
+        jest.mocked(getCurrentUser).mockResolvedValueOnce(TestHelper.fakeUserModel({locale: 'es'}));
+        jest.mocked(hasLiveSession).mockResolvedValueOnce(true);
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(magicLinkLogin).not.toHaveBeenCalled();
+        expect(alertSpy).toHaveBeenCalled();
+        expect(result).toEqual({error: false});
+    });
+
+    // El usuario cacheado NO prueba que haya sesion: sale de la base local, que
+    // sobrevive hasta que un 401 dispara el logout. En esa ventana el alumno
+    // recibia "ya iniciaste sesion" sin tenerla, el enlace no se canjeaba, y al
+    // ir a Home el 401 lo devolvia a la pantalla de servidor. Intermitente
+    // porque dependia de si el 401 ya se habia disparado.
+    it('canjea igual si quedo un usuario cacheado pero el servidor ya no reconoce la sesion', async () => {
+        const alertSpy = jest.spyOn(Alert, 'alert');
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('https://chat.conversa.site');
+        jest.mocked(getCurrentUser).mockResolvedValueOnce(TestHelper.fakeUserModel({locale: 'es'}));
+        jest.mocked(hasLiveSession).mockResolvedValueOnce(false);
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(magicLinkLogin).toHaveBeenCalledWith('chat.conversa.site', TOKEN);
+        expect(alertSpy).not.toHaveBeenCalled();
+        expect(result).toEqual({error: false});
+    });
+
+    // El servidor manda el motivo ya redactado para el alumno. Antes moria en
+    // logcat y la app se quedaba muda: sin esto, "no pasa nada" es
+    // indistinguible de "el enlace ya se uso".
+    it('muestra el motivo que devuelve el servidor cuando el canje falla', async () => {
+        const alertSpy = jest.spyOn(Alert, 'alert');
+        const motivo = 'Este enlace ya se uso. Pedi uno nuevo desde la pantalla de ingreso.';
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('https://chat.conversa.site');
+        jest.mocked(getCurrentUser).mockResolvedValueOnce(undefined);
+        jest.mocked(magicLinkLogin).mockResolvedValueOnce({error: new Error(motivo), failed: true});
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(logError).toHaveBeenCalled();
+        expect(alertSpy).toHaveBeenCalledWith(expect.any(String), motivo, expect.any(Array));
+        expect(result).toEqual({error: true});
     });
 });

@@ -5,6 +5,14 @@ export const ID_PATH_PATTERN = '[a-z0-9]{26}';
 
 export const TOKEN_PATH_PATTERN = '[a-z0-9]{64}';
 
+// Token del acceso por enlace de Conversa: dos segmentos base64url sin relleno
+// separados por un punto (payload.firma). No entra en TOKEN_PATH_PATTERN, que
+// describe el formato nativo de Mattermost -- 64 caracteres hexadecimales.
+//
+// Esto es solo un filtro barato antes de salir a la red. La validacion real es
+// el HMAC del lado del servidor, asi que aceptar de mas aca no abre nada.
+export const CONVERSA_MAGIC_TOKEN_PATTERN = '[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+';
+
 // This should cover:
 // - Team name (lowercase english characters, numbers or -)
 // - Two ids separated by __ (userID__userID)

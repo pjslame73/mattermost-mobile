@@ -92,6 +92,48 @@
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="mmauthbeta" />
         </intent-filter>
+        <!--
+          Esquemas de la marca Socratix.
+
+          El rebranding cambio app.json (expo.scheme = socratix) y
+          assets/override/config.json (AuthUrlScheme = socratixauth://), pero no
+          este manifest. Como el build usa gradle directo y no expo prebuild,
+          android/ es la fuente de verdad: sin estas lineas la app quedaba
+          registrada solo con los esquemas viejos y no respondia a socratix://.
+
+          Los esquemas mattermost/mmauthbeta de arriba se dejan a proposito:
+          convivir con ellos no cuesta nada y mantiene andando los enlaces que
+          ya circulan.
+        -->
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="socratix" />
+          <data android:scheme="socratixauth" />
+          <data android:scheme="socratixauthbeta" />
+        </intent-filter>
+        <!--
+          App Links del acceso por enlace (magic link). Sin esto, un enlace
+          https del correo abre SIEMPRE en el navegador aunque la app este
+          instalada: los esquemas mattermost:// y mmauthbeta:// de arriba no
+          cubren https.
+
+          autoVerify hace que Android busque
+          https://chat.conversa.site/.well-known/assetlinks.json al instalar y
+          verifique que ese dominio autoriza a este paquete. Mientras ese
+          archivo no este servido, la verificacion falla y el filtro queda
+          inerte. No rompe nada: el enlace sigue abriendo en el navegador, que
+          es la degradacion prevista.
+        -->
+        <intent-filter android:autoVerify="true">
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="https"
+                android:host="chat.conversa.site"
+                android:pathPrefix="/plugins/com.conversa.mm-bridge/magic" />
+        </intent-filter>
       </activity>
       <service android:name=".NotificationDismissService"
                 android:enabled="true"

@@ -1,9 +1,9 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {markChannelAsViewed} from '@actions/local/channel';
+import {markChannelAsViewed, removeCurrentUserFromChannel} from '@actions/local/channel';
 import {dataRetentionCleanup, expiredBoRPostCleanup} from '@actions/local/systems';
-import {markChannelAsRead} from '@actions/remote/channel';
+import {handleKickFromChannel, markChannelAsRead} from '@actions/remote/channel';
 import {
     entry,
     handleEntryAfterLoadNavigation,
@@ -17,7 +17,7 @@ import {checkIsAgentsPluginEnabled} from '@agents/actions/remote/agents_status';
 import {handleAgentsReconnect} from '@agents/actions/websocket/reconnect';
 import {loadConfigAndCalls} from '@calls/actions/calls';
 import {isSupportedServerCalls} from '@calls/utils';
-import {Screens} from '@constants';
+import {Events, Screens} from '@constants';
 import DatabaseManager from '@database/manager';
 import AppsManager from '@managers/apps_manager';
 import {handlePlaybookReconnect} from '@playbooks/actions/websocket/reconnect';
@@ -29,6 +29,7 @@ import {
     getCurrentTeamId,
     getLicense,
     getLastFullSync,
+    canViewArchivedChannels,
     setLastFullSync,
 } from '@queries/servers/system';
 import {getIsCRTEnabled} from '@queries/servers/thread';
@@ -83,6 +84,8 @@ async function doReconnect(serverUrl: string, groupLabel?: BaseRequestGroupLabel
             await operator.batchRecords(models, 'doReconnect');
         }
 
+        await handleArchivedCurrentChannelAfterReconnect(serverUrl, chData?.channels);
+
         logInfo('WEBSOCKET RECONNECT MODELS BATCHING TOOK', `${Date.now() - dt}ms`);
 
         await fetchPostDataIfNeeded(serverUrl, groupLabel);
@@ -114,6 +117,30 @@ async function doReconnect(serverUrl: string, groupLabel?: BaseRequestGroupLabel
         return undefined;
     } finally {
         setTeamLoading(serverUrl, false);
+    }
+}
+
+async function handleArchivedCurrentChannelAfterReconnect(serverUrl: string, channels?: Channel[]) {
+    try {
+        if (!channels?.length) {
+            return;
+        }
+
+        const {database} = DatabaseManager.getServerDatabaseAndOperator(serverUrl);
+        const currentChannelId = await getCurrentChannelId(database);
+        if (!currentChannelId) {
+            return;
+        }
+
+        const currentChannel = channels.find((channel) => channel.id === currentChannelId);
+        if (!currentChannel?.delete_at || await canViewArchivedChannels(database)) {
+            return;
+        }
+
+        await handleKickFromChannel(serverUrl, currentChannelId, Events.CHANNEL_ARCHIVED);
+        await removeCurrentUserFromChannel(serverUrl, currentChannelId);
+    } catch (error) {
+        logDebug('could not handle archived current channel after reconnect', error);
     }
 }
 

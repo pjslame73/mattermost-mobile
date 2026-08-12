@@ -3,21 +3,22 @@
 
 import {DeviceEventEmitter} from 'react-native';
 
-import {markChannelAsViewed} from '@actions/local/channel';
+import {markChannelAsViewed, removeCurrentUserFromChannel} from '@actions/local/channel';
 import {dataRetentionCleanup, expiredBoRPostCleanup} from '@actions/local/systems';
-import {markChannelAsRead} from '@actions/remote/channel';
+import {handleKickFromChannel, markChannelAsRead} from '@actions/remote/channel';
 import {entry, handleEntryAfterLoadNavigation} from '@actions/remote/entry/common';
 import {deferredAppEntryActions} from '@actions/remote/entry/deferred';
 import {fetchPostsForChannel, fetchPostThread} from '@actions/remote/post';
 import {openAllUnreadChannels} from '@actions/remote/preference';
 import {loadConfigAndCalls} from '@calls/actions/calls';
 import {isSupportedServerCalls} from '@calls/utils';
+import {Events} from '@constants';
 import DatabaseManager from '@database/manager';
 import AppsManager from '@managers/apps_manager';
 import {handlePlaybookReconnect} from '@playbooks/actions/websocket/reconnect';
 import {getActiveServerUrl} from '@queries/app/servers';
 import {getLastPostInThread} from '@queries/servers/post';
-import {getConfig, getCurrentChannelId, getCurrentTeamId, setLastFullSync} from '@queries/servers/system';
+import {canViewArchivedChannels, getConfig, getCurrentChannelId, getCurrentTeamId, setLastFullSync} from '@queries/servers/system';
 import {getIsCRTEnabled} from '@queries/servers/thread';
 import {getCurrentUser} from '@queries/servers/user';
 import EphemeralStore from '@store/ephemeral_store';
@@ -125,6 +126,7 @@ describe('WebSocket Index Actions', () => {
             jest.mocked(getActiveServerUrl).mockResolvedValue(serverUrl);
             jest.mocked(getCurrentChannelId).mockResolvedValue(currentChannelId);
             jest.mocked(getCurrentTeamId).mockResolvedValue(currentTeamId);
+            jest.mocked(canViewArchivedChannels).mockResolvedValue(false);
             jest.mocked(getIsCRTEnabled).mockResolvedValue(false);
             jest.mocked(EphemeralStore.getCurrentThreadId).mockReturnValue('');
             jest.mocked(EphemeralStore.wasNotificationTapped).mockReturnValue(false);
@@ -208,6 +210,61 @@ describe('WebSocket Index Actions', () => {
 
             expect(markChannelAsViewed).not.toHaveBeenCalled();
             expect(EphemeralStore.setNotificationTapped).toHaveBeenCalledWith(false);
+        });
+
+        it('should leave the current channel when reconnect learns it was archived', async () => {
+            const mockEntryData = {
+                models: [],
+                initialTeamId: currentTeamId,
+                initialChannelId: currentChannelId,
+                prefData: {preferences: []},
+                teamData: {memberships: [], teams: []},
+                chData: {
+                    memberships: [{channel_id: currentChannelId}],
+                    channels: [{id: currentChannelId, delete_at: 12345}],
+                },
+                gmConverted: false,
+            };
+
+            jest.mocked(entry).mockResolvedValue(mockEntryData as any);
+            jest.mocked(getCurrentUser).mockResolvedValue(TestHelper.fakeUserModel({
+                id: currentUserId,
+                locale: 'en',
+            }));
+            jest.mocked(getConfig).mockResolvedValue({Version: '9.0.0'} as ClientConfig);
+
+            await handleReconnect(serverUrl);
+
+            expect(handleKickFromChannel).toHaveBeenCalledWith(serverUrl, currentChannelId, Events.CHANNEL_ARCHIVED);
+            expect(removeCurrentUserFromChannel).toHaveBeenCalledWith(serverUrl, currentChannelId);
+        });
+
+        it('should keep the current archived channel when archived channels are viewable', async () => {
+            const mockEntryData = {
+                models: [],
+                initialTeamId: currentTeamId,
+                initialChannelId: currentChannelId,
+                prefData: {preferences: []},
+                teamData: {memberships: [], teams: []},
+                chData: {
+                    memberships: [{channel_id: currentChannelId}],
+                    channels: [{id: currentChannelId, delete_at: 12345}],
+                },
+                gmConverted: false,
+            };
+
+            jest.mocked(entry).mockResolvedValue(mockEntryData as any);
+            jest.mocked(canViewArchivedChannels).mockResolvedValue(true);
+            jest.mocked(getCurrentUser).mockResolvedValue(TestHelper.fakeUserModel({
+                id: currentUserId,
+                locale: 'en',
+            }));
+            jest.mocked(getConfig).mockResolvedValue({Version: '9.0.0'} as ClientConfig);
+
+            await handleReconnect(serverUrl);
+
+            expect(handleKickFromChannel).not.toHaveBeenCalled();
+            expect(removeCurrentUserFromChannel).not.toHaveBeenCalled();
         });
 
         it('should handle error in entry data', async () => {

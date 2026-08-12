@@ -17,6 +17,7 @@ import {
     addPushProxyVerificationStateFromLogin,
     forceLogoutIfNecessary,
     fetchSessions,
+    hasLiveSession,
     login,
     logout,
     nativeEntraLogin,
@@ -182,6 +183,28 @@ describe('Session Actions', () => {
             expect(result).toBeDefined();
             expect(result.error).toBeNull();
             expect(result.logout).toBe(false);
+        });
+
+        it('hasLiveSession - viva si el servidor responde', async () => {
+            expect(await hasLiveSession(serverUrl)).toBe(true);
+        });
+
+        it('hasLiveSession - muerta con 401', async () => {
+            mockClient.getMe.mockImplementationOnce(() => {
+                throw Object.assign(new Error('Unauthorized'), {status_code: 401, url: '/api/v4/users/me'});
+            });
+
+            expect(await hasLiveSession(serverUrl)).toBe(false);
+        });
+
+        // Sin red o con el servidor caido no se puede demostrar que la sesion
+        // murio. Darla por muerta gastaria un enlace de un solo uso a ciegas.
+        it('hasLiveSession - se la da por viva si el fallo no es un 401', async () => {
+            mockClient.getMe.mockImplementationOnce(() => {
+                throw Object.assign(new Error('Server error'), {status_code: 500, url: '/api/v4/users/me'});
+            });
+
+            expect(await hasLiveSession(serverUrl)).toBe(true);
         });
 
         it('fetchSessions - handle error', async () => {

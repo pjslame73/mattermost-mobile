@@ -4,6 +4,26 @@
 <dict>
 	<key>aps-environment</key>
 	<string>production</string>
+	<!--
+	  Universal Links del acceso por enlace (magic link).
+
+	  Es el equivalente iOS de las App Links de Android, y es MEJOR: cero
+	  toques, sin dialogo de confirmacion, y si la app no esta instalada el
+	  enlace simplemente carga en Safari. El esquema mattermost:// no sirve
+	  para esto porque siempre pregunta, y ademas rompe con un error de Safari
+	  cuando la app no esta.
+
+	  Requiere que el dominio publique https://chat.conversa.site/.well-known/
+	  apple-app-site-association con content-type application/json y sin
+	  redirecciones. Mientras eso no este, este entitlement queda inerte: no
+	  rompe nada, el enlace sigue abriendo en Safari.
+
+	  OJO: iOS solo relee ese archivo al INSTALAR o actualizar la app.
+	-->
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:chat.conversa.site</string>
+	</array>
 	<key>com.apple.developer.usernotifications.communication</key>
 	<true/>
 	<key>com.apple.security.application-groups</key>

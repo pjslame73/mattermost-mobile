@@ -88,7 +88,7 @@ export async function restDeferredAppEntryActions(
                 let data: MyChannelsRequest = {};
                 try {
                     /* eslint-disable-next-line no-await-in-loop */
-                    data = await fetchMyChannelsForTeam(serverUrl, team.id, false, since, true, false, isCRTEnabled, requestLabel);
+                    data = await fetchMyChannelsForTeam(serverUrl, team.id, true, since, true, false, isCRTEnabled, requestLabel);
 
                     combineChannelsData(combinedChannelsData, data);
 
@@ -200,4 +200,3 @@ export const testExports = {
     combineChannelsData,
     sortTeamsByPreferences,
 };
-

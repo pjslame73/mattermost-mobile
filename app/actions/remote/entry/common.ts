@@ -169,7 +169,7 @@ const entryRest = async (serverUrl: string, teamId?: string, channelId?: string,
             categories: [],
         };
         if (initialTeamId) {
-            chData = await fetchMyChannelsForTeam(serverUrl, initialTeamId, false, lastDisconnectedAt, true, false, isCRTEnabled, groupLabel);
+            chData = await fetchMyChannelsForTeam(serverUrl, initialTeamId, true, lastDisconnectedAt, true, false, isCRTEnabled, groupLabel);
         }
 
         initialChannelId = await entryInitialChannelId(database, initialChannelId, teamId, initialTeamId, meData?.user?.locale || '', chData?.channels, chData?.memberships);
@@ -255,7 +255,8 @@ export async function handleAutotranslationChanges(serverUrl: string, meData: My
 
 export async function entryInitialChannelId(database: Database, requestedChannelId = '', requestedTeamId = '', initialTeamId: string, locale: string, channels?: Channel[], memberships?: ChannelMember[]) {
     const membershipIds = new Set(memberships?.map((m) => m.channel_id));
-    const requestedChannel = channels?.find((c) => (c.id === requestedChannelId) && membershipIds.has(c.id));
+    const activeChannels = channels?.filter((c) => !c.delete_at);
+    const requestedChannel = activeChannels?.find((c) => (c.id === requestedChannelId) && membershipIds.has(c.id));
 
     // If team and channel are the requested, return the channel
     if (initialTeamId === requestedTeamId && requestedChannel) {
@@ -276,14 +277,14 @@ export async function entryInitialChannelId(database: Database, requestedChannel
     }
 
     // Check if we are member of the default channel.
-    const defaultChannel = channels?.find((c) => isDefaultChannel(c) && c.team_id === initialTeamId);
+    const defaultChannel = activeChannels?.find((c) => isDefaultChannel(c) && c.team_id === initialTeamId);
     const iAmMemberOfTheTeamDefaultChannel = Boolean(defaultChannel && membershipIds.has(defaultChannel.id));
     if (iAmMemberOfTheTeamDefaultChannel) {
         return defaultChannel!.id;
     }
 
     // Get the first channel of the list, based on the locale.
-    const myFirstTeamChannel = channels?.filter((c) =>
+    const myFirstTeamChannel = activeChannels?.filter((c) =>
         c.team_id === requestedTeamId &&
         c.type === General.OPEN_CHANNEL &&
         membershipIds.has(c.id),

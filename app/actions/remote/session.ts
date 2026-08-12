@@ -97,6 +97,44 @@ export const forceLogoutIfNecessary = async (serverUrl: string, err: unknown) =>
     return {error: null, logout: false};
 };
 
+/**
+ * ¿La sesion guardada en este dispositivo sigue viva del lado del servidor?
+ *
+ * Existe porque la base local NO contesta esa pregunta. getCurrentUser() sale
+ * de WatermelonDB y dice si quedo un usuario cacheado, no si hay sesion: el
+ * registro local solo se borra en un logout, y en esta app el logout es
+ * REACTIVO -- ocurre cuando alguna peticion vuelve con 401 y salta
+ * forceLogoutIfNecessary(). Entre que el servidor mata la sesion y que la app
+ * se entera puede pasar un rato largo, y en esa ventana la app cree que el
+ * alumno sigue adentro cuando en realidad esta afuera.
+ *
+ * A proposito NO llama a forceLogoutIfNecessary(): esto es una PREGUNTA, no una
+ * accion. Ese camino emite SERVER_LOGOUT, que dispara terminateSession() --
+ * destruye la base del servidor, borra las credenciales y relanza la app -- de
+ * forma asincronica, o sea compitiendo con el login que viene justo despues.
+ *
+ * Solo un 401 prueba que la sesion murio. Cualquier otro fallo (sin red,
+ * servidor caido, cliente sin crear) se responde "viva" a proposito: no se
+ * puede demostrar lo contrario, y darla por muerta gastaria un enlace de un
+ * solo uso a ciegas.
+ *
+ * @param serverUrl
+ * @return true si el servidor respondio, o si no se pudo comprobar.
+ */
+export const hasLiveSession = async (serverUrl: string): Promise<boolean> => {
+    try {
+        const client = NetworkManager.getClient(serverUrl);
+        await client.getMe();
+        return true;
+    } catch (error) {
+        if (isErrorWithStatusCode(error) && error.status_code === HTTP_UNAUTHORIZED) {
+            return false;
+        }
+        logDebug('hasLiveSession: no se pudo comprobar la sesion', getFullErrorMessage(error));
+        return true;
+    }
+};
+
 export const fetchSessions = async (serverUrl: string, currentUserId: string) => {
     let client;
     try {
