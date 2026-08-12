@@ -48,6 +48,9 @@ const INVITE = 'invite';
 const JOIN_TEAM = 'join_team';
 const LATEX = 'latex';
 const LOGIN = 'login';
+
+// Reentrada: el alumno pide su propio enlace de acceso sin tener sesion.
+const MAGIC_LINK_REQUEST = 'magic_link_request';
 const MANAGE_CHANNEL_MEMBERS = 'manage_channel_members';
 const MENTIONS = 'mentions';
 const MFA = 'mfa';
@@ -134,6 +137,7 @@ export default {
     JOIN_TEAM,
     LATEX,
     LOGIN,
+    MAGIC_LINK_REQUEST,
     MANAGE_CHANNEL_MEMBERS,
     MENTIONS,
     MFA,
@@ -225,6 +229,7 @@ export const UNAUTHENTICATED_SCREENS = new Set<string>([
     SSO,
     MFA,
     FORGOT_PASSWORD,
+    MAGIC_LINK_REQUEST,
 ]);
 
 export const HOME_TAB_SCREENS = new Set<string>([

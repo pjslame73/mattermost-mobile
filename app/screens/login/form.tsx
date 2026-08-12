@@ -292,6 +292,10 @@ const LoginForm = ({
         navigateToScreen(Screens.FORGOT_PASSWORD, passProps);
     }, [config.ForgotPasswordLink, isModal, serverUrl, theme]);
 
+    const onPressCantGetIn = useCallback(() => {
+        navigateToScreen(Screens.MAGIC_LINK_REQUEST, {isModal, theme, serverUrl});
+    }, [isModal, serverUrl, theme]);
+
     const togglePasswordVisiblity = useCallback(() => {
         setIsPasswordVisible((prevState) => !prevState);
     }, []);
@@ -412,6 +416,28 @@ const LoginForm = ({
                 </>
             )}
             {proceedButton}
+
+            {/*
+              * Salida para el alumno que no tiene contrasena y nunca la tuvo.
+              *
+              * Va FUERA del bloque de showPasswordInput y sin condicionar por
+              * config: esta pantalla es donde termina TODO el que se quedo sin
+              * sesion -- telefono nuevo, enlace vencido, app reinstalada -- y si
+              * dependiera de la configuracion del servidor, el caso que mas
+              * importa (instalacion nueva, antes de conocer nada del servidor)
+              * se quedaria sin el enlace justo cuando mas falta hace.
+              */}
+            <RNEButton
+                onPress={onPressCantGetIn}
+                buttonStyle={styles.forgotPasswordBtn}
+                testID='login_form.magic_link_request.button'
+            >
+                <FormattedText
+                    id='login.cant_get_in'
+                    defaultMessage="Can't get in? Request your access link"
+                    style={styles.forgotPasswordTxt}
+                />
+            </RNEButton>
         </View>
     );
 };

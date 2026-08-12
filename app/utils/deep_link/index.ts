@@ -22,7 +22,7 @@ import {fetchIsPlaybooksEnabled} from '@playbooks/database/queries/version';
 import {goToPlaybookRun} from '@playbooks/screens/navigation';
 import {getActiveServerUrl} from '@queries/app/servers';
 import {getCurrentUser, queryUsersByUsername} from '@queries/servers/user';
-import {navigateToRoot, updateParams} from '@screens/navigation';
+import {navigateToRoot, navigateToScreen, updateParams} from '@screens/navigation';
 import EphemeralStore from '@store/ephemeral_store';
 import {NavigationStore} from '@store/navigation_store';
 import {alertErrorWithFallback, errorBadChannel, errorUnkownUser} from '@utils/draft';
@@ -106,11 +106,31 @@ export async function handleDeepLink(deepLink: DeepLinkWithData, intlShape?: Int
                 // le dieron de baja. En el navegador ese mismo rechazo se ve
                 // como una pagina de error; la app era el unico lado mudo.
                 const intl = intlShape || getIntlShape(DEFAULT_LOCALE);
+
+                // Se captura fuera de la alerta: adentro del onPress se pierde
+                // el estrechamiento de tipo que hizo el 'token' in deepLink.data
+                // de arriba, y deepLink.data vuelve a ser opcional.
+                const {serverUrl: servidorDelEnlace} = deepLink.data;
+
+                // El motivo por si solo deja al alumno sabiendo QUE fallo y sin
+                // ningun lugar a donde ir: toca OK y queda en la pantalla de
+                // conectarse a un servidor, que para el no significa nada
+                // --nunca configuro un servidor ni tuvo contrasena--. El segundo
+                // boton es la salida: lo lleva a pedir un enlace nuevo.
                 Alert.alert(
                     intl.formatMessage({id: 'magic_link.login_error.title', defaultMessage: 'Could not open your session'}),
                     getFullErrorMessage(result.error, intl),
                     [{
                         text: intl.formatMessage({id: 'magic_link.login_error.ok', defaultMessage: 'OK'}),
+                        style: 'cancel',
+                    }, {
+                        text: intl.formatMessage({id: 'magic_link.login_error.request', defaultMessage: 'Request a new link'}),
+                        onPress: () => {
+                            navigateToScreen(Screens.MAGIC_LINK_REQUEST, {
+                                serverUrl: servidorDelEnlace,
+                                theme: EphemeralStore.getTheme() || getDefaultThemeByAppearance(),
+                            });
+                        },
                     }],
                 );
                 return {error: true};

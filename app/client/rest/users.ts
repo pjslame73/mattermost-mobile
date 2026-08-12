@@ -20,6 +20,7 @@ export interface ClientUsersMix {
     login: (loginId: string, password: string, token?: string, deviceId?: string, voipDeviceId?: string, ldapOnly?: boolean) => Promise<UserProfile>;
     loginById: (id: string, password: string, token?: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
     loginByMagicLinkLogin: (token: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
+    requestMagicLink: (email: string) => Promise<{status: string}>;
     loginByIntune: (accessToken: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
     logout: () => Promise<any>;
     getProfiles: (page?: number, perPage?: number, options?: Record<string, any>) => Promise<UserProfile[]>;
@@ -193,6 +194,27 @@ const ClientUsers = <TBase extends Constructor<ClientBase>>(superclass: TBase) =
     // La forma de la respuesta es la misma: cookies para la sesion (el cliente
     // nativo maneja el cookie jar, y getCSRFFromCookie lee MMCSRF) y el
     // UserProfile en el cuerpo. Por eso no cambia nada aguas abajo.
+    // Pide un enlace de acceso nuevo para una direccion de correo.
+    //
+    // Va contra la variante JSON de la pagina de reentrada. La pagina HTML
+    // existe igual, para el navegador, pero el cliente nativo no sabe mandar
+    // formularios -- serializa como JSON o como text/plain -- asi que la app
+    // tiene su propia ruta en vez de deducir el resultado de una pagina.
+    //
+    // Responde 200 aunque no se haya mandado ningun correo: la cuenta puede no
+    // existir o no tener cursos vigentes. Es a proposito, para que la app no
+    // sirva de oraculo para averiguar quien esta matriculado.
+    requestMagicLink = async (email: string) => {
+        return this.doFetch(
+            `${this.getPluginRoute('com.conversa.mm-bridge')}/reentrada/solicitud`,
+            {
+                method: 'post',
+                body: {email},
+                headers: {'Cache-Control': 'no-store'},
+            },
+        );
+    };
+
     loginByMagicLinkLogin = async (token: string, deviceId = '', voipDeviceId = '') => {
         const body = {
             magic_link_token: token,

@@ -52,6 +52,7 @@ export default function UnauthenticatedLayout() {
                 <Stack.Screen name={Screens.SSO}/>
                 <Stack.Screen name={Screens.MFA}/>
                 <Stack.Screen name={Screens.FORGOT_PASSWORD}/>
+                <Stack.Screen name={Screens.MAGIC_LINK_REQUEST}/>
                 <Stack.Screen name={Screens.ONBOARDING}/>
             </Stack>
         </SafeAreaView>

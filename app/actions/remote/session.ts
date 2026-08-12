@@ -464,6 +464,60 @@ export const getUserLoginType = async (serverUrl: string, loginId: string) => {
     }
 };
 
+/**
+ * Pide un enlace de acceso nuevo para una direccion de correo.
+ *
+ * Es la salida del alumno que se quedo afuera: cambio de telefono, borro la app
+ * o su enlace vencio. Como nunca entra a Moodle y nunca tuvo contrasena, este es
+ * el unico camino de vuelta que puede recorrer solo.
+ *
+ * Crea el cliente si no existe. La pantalla se alcanza sin sesion y a veces sin
+ * servidor agregado todavia -- una instalacion nueva en un telefono nuevo es
+ * justamente el caso que motiva la funcion -- y ahi getClient() tira. El fork
+ * apunta a un unico servidor propio (DefaultServerUrl), asi que la URL siempre
+ * se conoce aunque no haya nada configurado.
+ *
+ * Devolver el error tal cual, y no un booleano, es a proposito: la pantalla
+ * necesita el status_code para distinguir "escribiste mal el correo" (400) de
+ * "pediste demasiadas veces" (429), que son dos consejos distintos.
+ */
+export const requestMagicLink = async (serverUrl: string, email: string) => {
+    try {
+        let client;
+        try {
+            client = NetworkManager.getClient(serverUrl);
+        } catch {
+            // La URL puede venir SIN esquema. Cuando la pantalla se alcanza
+            // desde el rechazo de un enlace, serverUrl sale de parseDeepLink,
+            // que la arma juntando los segmentos de la ruta ("chat.ejemplo.com",
+            // sin https://). createClient con eso falla, y el alumno leia
+            // "revisá tu conexión" teniendo conexión perfecta.
+            //
+            // Es la misma normalizacion que hace magicLinkLogin acá abajo, y por
+            // el mismo motivo. Se prueba https y se cae a http, porque un
+            // servidor que solo habla http igual tiene que poder emitir.
+            const https = await getServerUrlAfterRedirect(serverUrl);
+            const resuelta = https.url || (await getServerUrlAfterRedirect(serverUrl, true)).url;
+            if (!resuelta) {
+                return {error: https.error || 'empty server url'};
+            }
+
+            // getClient TIRA cuando no encuentra el cliente, no devuelve null.
+            try {
+                client = NetworkManager.getClient(resuelta);
+            } catch {
+                client = await NetworkManager.createClient(resuelta);
+            }
+        }
+
+        await client.requestMagicLink(email);
+        return {};
+    } catch (error) {
+        logDebug('error on requestMagicLink', getFullErrorMessage(error));
+        return {error};
+    }
+};
+
 export const magicLinkLogin = async (serverUrl: string, token: string): Promise<LoginActionResponse> => {
     const httpsHeadRequest = await getServerUrlAfterRedirect(serverUrl);
     let serverUrlToUse;
