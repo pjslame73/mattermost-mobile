@@ -1,6 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import {esCampoHorarioSecuencia, formatearHorario} from '@secuencia/utils/horario';
 import React, {useCallback, useMemo} from 'react';
 import {View} from 'react-native';
 
@@ -83,6 +84,14 @@ const AppsFormField = React.memo<Props>(({
     const displayName = field.modal_label || field.label || '';
 
     const handleChange = useCallback((newValue: string | boolean) => {
+        // secuenciadidacticamm: el campo del horario se escribe como reloj (HH:MM), con
+        // los dos puntos puestos por la mascara. Un dialogo interactivo no puede declarar
+        // un campo "de hora" --no existe ese subtipo-- asi que el comportamiento se
+        // agrega aca. Ver app/products/secuencia/utils/horario.ts.
+        if (typeof newValue === 'string' && esCampoHorarioSecuencia(name)) {
+            onChange(name, formatearHorario(newValue));
+            return;
+        }
         onChange(name, newValue);
     }, [name, onChange]);
 
@@ -165,7 +174,13 @@ const AppsFormField = React.memo<Props>(({
                     onChange={handleChange}
                     optional={!field.is_required}
                     multiline={field.subtype === 'textarea'}
-                    keyboardType={selectKeyboardType(field.subtype)}
+
+                    // secuenciadidacticamm: teclado numerico para el campo del horario.
+                    // Moodle no puede pedirlo con subtype:'number' porque eso volveria
+                    // el input un type="number" en escritorio, que rechaza los dos
+                    // puntos de "08:30". Como la mascara pone los dos puntos sola, acá
+                    // no hace falta que el teclado los tenga.
+                    keyboardType={esCampoHorarioSecuencia(name) ? 'numeric' : selectKeyboardType(field.subtype)}
                     secureTextEntry={field.subtype === 'password'}
                     disabled={Boolean(field.readonly)}
                     testID={testID}
