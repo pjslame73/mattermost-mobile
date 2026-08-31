@@ -1,6 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import {adaptarStyleInline, detectarColoresBase} from '@secuencia/utils/colores_tema';
 import sanitizeHtml from 'sanitize-html';
 
 // Mismo criterio de lista blanca que el plugin webapp de desktop
@@ -17,17 +18,49 @@ const ALLOWED_TAGS = [
     'blockquote', 'code', 'pre', 'font',
 ];
 
-function sanitizar(html: string): string {
+/**
+ * Sanea el HTML y, si el tema es oscuro, adapta de paso cada color declarado inline.
+ *
+ * Las dos cosas van juntas en una sola pasada a proposito: sanitize-html ya esta
+ * recorriendo cada tag con sus atributos, asi que reescribir el `style` ahi sale
+ * gratis -- no hace falta un segundo recorrido ni parsear el HTML dos veces.
+ */
+function sanitizar(html: string, esOscuro: boolean): string {
     return sanitizeHtml(html, {
         allowedTags: ALLOWED_TAGS,
+
+        // 'id' (abajo, en '*'): habilita el indice de anclas ("botones" que saltan a
+        // una seccion mas abajo) dentro del MISMO post -- mismo motivo que el plugin
+        // webapp de desktop (conversa-mm-plugin/webapp/src/components/secuencia_html_post.tsx,
+        // agregado 2026-08-30). Sin esto, un <h2 id="x"> perdia el id acá y
+        // <a href="#x"> quedaba apuntando a nada.
+        //
+        // Ojo: esto NO alcanza para que el indice funcione cruzando POSTS distintos
+        // -- cada bloque de texto de mm_enviar_descripcion() es un WebView separado,
+        // y un anchor solo salta dentro de su propio documento. Ver el comentario
+        // largo en index.tsx sobre esto.
         allowedAttributes: {
-            '*': ['style', 'class'],
+            '*': ['style', 'class', 'id'],
             a: ['href', 'target', 'rel'],
             img: ['src', 'alt', 'title', 'width', 'height'],
             td: ['colspan', 'rowspan'],
             th: ['colspan', 'rowspan'],
         },
         allowedSchemes: ['http', 'https', 'data'],
+
+        // En tema claro el HTML ya esta pensado para eso: adaptar seria reescribir
+        // colores que ya son correctos, y encima se perderia el diseno original.
+        transformTags: esOscuro ? {
+            '*': (tagName, attribs) => {
+                if (attribs.style) {
+                    return {
+                        tagName,
+                        attribs: {...attribs, style: adaptarStyleInline(attribs.style)},
+                    };
+                }
+                return {tagName, attribs};
+            },
+        } : undefined,
     });
 }
 
@@ -37,8 +70,9 @@ const KATEX_VERSION = '0.18.1';
 // styles.ts del lado desktop) renderiza $$..$$/\(..\)/\[..\] directo en el texto,
 // sin necesidad de ningún preprocesamiento propio (a diferencia del intento
 // anterior con react-native-render-html + tags custom).
-export function construirDocumentoHtml(html: string, textColor: string): string {
-    const contenido = sanitizar(html);
+export function construirDocumentoHtml(html: string, theme: Theme): string {
+    const base = detectarColoresBase(theme);
+    const contenido = sanitizar(html, base.esOscuro);
     return `<!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +81,15 @@ export function construirDocumentoHtml(html: string, textColor: string): string 
 <script src="https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/contrib/auto-render.min.js"></script>
 <style>
-html, body { margin: 0; padding: 0; background: transparent; color: ${textColor}; font-family: sans-serif; font-size: 15px; word-wrap: break-word; }
+html, body { margin: 0; padding: 0; background: transparent; font-family: sans-serif; font-size: 15px; word-wrap: break-word; }
+/* Superficie y color de texto PRESTADOS del tema activo, no inventados aca: asi
+   la tarjeta se funde con Denim, Indigo, Onyx o un tema personalizado sin que
+   haya que conocerlos de antemano. Los colores del contenido en si ya vienen
+   adaptados desde sanitizar() -- ver colores_tema.ts. */
+#secuencia-content {
+    background: ${base.superficie};
+    color: ${base.texto};
+}
 table { border-collapse: collapse; margin: 8px 0; max-width: 100%; }
 th, td { border: 1px solid rgba(128,128,128,0.4); padding: 4px 10px; text-align: left; }
 th { font-weight: 600; }

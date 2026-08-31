@@ -55,8 +55,12 @@ const SecuenciaHtmlPost = ({location, post, theme}: Props) => {
         if (!isSecuenciaHtmlProps(post.props)) {
             return null;
         }
-        return construirDocumentoHtml(post.props.html, theme.centerChannelColor);
-    }, [post.props, theme.centerChannelColor]);
+
+        // Depende del tema a proposito: al cambiarlo, el documento se reconstruye con
+        // la superficie/texto nuevos y los colores del contenido readaptados, sin que
+        // el alumno tenga que salir y volver a entrar al hilo (ver colores_tema.ts).
+        return construirDocumentoHtml(post.props.html, theme);
+    }, [post.props, theme]);
 
     const onMessage = (event: WebViewMessageEvent) => {
         const alturaReportada = Number(event.nativeEvent.data);

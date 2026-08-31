@@ -50,6 +50,23 @@ export async function handleNewPostEvent(serverUrl: string, msg: WebSocketMessag
     } catch {
         return;
     }
+
+    // Apagar el "esta escribiendo" va ANTES que cualquier otra cosa, y a
+    // proposito arriba de todos los return tempranos que siguen.
+    //
+    // No necesita nada de la base: le alcanza con el canal, el hilo y el autor,
+    // que vienen en el propio post. Abajo, en cambio, hay cuatro salidas
+    // tempranas, y la primera --"este post ya esta en la base"-- se dispara
+    // seguido en los hilos, porque la sincronizacion del hilo trae el post
+    // antes de que se procese el evento. Ese era el motivo de que el cartel se
+    // apagara en la primera respuesta del bot y en las siguientes no.
+    DeviceEventEmitter.emit(Events.USER_STOP_TYPING, {
+        channelId: post.channel_id,
+        rootId: post.root_id,
+        userId: post.user_id,
+        now: Date.now(),
+    });
+
     const currentUserId = await getCurrentUserId(database);
 
     const existing = await getPostById(database, post.pending_post_id) || await getPostById(database, post.id);
@@ -103,16 +120,6 @@ export async function handleNewPostEvent(serverUrl: string, msg: WebSocketMessag
     }
 
     const currentChannelId = await getCurrentChannelId(database);
-
-    if (post.channel_id === currentChannelId) {
-        const data = {
-            channelId: post.channel_id,
-            rootId: post.root_id,
-            userId: post.user_id,
-            now: Date.now(),
-        };
-        DeviceEventEmitter.emit(Events.USER_STOP_TYPING, data);
-    }
 
     const models: Model[] = [];
 

@@ -70,7 +70,27 @@ function Typing({
             return;
         }
 
-        typing.current = typing.current.filter(({id, now}) => id !== msg.userId && now !== msg.now);
+        // Un apagado VIEJO no puede matar un aviso mas nuevo.
+        //
+        // Cada aviso de "esta escribiendo" programa su propio apagado a los
+        // TimeBetweenUserTypingUpdatesMilliseconds (5 s), reusando el mismo
+        // `now` del aviso que lo genero. Con la condicion anterior --que unia
+        // las dos comparaciones con && -- alcanzaba con que coincidiera el id
+        // para borrar, asi que ese apagado diferido borraba la entrada que
+        // hubiera dejado un aviso POSTERIOR.
+        //
+        // Con una persona escribiendo casi no se nota, porque el cliente manda
+        // los avisos con ese mismo intervalo y los dos quedan alineados. Pero el
+        // indicador del bot lo late el plugin cada 4 s (a proposito, para que no
+        // se apague solo), y ahi el apagado de un latido caia siempre 1 s
+        // DESPUES del latido siguiente y lo mataba: se veia los primeros 5
+        // segundos y despues parpadeaba un segundo cada cuatro, que es
+        // indistinguible de "no aparece".
+        //
+        // Ahora la entrada sobrevive si es de otro usuario O si es mas nueva que
+        // el apagado que esta llegando. El apagado por post del bot sigue
+        // funcionando: usa Date.now(), asi que siempre es el mas nuevo.
+        typing.current = typing.current.filter(({id, now}) => id !== msg.userId || now > msg.now);
 
         if (timeoutToDisappear.current) {
             clearTimeout(timeoutToDisappear.current);
