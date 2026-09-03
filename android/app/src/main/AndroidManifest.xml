@@ -18,7 +18,9 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <!-- Socratix no habilita llamadas: sin el servicio de micrófono en primer plano,
+         Play no exige la declaración de FOREGROUND_SERVICE_MICROPHONE -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" tools:node="remove" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
 
     <!-- Opt out of react-native-nitro-bg-timer-plus foreground service (Play Store special-use review not needed) -->
@@ -169,6 +171,9 @@
 
         <!-- Opt out of react-native-nitro-bg-timer-plus foreground service -->
         <service android:name="com.margelo.nitro.backgroundtimer.NitroBackgroundTimerService" tools:node="remove" />
+
+        <!-- Opt out del servicio de llamadas: el plugin Calls no está habilitado en el servidor -->
+        <service android:name="com.mattermost.callsnative.MMCallsForegroundService" tools:node="remove" />
 
     </application>
 </manifest>

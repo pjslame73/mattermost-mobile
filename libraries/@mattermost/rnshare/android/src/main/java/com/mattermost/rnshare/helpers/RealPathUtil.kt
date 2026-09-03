@@ -36,10 +36,6 @@ object RealPathUtil {
                 // DownloadsProvider
                 val id = DocumentsContract.getDocumentId(uri)
                 if (!TextUtils.isEmpty(id)) {
-                    if (id.startsWith("raw:")) {
-                        return id.replaceFirst(("raw:").toRegex(), "")
-                    }
-
                     try {
                         return getPathFromSavingTempFile(context, uri)
                     } catch (e:NumberFormatException) {
