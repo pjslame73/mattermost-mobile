@@ -5,6 +5,7 @@
 import DatabaseManager from '@database/manager';
 import IntegrationsMananger from '@managers/integrations_manager';
 import NetworkManager from '@managers/network_manager';
+import {getPostById} from '@queries/servers/post';
 import {getCurrentChannelId, getCurrentTeamId} from '@queries/servers/system';
 import {getFullErrorMessage} from '@utils/errors';
 import {logDebug} from '@utils/log';
@@ -16,7 +17,17 @@ export const submitInteractiveDialog = async (serverUrl: string, submission: Dia
         const client = NetworkManager.getClient(serverUrl);
         const {database} = DatabaseManager.getServerDatabaseAndOperator(serverUrl);
 
-        submission.channel_id = await getCurrentChannelId(database);
+        // El canal sale del POST que disparo el dialogo, no del que el usuario esta
+        // mirando. getCurrentChannelId() se deja solo como respaldo, para los dialogos
+        // que no vienen de una accion sobre un post (slash commands, por ejemplo).
+        //
+        // Con el canal actual a secas, entrar por la pestana de Hilos sin pasar antes por
+        // un canal mandaba el envio con el canal vacio o con uno viejo, y el servidor lo
+        // rechazaba antes de llamar a la integracion: "Fallo el envio", sin detalle y sin
+        // rastro del otro lado. Entrando primero al canal funcionaba, lo que hacia que el
+        // fallo pareciera aleatorio.
+        const triggerChannelId = IntegrationsMananger.getManager(serverUrl)?.getTriggerChannelId();
+        submission.channel_id = triggerChannelId || await getCurrentChannelId(database);
         submission.team_id = await getCurrentTeamId(database);
         const data = await client.submitInteractiveDialog(submission);
 
@@ -51,7 +62,11 @@ export const postActionWithCookie = async (serverUrl: string, postId: string, ac
 
         const data = await client.doPostActionWithCookie(postId, actionId, actionCookie, selectedOption);
         if (data?.trigger_id) {
-            IntegrationsMananger.getManager(serverUrl)?.setTriggerId(data.trigger_id);
+            // El canal viaja junto con el trigger_id: es el unico momento en que se sabe
+            // sobre que post se actuo, y el dialogo que llegue despues no lo trae.
+            const {database} = DatabaseManager.getServerDatabaseAndOperator(serverUrl);
+            const post = await getPostById(database, postId);
+            IntegrationsMananger.getManager(serverUrl)?.setTriggerId(data.trigger_id, post?.channelId);
         }
 
         return {data};
@@ -68,7 +83,10 @@ export const postActionWithQuery = async (serverUrl: string, postId: string, act
 
         const data = await client.doPostActionWithQuery(postId, actionId, query);
         if (data?.trigger_id) {
-            IntegrationsMananger.getManager(serverUrl)?.setTriggerId(data.trigger_id);
+            // Mismo motivo que en postActionWithCookie.
+            const {database} = DatabaseManager.getServerDatabaseAndOperator(serverUrl);
+            const post = await getPostById(database, postId);
+            IntegrationsMananger.getManager(serverUrl)?.setTriggerId(data.trigger_id, post?.channelId);
         }
 
         return {data};

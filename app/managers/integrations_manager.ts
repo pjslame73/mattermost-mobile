@@ -14,6 +14,18 @@ class ServerIntegrationsManager {
     private triggerId = '';
     private storedDialog?: InteractiveDialogConfig;
 
+    // Canal del post que disparo el dialogo.
+    //
+    // Hace falta porque InteractiveDialogConfig no trae el canal (ver
+    // types/api/integrations.d.ts) y el envio SI lo necesita. Sin esto,
+    // submitInteractiveDialog() lo completaba con getCurrentChannelId(), o sea con el
+    // canal que el usuario esta MIRANDO, que no tiene por que ser el del dialogo: si
+    // entro por la pestana de Hilos sin pasar por un canal, va vacio o viejo y el
+    // servidor rechaza el envio antes de llamar a la integracion. El sintoma es "Fallo
+    // el envio" sin ningun detalle, y del lado de la integracion no queda rastro
+    // porque la peticion nunca le llega.
+    private triggerChannelId = '';
+
     constructor(serverUrl: string) {
         this.serverUrl = serverUrl;
     }
@@ -38,11 +50,22 @@ class ServerIntegrationsManager {
         }
     }
 
-    public setTriggerId(id: string) {
+    public setTriggerId(id: string, channelId = '') {
         this.triggerId = id;
+        if (channelId) {
+            this.triggerChannelId = channelId;
+        }
         if (this.storedDialog?.trigger_id === id) {
             this.showDialog();
         }
+    }
+
+    /**
+     * Canal del post que disparo el dialogo abierto, o cadena vacia si no se conoce.
+     * Lo usa submitInteractiveDialog() en vez del canal que el usuario esta mirando.
+     */
+    public getTriggerChannelId() {
+        return this.triggerChannelId;
     }
 
     public setDialog(dialog: InteractiveDialogConfig) {
