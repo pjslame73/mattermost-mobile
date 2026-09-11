@@ -49,11 +49,17 @@ KEEP = {
 
 
 def load_es_translations():
-    """Traducciones al espanol que faltan en upstream (branding/es-translations.json).
+    """Traducciones al espanol propias (branding/es-translations.json).
 
     Se cargan desde un archivo aparte, versionado, en vez de escribirse directo
     en assets/override/i18n/es.json: ese archivo lo genera este script, asi que
     editarlo a mano se perderia en la proxima corrida.
+
+    Son dos categorias, y el archivo las separa con sus propios comentarios:
+    claves que upstream no tradujo al espanol, y reemplazos de vocabulario del
+    producto (canal -> curso, thread -> conversacion) sobre claves que upstream
+    SI tradujo, pero con las palabras de una app de chat y no de una plataforma
+    formativa.
 
     Se valida que cada clave exista en en.json. Una clave que no este ahi es un
     typo o una string que upstream elimino, y no sirve de nada.
@@ -65,7 +71,11 @@ def load_es_translations():
     with open(path, encoding='utf-8') as fh:
         data = json.load(fh)
 
-    data.pop('_comment', None)
+    # Toda clave que arranca con "_" es un comentario del archivo, no una
+    # traduccion. Se descartan antes de validar contra en.json o la validacion
+    # las tomaria por huerfanas y abortaria.
+    for clave in [k for k in data if k.startswith('_')]:
+        del data[clave]
 
     with open(os.path.join(BASE_I18N, 'en.json'), encoding='utf-8') as fh:
         en = json.load(fh)
