@@ -37,7 +37,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>790</string>
+	<string>791</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -98,10 +98,11 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>audio</string>
+		<!-- Socratix no habilita el plugin Calls en el servidor: sin llamadas no hay
+		     audio persistente ni pushes VoIP que declarar (guía 2.5.4 de Apple).
+		     Si algún día se habilita Calls, hay que volver a agregar audio y voip. -->
 		<string>fetch</string>
 		<string>remote-notification</string>
-		<string>voip</string>
 	</array>
 	<key>UIDesignRequiresCompatibility</key>
 	<true/>
