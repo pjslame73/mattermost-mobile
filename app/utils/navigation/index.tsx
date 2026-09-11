@@ -23,6 +23,7 @@ export const appearanceControlledScreens = new Set<AvailableScreens>([
     Screens.LOGIN,
     Screens.FORGOT_PASSWORD,
     Screens.MAGIC_LINK_REQUEST,
+    Screens.TERMS_GATE,
     Screens.MFA,
     Screens.SSO,
 ]);

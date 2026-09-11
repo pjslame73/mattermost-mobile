@@ -39,6 +39,7 @@ const loginFlowScreens = new Set<AvailableScreens>([
     Screens.MFA,
     Screens.FORGOT_PASSWORD,
     Screens.MAGIC_LINK_REQUEST,
+    Screens.TERMS_GATE,
 ]);
 
 const styles = StyleSheet.create({

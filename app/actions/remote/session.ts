@@ -590,6 +590,13 @@ export const magicLinkLogin = async (serverUrl: string, token: string, acepto = 
             await canReceiveNotifications(serverUrlToUse, pingResult.canReceiveNotifications as string, intl);
         }
     } catch (error) {
+        // Faltan los terminos: el rechazo pasa ACA, en loginByMagicLinkLogin,
+        // no en el segundo bloque de mas abajo -- ese solo se ejecuta si este
+        // primero ya tuvo exito. Mismo chequeo que el segundo catch, duplicado
+        // a proposito porque son dos puntos de falla distintos.
+        if (isServerError(error) && error.server_error_id === TERMS_REQUIRED_ERROR_ID) {
+            return {failed: false, termsRequired: true};
+        }
         return {error, failed: true};
     }
 
