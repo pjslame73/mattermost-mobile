@@ -484,6 +484,13 @@
   "suggestion.mention.users": "Usuarios",
 
   "table.cannot_display_table": "No se puede mostrar la tabla",
+  "terms_gate.accept": "Acepto y quiero entrar",
+  "terms_gate.description": "Antes de entrar tenés que leer y aceptar los términos de uso. Explican qué se espera de vos en Socratix y qué pasa con el contenido objetable.",
+  "terms_gate.error.ok": "Entendido",
+  "terms_gate.error.title": "No pudimos abrir tu sesión",
+  "terms_gate.hint": "Al tocar «Acepto y quiero entrar» confirmás que leíste los términos de uso y que estás de acuerdo.",
+  "terms_gate.read": "Leer los términos de uso",
+  "terms_gate.title": "Términos de uso",
   "upload_item.unknown_file": "Archivo desconocido",
 
   "user_profile.channel_admin": "Administrador del canal",

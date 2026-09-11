@@ -85,6 +85,7 @@ const SETTINGS_NOTIFICATION_CALL = 'settings_notification_call';
 const SSO = 'sso';
 const TABLE = 'table';
 const TEAM_SELECTOR_LIST = 'team_selector_list';
+const TERMS_GATE = 'terms_gate';
 const TERMS_OF_SERVICE = 'terms_of_service';
 const THREAD = 'thread';
 const THREAD_OPTIONS = 'thread_options';
@@ -172,6 +173,7 @@ export default {
     SSO,
     TABLE,
     TEAM_SELECTOR_LIST,
+    TERMS_GATE,
     TERMS_OF_SERVICE,
     THREAD,
     THREAD_OPTIONS,
@@ -214,6 +216,7 @@ export const SCREENS_AS_BOTTOM_SHEET = new Set<string>([
     POST_PRIORITY_PICKER,
     REACTIONS,
     SCHEDULED_POST_OPTIONS,
+    TERMS_GATE,
     TERMS_OF_SERVICE,
     THREAD_OPTIONS,
     USER_PROFILE,
@@ -230,6 +233,7 @@ export const UNAUTHENTICATED_SCREENS = new Set<string>([
     MFA,
     FORGOT_PASSWORD,
     MAGIC_LINK_REQUEST,
+    TERMS_GATE,
 ]);
 
 export const HOME_TAB_SCREENS = new Set<string>([

@@ -94,6 +94,20 @@ export async function handleDeepLink(deepLink: DeepLinkWithData, intlShape?: Int
             }
 
             const result = await magicLinkLogin(deepLink.data.serverUrl, deepLink.data.token);
+
+            // Faltan los terminos de uso. No es un error: el puente frena el
+            // canje ANTES de quemar el enlace (guia 1.2 de la App Store), asi
+            // que el alumno puede leerlos con calma y el mismo token sigue
+            // sirviendo cuando acepta.
+            if (result.termsRequired) {
+                navigateToScreen(Screens.TERMS_GATE, {
+                    serverUrl: deepLink.data.serverUrl,
+                    token: deepLink.data.token,
+                    theme: EphemeralStore.getTheme() || getDefaultThemeByAppearance(),
+                });
+                return {error: false};
+            }
+
             if (result.error) {
                 logError('Failed to do magic link login', result.error);
 

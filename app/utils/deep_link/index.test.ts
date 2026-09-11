@@ -17,7 +17,7 @@ import {fetchIsPlaybooksEnabled} from '@playbooks/database/queries/version';
 import {goToPlaybookRun} from '@playbooks/screens/navigation';
 import {getActiveServerUrl} from '@queries/app/servers';
 import {getCurrentUser, queryUsersByUsername} from '@queries/servers/user';
-import {navigateToRoot} from '@screens/navigation';
+import {navigateToRoot, navigateToScreen} from '@screens/navigation';
 import {NavigationStore} from '@store/navigation_store';
 import TestHelper from '@test/test_helper';
 import {logError} from '@utils/log';
@@ -483,6 +483,26 @@ describe('handleDeepLink — canje del enlace de acceso de Conversa', () => {
     // El servidor manda el motivo ya redactado para el alumno. Antes moria en
     // logcat y la app se quedaba muda: sin esto, "no pasa nada" es
     // indistinguible de "el enlace ya se uso".
+    // Guia 1.2 de la App Store: los terminos se aceptan ANTES de iniciar sesion.
+    // El puente frena el canje y responde que faltan, y ese caso NO es un fallo:
+    // si cayera por la rama de error, el alumno veria un alert con un motivo y
+    // se quedaria afuera, con el enlace intacto y sin ninguna forma de aceptar.
+    it('lleva a la pantalla de terminos cuando el canje pide aceptarlos', async () => {
+        const alertSpy = jest.spyOn(Alert, 'alert');
+        jest.mocked(DatabaseManager.searchUrl).mockReturnValueOnce('https://chat.conversa.site');
+        jest.mocked(getCurrentUser).mockResolvedValueOnce(undefined);
+        jest.mocked(magicLinkLogin).mockResolvedValueOnce({failed: false, termsRequired: true});
+
+        const result = await parseAndHandleDeepLink(URL);
+
+        expect(navigateToScreen).toHaveBeenCalledWith(
+            Screens.TERMS_GATE,
+            expect.objectContaining({serverUrl: 'chat.conversa.site', token: TOKEN}),
+        );
+        expect(alertSpy).not.toHaveBeenCalled();
+        expect(result).toEqual({error: false});
+    });
+
     it('muestra el motivo que devuelve el servidor cuando el canje falla', async () => {
         const alertSpy = jest.spyOn(Alert, 'alert');
         const motivo = 'Este enlace ya se uso. Pedi uno nuevo desde la pantalla de ingreso.';

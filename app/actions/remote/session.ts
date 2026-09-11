@@ -9,6 +9,7 @@ import {doPing} from '@actions/remote/general';
 import {Database, Events} from '@constants';
 import {SYSTEM_IDENTIFIERS} from '@constants/database';
 import {HTTP_UNAUTHORIZED} from '@constants/network';
+import {TERMS_REQUIRED_ERROR_ID} from '@constants/socratix';
 import DatabaseManager from '@database/manager';
 import IntuneManager from '@managers/intune_manager';
 import NetworkManager from '@managers/network_manager';
@@ -18,7 +19,7 @@ import {getServerDisplayName} from '@queries/app/servers';
 import {getCurrentUserId} from '@queries/servers/system';
 import {getCurrentUser} from '@queries/servers/user';
 import EphemeralStore from '@store/ephemeral_store';
-import {getFullErrorMessage, isErrorWithStatusCode, isErrorWithUrl} from '@utils/errors';
+import {getFullErrorMessage, isErrorWithStatusCode, isErrorWithUrl, isServerError} from '@utils/errors';
 import {getIntlShape} from '@utils/general';
 import {logWarning, logError, logDebug} from '@utils/log';
 import {scheduleExpiredNotification} from '@utils/notification';
@@ -518,7 +519,17 @@ export const requestMagicLink = async (serverUrl: string, email: string) => {
     }
 };
 
-export const magicLinkLogin = async (serverUrl: string, token: string): Promise<LoginActionResponse> => {
+/**
+ * Canjea un enlace de acceso por una sesion abierta.
+ *
+ * @param acepto Vacio salvo que el alumno venga de aceptar los terminos de uso.
+ *               El puente frena el canje hasta que haya aceptacion registrada
+ *               (guia 1.2 de la App Store) y responde 403 con
+ *               server_error_id=terms_required. Ese caso NO gasta el enlace:
+ *               se muestra la pantalla de terminos y se vuelve a llamar aca con
+ *               acepto puesto.
+ */
+export const magicLinkLogin = async (serverUrl: string, token: string, acepto = ''): Promise<LoginActionResponse> => {
     const httpsHeadRequest = await getServerUrlAfterRedirect(serverUrl);
     let serverUrlToUse;
     if (httpsHeadRequest.error || !httpsHeadRequest.url) {
@@ -544,7 +555,7 @@ export const magicLinkLogin = async (serverUrl: string, token: string): Promise<
         const voipDeviceId = await getVoIPDeviceToken();
         const serverDisplayName = config.SiteName;
 
-        const user = await client.loginByMagicLinkLogin(token, deviceId, voipDeviceId);
+        const user = await client.loginByMagicLinkLogin(token, deviceId, voipDeviceId, acepto);
 
         const server = await DatabaseManager.createServerDatabase({
             config: {
@@ -588,6 +599,12 @@ export const magicLinkLogin = async (serverUrl: string, token: string): Promise<
         await DatabaseManager.setActiveServerDatabase(serverUrlToUse);
         return {error, failed: false};
     } catch (error) {
+        // Faltan los terminos: es un paso del flujo, no un fallo. Se distingue
+        // por el server_error_id y no por el texto del mensaje, que cambia al
+        // reescribirlo del lado del puente.
+        if (isServerError(error) && error.server_error_id === TERMS_REQUIRED_ERROR_ID) {
+            return {failed: false, termsRequired: true};
+        }
         return {error, failed: false};
     }
 };

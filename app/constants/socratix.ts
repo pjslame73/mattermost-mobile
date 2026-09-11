@@ -41,3 +41,22 @@ export const SHOW_PLUS_MENU: boolean = false;
  * personas.
  */
 export const SHOW_USERS_IN_CHANNEL_SEARCH: boolean = false;
+
+/**
+ * server_error_id con el que el puente avisa que faltan los terminos de uso.
+ *
+ * Lo define server/terminos.go del plugin com.conversa.mm-bridge. Se compara
+ * contra esto y no contra el texto del mensaje, que se puede reescribir del
+ * lado del servidor sin que nadie se acuerde de esta pantalla.
+ */
+export const TERMS_REQUIRED_ERROR_ID = 'terms_required';
+
+/**
+ * Valor que el cliente manda para confirmar la aceptacion.
+ *
+ * El puente lo trata como una intencion, no como una version: cualquier valor
+ * no vacio significa "el alumno toco Acepto", y la version que queda registrada
+ * la pone el servidor desde su configuracion. Si la mandara el cliente, una app
+ * vieja podria registrar la aceptacion de unos terminos que ya no existen.
+ */
+export const ACEPTO_TERMINOS = '1';

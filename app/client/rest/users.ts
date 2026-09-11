@@ -19,7 +19,7 @@ export interface ClientUsersMix {
     setDefaultProfileImage: (userId: string) => Promise<any>;
     login: (loginId: string, password: string, token?: string, deviceId?: string, voipDeviceId?: string, ldapOnly?: boolean) => Promise<UserProfile>;
     loginById: (id: string, password: string, token?: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
-    loginByMagicLinkLogin: (token: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
+    loginByMagicLinkLogin: (token: string, deviceId?: string, voipDeviceId?: string, acepto?: string) => Promise<UserProfile>;
     requestMagicLink: (email: string) => Promise<{status: string}>;
     loginByIntune: (accessToken: string, deviceId?: string, voipDeviceId?: string) => Promise<UserProfile>;
     logout: () => Promise<any>;
@@ -215,11 +215,16 @@ const ClientUsers = <TBase extends Constructor<ClientBase>>(superclass: TBase) =
         );
     };
 
-    loginByMagicLinkLogin = async (token: string, deviceId = '', voipDeviceId = '') => {
+    // `acepto` viaja vacio salvo que el alumno venga de aceptar los terminos.
+    // El puente lo trata como una intencion, no como una version: cualquier
+    // valor no vacio significa "toco Acepto", y la version que queda registrada
+    // la pone el servidor desde su configuracion.
+    loginByMagicLinkLogin = async (token: string, deviceId = '', voipDeviceId = '', acepto = '') => {
         const body = {
             magic_link_token: token,
             device_id: deviceId,
             voip_device_id: voipDeviceId,
+            acepto,
         };
 
         const resp = await this.doFetch(

@@ -16,4 +16,9 @@ interface Session {
 interface LoginActionResponse {
     error?: unknown;
     failed: boolean;
+
+    // El canje del magic link se freno porque faltan los terminos de uso
+    // (guia 1.2 de la App Store). No es un fallo: el enlace NO se gasto y el
+    // mismo canje vuelve a intentarse con la aceptacion puesta.
+    termsRequired?: boolean;
 }
