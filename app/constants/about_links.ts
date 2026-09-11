@@ -17,6 +17,12 @@ export default {
 
     PRIVACY_POLICY: 'https://miportafoliodigital.com/politica-de-privacidad-plataforma-formativa/',
 
+    // Baja de cuenta y borrado de datos. Play lo exige como URL declarada en la
+    // ficha, y Apple espera que el camino sea alcanzable DESDE la app: una
+    // pagina que el alumno no encuentra no es un mecanismo. Por eso ademas se
+    // enlaza desde Ajustes -> Acerca de.
+    DELETE_ACCOUNT: 'https://miportafoliodigital.com/eliminar-cuenta-socratix/',
+
     // La pantalla share_feedback abre esto. Antes iba a forum.mattermost.com.
     FEEDBACK_FORUM: 'https://miportafoliodigital.com/support-portal/',
 };

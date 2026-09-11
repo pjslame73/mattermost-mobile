@@ -1561,6 +1561,7 @@
   "settings.about.database.schema": "Database Schema Version: {version}",
   "settings.about.database.schema.title": "Database Schema Version:",
   "settings.about.database.title": "Database:",
+  "settings.about.delete_account": "Delete my account and data",
   "settings.about.license.load_metric": "Load Metric: {load}",
   "settings.about.license.load_metric.title": "Load Metric:",
   "settings.about.licensed": "Licensed to: {company}",

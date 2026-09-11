@@ -171,6 +171,10 @@ const About = ({config, license}: AboutProps) => {
         return openURL(AboutLinks.PRIVACY_POLICY);
     }, [openURL]));
 
+    const handleDeleteAccount = usePreventDoubleTap(useCallback(() => {
+        return openURL(AboutLinks.DELETE_ACCOUNT);
+    }, [openURL]));
+
     const serverVersion = useMemo(() => {
         const buildNumber = config.BuildNumber;
         const version = config.Version;
@@ -350,6 +354,22 @@ const About = ({config, license}: AboutProps) => {
                             config={config}
                             onPressPrivacyPolicy={handlePrivacyPolicy}
                             onPressTOS={handleTermsOfService}
+                        />
+                    </View>
+                    {/*
+                      * Va fuera de TosPrivacyContainer, que es un archivo de upstream, para
+                      * no sumarle delta de merge. Y NO se gatea contra el ClientConfig como
+                      * hacen los otros dos enlaces: la via para dar de baja la cuenta tiene
+                      * que estar siempre, la pidan las tiendas o no, y no depender de como
+                      * quede configurado el servidor.
+                      */}
+                    <View style={styles.tosPrivacyContainer}>
+                        <FormattedText
+                            defaultMessage='Delete my account and data'
+                            id='settings.about.delete_account'
+                            onPress={handleDeleteAccount}
+                            style={styles.noticeLink}
+                            testID='about.delete_account'
                         />
                     </View>
                     <View style={styles.noticeContainer}>

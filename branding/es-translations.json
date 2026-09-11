@@ -456,6 +456,7 @@
 
   "server.invalid.pinning.title": "Certificado SSL fijado no válido",
 
+  "settings.about.delete_account": "Eliminar mi cuenta y mis datos",
   "settings.about.license.load_metric": "Métrica de carga: {load}",
   "settings.about.license.load_metric.title": "Métrica de carga:",
   "settings.advanced.component_library": "Biblioteca de componentes",
