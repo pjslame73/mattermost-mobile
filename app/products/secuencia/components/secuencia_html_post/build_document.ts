@@ -1,8 +1,9 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {adaptarStyleInline, detectarColoresBase} from '@secuencia/utils/colores_tema';
 import sanitizeHtml from 'sanitize-html';
+
+import {adaptarStyleInline, detectarColoresBase} from '@secuencia/utils/colores_tema';
 
 // Mismo criterio de lista blanca que el plugin webapp de desktop
 // (conversa-mm-plugin/webapp/src/components/secuencia_html_post.tsx) -- es el
