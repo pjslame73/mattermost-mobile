@@ -24,6 +24,7 @@ import DeletePostOption from './options/delete_post_option';
 import EditOption from './options/edit_option';
 import MarkAsUnreadOption from './options/mark_unread_option';
 import PinChannelOption from './options/pin_channel_option';
+import ReportPostOption from './options/report_post_option';
 import ReactionBar from './reaction_bar';
 
 import type {BurnOnReadRecipientData} from '@typings/components/post_options';
@@ -69,6 +70,11 @@ const PostOptions = ({
 
     const canSavePost = !isSystemPost && (!isUnrevealedBoRPost(post) || isOwnBoRPost(post, currentUser?.id));
 
+    // Reportar cualquier mensaje ajeno, incluidos los del bot: la salida del
+    // motor socratico la genera un LLM y es el contenido mas expuesto de la app.
+    // Los propios quedan afuera porque reportarse a uno mismo no significa nada.
+    const canReport = !isSystemPost && Boolean(currentUser) && post.userId !== currentUser?.id;
+
     const shouldRenderFollow = !(sourceScreen !== Screens.CHANNEL || !thread);
     const shouldShowBindings = bindings.length > 0 && !isSystemPost;
 
@@ -78,7 +84,7 @@ const PostOptions = ({
         const items: Array<string | number> = [1];
         const optionsCount = [
             canCopyPermalink, canCopyText, canDelete, canEdit,
-            canMarkAsUnread, canPin, canReply, canSavePost, shouldRenderFollow, canViewTranslation,
+            canMarkAsUnread, canPin, canReply, canReport, canSavePost, shouldRenderFollow, canViewTranslation,
         ].reduce((acc, v) => {
             return v ? acc + 1 : acc;
         }, 0) + (shouldShowBindings ? 0.5 : 0);
@@ -96,7 +102,7 @@ const PostOptions = ({
         }
 
         return items;
-    }, [canCopyPermalink, canCopyText, canDelete, canEdit, canMarkAsUnread, canPin, canReply, canSavePost, shouldRenderFollow, canViewTranslation, shouldShowBindings, canAddReaction, shouldShowBORReadReceipts, bottom]);
+    }, [canCopyPermalink, canCopyText, canDelete, canEdit, canMarkAsUnread, canPin, canReply, canReport, canSavePost, shouldRenderFollow, canViewTranslation, shouldShowBindings, canAddReaction, shouldShowBORReadReceipts, bottom]);
 
     const renderContent = () => {
         return (
@@ -154,6 +160,9 @@ const PostOptions = ({
                     post={post}
                     currentUser={currentUser}
                 />}
+                {canReport &&
+                <ReportPostOption postId={post.id}/>
+                }
                 {shouldShowBindings &&
                 <AppBindingsPostOptions
                     post={post}

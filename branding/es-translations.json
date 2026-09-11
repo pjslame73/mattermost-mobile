@@ -302,6 +302,7 @@
   "mobile.permalink_preview.external_link": "Enlace externo",
   "mobile.permalink_preview.originally_posted": "Publicado originalmente en ",
   "mobile.playbook.create_checklist": "Crear lista de verificación",
+  "mobile.post_info.report": "Reportar",
   "mobile.post_info.show_translation": "Mostrar traducción",
   "mobile.reschedule_draft.title": "Cambiar la programación",
   "mobile.scheduled_post.error": "No se seleccionó una hora",
@@ -433,6 +434,18 @@
   "security_manager.mam_enrollment_required_title": "Se requiere inscripción",
   "security_manager.okay": "Aceptar",
   "security_manager.your_organization": "tu organización",
+
+  "secuencia.report.error.body": "Revisá tu conexión e intentá de nuevo.",
+  "secuencia.report.error.title": "No pudimos enviar tu reporte",
+  "secuencia.report.ok": "Entendido",
+  "secuencia.report.reason.harassment": "Acoso o maltrato",
+  "secuencia.report.reason.offensive": "Contenido ofensivo",
+  "secuencia.report.reason.other": "Otro motivo",
+  "secuencia.report.reason.spam": "Spam",
+  "secuencia.report.sent.body": "Gracias por avisarnos. Revisamos los reportes dentro de las 24 horas y damos de baja el contenido que incumple las reglas.",
+  "secuencia.report.sent.title": "Reporte enviado",
+  "secuencia.report.subtitle": "Revisamos los reportes dentro de las 24 horas.",
+  "secuencia.report.title": "Reportar este mensaje",
 
   "select_field.optional": "{labelName} (opcional)",
 

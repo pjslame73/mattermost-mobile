@@ -5,6 +5,7 @@ import ClientAgents, {type ClientAgentsMix} from '@agents/client/rest';
 import ClientCalls, {type ClientCallsMix} from '@calls/client/rest';
 import ClientPlugins, {type ClientPluginsMix} from '@client/rest/plugins';
 import ClientPlaybooks, {type ClientPlaybooksMix} from '@playbooks/client/rest';
+import ClientSecuencia, {type ClientSecuenciaMix} from '@secuencia/client/rest';
 import mix from '@utils/mix';
 
 import ClientApps, {type ClientAppsMix} from './apps';
@@ -54,7 +55,8 @@ interface Client extends ClientBase,
     ClientPluginsMix,
     ClientNPSMix,
     ClientCustomAttributesMix,
-    ClientPlaybooksMix
+    ClientPlaybooksMix,
+    ClientSecuenciaMix
 {
     setClientCredentials: (token: string, preauthSecret?: string) => void;
     setCSRFToken: (csrfToken: string) => void;
@@ -85,6 +87,7 @@ class Client extends mix(ClientBase).with(
     ClientCustomAttributes,
     ClientScheduledPost,
     ClientPlaybooks,
+    ClientSecuencia,
 ) {
     // eslint-disable-next-line no-useless-constructor
     constructor(apiClient: APIClientInterface, serverUrl: string, bearerToken?: string, csrfToken?: string, preauthSecret?: string) {
