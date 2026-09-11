@@ -14,6 +14,7 @@ import Loading from '@components/loading';
 import NoResultsWithTerm from '@components/no_results_with_term';
 import ThreadsButton from '@components/threads_button';
 import UserItem from '@components/user_item';
+import {SHOW_USERS_IN_CHANNEL_SEARCH} from '@constants/socratix';
 import {useServerUrl} from '@context/server';
 import {useTheme} from '@context/theme';
 import {useDebounce} from '@hooks/utils';
@@ -93,7 +94,7 @@ const FilteredList = ({
             setRemoteChannels({archived: [], startWith: [], matches: []});
         }
         const lowerCasedTerm = (term.startsWith('@') ? term.substring(1) : term).toLowerCase();
-        if ((channelsMatchStart.length + channelsMatch.length) < MAX_RESULTS) {
+        if (SHOW_USERS_IN_CHANNEL_SEARCH && (channelsMatchStart.length + channelsMatch.length) < MAX_RESULTS) {
             if (restrictDirectMessage) {
                 searchProfiles(serverUrl, lowerCasedTerm, {team_id: currentTeamId, allow_inactive: true});
             } else {

@@ -21,3 +21,23 @@
  * companeros: entra por Magic Link al canal donde lo espera el motor socratico.
  */
 export const SHOW_PLUS_MENU: boolean = false;
+
+/**
+ * Seccion de usuarios en la busqueda de "Encontrar Cursos".
+ *
+ * Esa pantalla lista personas ademas de canales y ofrece abrir un mensaje
+ * directo con ellas. El servidor ya lo tiene cerrado por dos vias
+ * (create_direct_channel revocado y RestrictDirectMessage=team), pero las filas
+ * salen de una consulta SQL contra la tabla local de usuarios
+ * (observeNotDirectChannelsByTerm), que conserva los perfiles sincronizados
+ * cuando Town Square todavia tenia a todos los alumnos como miembros. Esa
+ * cache no se limpia con actualizar la app: solo desinstalando.
+ *
+ * Apagarlo del lado del cliente es la unica forma de corregir los dispositivos
+ * ya instalados, y ademas hace que el aislamiento no dependa de que nadie
+ * toque la configuracion del servidor mas adelante.
+ *
+ * En Socratix la pantalla se llama "Encontrar Cursos": ahi se buscan cursos, no
+ * personas.
+ */
+export const SHOW_USERS_IN_CHANNEL_SEARCH: boolean = false;

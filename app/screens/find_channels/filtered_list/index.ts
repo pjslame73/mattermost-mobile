@@ -6,6 +6,7 @@ import {of as of$} from 'rxjs';
 import {combineLatestWith, switchMap} from 'rxjs/operators';
 
 import {General} from '@constants';
+import {SHOW_USERS_IN_CHANNEL_SEARCH} from '@constants/socratix';
 import {observeArchiveChannelsByTerm, observeDirectChannelsByTerm, observeJoinedChannelsByTerm, observeNotDirectChannelsByTerm} from '@queries/servers/channel';
 import {observeConfigValue, observeCurrentTeamId} from '@queries/servers/system';
 import {queryJoinedTeams} from '@queries/servers/team';
@@ -16,6 +17,10 @@ import {removeChannelsFromArchivedTeams, retrieveChannels} from '@screens/find_c
 import FilteredList, {MAX_RESULTS} from './filtered_list';
 
 import type {WithDatabaseArgs} from '@typings/database/database';
+import type UserModel from '@typings/database/models/servers/user';
+
+// Constante de modulo para que el observable no emita un array nuevo por render.
+const NO_USERS: UserModel[] = [];
 
 type EnhanceProps = WithDatabaseArgs & {
     term: string;
@@ -51,8 +56,12 @@ const enhanced = withObservables(['term'], ({database, term}: EnhanceProps) => {
         switchMap((archived) => retrieveChannels(database, archived)),
     );
 
-    const usersMatchStart = observeNotDirectChannelsByTerm(database, term, MAX_RESULTS, true);
-    const usersMatch = observeNotDirectChannelsByTerm(database, term, MAX_RESULTS);
+    // Se cortan en el origen y no al renderizar: `totalLocalResults` cuenta
+    // `usersMatchStart` para decidir si vale la pena la busqueda remota de
+    // canales, asi que filtrar mas abajo dejaria a un dispositivo con la cache
+    // sucia sin poder encontrar sus cursos.
+    const usersMatchStart = SHOW_USERS_IN_CHANNEL_SEARCH ? observeNotDirectChannelsByTerm(database, term, MAX_RESULTS, true) : of$(NO_USERS);
+    const usersMatch = SHOW_USERS_IN_CHANNEL_SEARCH ? observeNotDirectChannelsByTerm(database, term, MAX_RESULTS) : of$(NO_USERS);
 
     const restrictDirectMessage = observeConfigValue(database, 'RestrictDirectMessage').pipe(
         switchMap((v) => of$(v !== General.RESTRICT_DIRECT_MESSAGE_ANY)),
