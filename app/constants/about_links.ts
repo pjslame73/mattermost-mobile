@@ -9,9 +9,11 @@
 // Mattermost. Hardcodeado no depende de como quede configurado el server.
 export default {
 
-    // TODO: falta la pagina de terminos de Socratix. Sigue apuntando a
-    // Mattermost, que es incorrecto para una app de marca propia.
-    TERMS_OF_SERVICE: 'https://about.mattermost.com/default-terms/',
+    // Terminos propios de Socratix, firmados por Fundacion FUNPEI. Apple los
+    // exige por la guia 1.2: tienen que decir explicitamente que no hay
+    // tolerancia para contenido objetable ni usuarios abusivos, y el revisor
+    // abre este enlace sin cuenta, asi que la pagina no puede pedir login.
+    TERMS_OF_SERVICE: 'https://miportafoliodigital.com/terminos-de-uso-de-socratix/',
 
     PRIVACY_POLICY: 'https://miportafoliodigital.com/politica-de-privacidad-plataforma-formativa/',
 
