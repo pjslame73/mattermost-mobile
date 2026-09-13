@@ -500,7 +500,12 @@ describe('handleDeepLink — canje del enlace de acceso de Conversa', () => {
             expect.objectContaining({serverUrl: 'chat.conversa.site', token: TOKEN}),
         );
         expect(alertSpy).not.toHaveBeenCalled();
-        expect(result).toEqual({error: false});
+
+        // termsRequired se propaga a proposito: launch.ts y +native-intent.ts
+        // lo necesitan para distinguir esto de un login YA exitoso, que tambien
+        // devuelve error:false. Sin esa marca los dos forzaban ir al Home por
+        // encima de la pantalla de terminos y la app quedaba en blanco.
+        expect(result).toEqual({error: false, termsRequired: true});
     });
 
     it('muestra el motivo que devuelve el servidor cuando el canje falla', async () => {
