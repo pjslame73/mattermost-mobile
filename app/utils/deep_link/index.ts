@@ -105,7 +105,14 @@ export async function handleDeepLink(deepLink: DeepLinkWithData, intlShape?: Int
                     token: deepLink.data.token,
                     theme: EphemeralStore.getTheme() || getDefaultThemeByAppearance(),
                 });
-                return {error: false};
+
+                // termsRequired: true se propaga a proposito, para que
+                // app/init/launch.ts (el otro llamador de handleDeepLink,
+                // usado en el arranque en frio con deep link) pueda distinguir
+                // este caso de un login ya exitoso -- los dos devuelven
+                // error:false por igual, pero solo este necesita frenar antes
+                // de pisar el router.push de arriba con su propio redirect.
+                return {error: false, termsRequired: true};
             }
 
             if (result.error) {

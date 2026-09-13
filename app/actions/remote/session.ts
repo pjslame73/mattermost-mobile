@@ -555,7 +555,9 @@ export const magicLinkLogin = async (serverUrl: string, token: string, acepto = 
         const voipDeviceId = await getVoIPDeviceToken();
         const serverDisplayName = config.SiteName;
 
+        logDebug('magicLinkLogin: llamando a loginByMagicLinkLogin');
         const user = await client.loginByMagicLinkLogin(token, deviceId, voipDeviceId, acepto);
+        logDebug('magicLinkLogin: loginByMagicLinkLogin respondio, user.id=', user.id);
 
         const server = await DatabaseManager.createServerDatabase({
             config: {
@@ -565,6 +567,7 @@ export const magicLinkLogin = async (serverUrl: string, token: string, acepto = 
                 displayName: serverDisplayName,
             },
         });
+        logDebug('magicLinkLogin: createServerDatabase listo');
 
         await server?.operator.handleUsers({users: [user], prepareRecordsOnly: false});
         await server?.operator.handleSystem({
@@ -574,10 +577,18 @@ export const magicLinkLogin = async (serverUrl: string, token: string, acepto = 
             }],
             prepareRecordsOnly: false,
         });
+        logDebug('magicLinkLogin: handleUsers/handleSystem listo');
         const csrfToken = await getCSRFFromCookie(serverUrlToUse);
         client.setCSRFToken(csrfToken);
+        logDebug('magicLinkLogin: CSRF token obtenido');
 
         // Check push notification capability (similar to normal login flow)
+        // OJO: este doPing con verifyPushProxy=true es sospechoso de colgarse --
+        // es una llamada de red real contra el servicio de push, agregada
+        // especificamente para el login por enlace magico (MM-66711), y no se
+        // le ve un timeout propio. Los logs de arriba y abajo son para
+        // confirmar o descartar esto la proxima vez que se repita el cuelgue.
+        logDebug('magicLinkLogin: llamando a doPing (verifyPushProxy)');
         const pingResult = await doPing(
             serverUrlToUse,
             true, // verifyPushProxy
@@ -585,10 +596,12 @@ export const magicLinkLogin = async (serverUrl: string, token: string, acepto = 
             undefined, // preauthSecret
             client, // client
         );
+        logDebug('magicLinkLogin: doPing respondio', pingResult.error ?? 'sin error');
         if (!pingResult.error && pingResult.canReceiveNotifications) {
             const intl = getIntlShape(user.locale);
             await canReceiveNotifications(serverUrlToUse, pingResult.canReceiveNotifications as string, intl);
         }
+        logDebug('magicLinkLogin: primer bloque completo, sin errores');
     } catch (error) {
         // Faltan los terminos: el rechazo pasa ACA, en loginByMagicLinkLogin,
         // no en el segundo bloque de mas abajo -- ese solo se ejecuta si este

@@ -1,6 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import {router} from 'expo-router';
 import React, {useCallback, useState} from 'react';
 import {defineMessages, useIntl} from 'react-intl';
 import {Alert, View} from 'react-native';
@@ -9,10 +10,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {magicLinkLogin} from '@actions/remote/session';
 import Button from '@components/button';
 import FormattedText from '@components/formatted_text';
+import {Launch} from '@constants';
 import AboutLinks from '@constants/about_links';
 import {ACEPTO_TERMINOS} from '@constants/socratix';
 import useAndroidHardwareBackHandler from '@hooks/android_back_handler';
 import {usePreventDoubleTap} from '@hooks/utils';
+import {getActiveServerUrl} from '@init/credentials';
+import {determineAuthenticatedRoute} from '@init/launch';
 import Background from '@screens/background';
 import {navigateBack} from '@screens/navigation';
 import {getFullErrorMessage} from '@utils/errors';
@@ -130,10 +134,33 @@ const TermsGate = ({serverUrl, token, theme}: TermsGateProps) => {
                 getFullErrorMessage(error, intl),
                 [{text: intl.formatMessage(messages.ok)}],
             );
+            return;
         }
 
-        // Sin error no se apaga el spinner ni se navega: magicLinkLogin deja la
-        // sesion activa y el arranque de la app se lleva la pantalla puesta.
+        // Sin error la sesion ya quedo activa (magicLinkLogin llama a
+        // DatabaseManager.setActiveServerDatabase), pero a diferencia del
+        // arranque en frio -- donde RootIndex (app/routes/index.tsx) recien
+        // monta y calcula la ruta por primera vez, encontrando la sesion ya
+        // puesta -- ACA la pantalla sigue viva: RootIndex ya monto hace rato,
+        // ya calculo su ruta UNA sola vez, y no hay ningun listener de
+        // ACTIVE_SERVER_CHANGED que la vuelva a calcular (se confirmo: lo
+        // unico que escucha ese evento es SecurityManager, para el bloqueo de
+        // pantalla). Sin este paso, la sesion queda viva -- se ve en que el
+        // websocket conecta -- pero la pantalla se queda mostrando esto para
+        // siempre.
+        //
+        // determineAuthenticatedRoute() y NO determineRouteFromLaunchProps():
+        // esa entrada general exige encontrar credenciales en el Keychain
+        // (getServerCredentials) antes de dar la ruta autenticada, y recien
+        // acabamos de loguearnos -- probado en el dispositivo, en ese primer
+        // instante todavia no estan escritas ahi, y termina mandando de vuelta
+        // a "Conectate a un servidor" con un "ya estas conectado" que no lleva
+        // a ningun lado. El arranque en frio con deep link (determineRoute,
+        // case Launch.DeepLink) tiene el mismo problema y por eso salta directo
+        // a determineAuthenticatedRoute -- se copia el mismo camino aca.
+        const activeServerUrl = await getActiveServerUrl() || serverUrl;
+        const launchRoute = await determineAuthenticatedRoute({launchType: Launch.Normal, serverUrl: activeServerUrl});
+        router.replace({pathname: launchRoute.route, params: launchRoute.params});
     }, [intl, serverUrl, token]));
 
     return (

@@ -20,7 +20,7 @@ import {getActiveServer, getAllServers} from '@queries/app/servers';
 import {queryPostsByType} from '@queries/servers/post';
 import {getThemeForCurrentTeam} from '@queries/servers/preference';
 import {queryMyTeams} from '@queries/servers/team';
-import {getExpoRouterPath} from '@screens/navigation';
+import {getExpoRouterPath, propsToParams} from '@screens/navigation';
 import EphemeralStore from '@store/ephemeral_store';
 import {handleDeepLink, getLaunchPropsFromDeepLink} from '@utils/deep_link';
 import {logInfo} from '@utils/log';
@@ -134,6 +134,30 @@ const determineRoute = async (props: LaunchProps): Promise<ExpoRouterLaunchResul
                 props.serverUrl = serverUrl || extra.data?.serverUrl;
                 if (extra.type === DeepLink.MagicLink && extra.data && 'token' in extra.data) {
                     const result = await handleDeepLink(extra);
+                    if (result.termsRequired) {
+                        // handleDeepLink ya navego a mano (navigateToScreen,
+                        // un router.push directo a TERMS_GATE) y devuelve
+                        // error:false porque esto NO es un fallo -- es un paso
+                        // mas del flujo. Pero result.error:false es tambien lo
+                        // que devuelve un login YA EXITOSO, y el chequeo de
+                        // abajo (if (result.error) ... else ...) no distinguia
+                        // los dos casos: en el de terminos, igual llamaba a
+                        // getActiveServerUrl() + determineAuthenticatedRoute(),
+                        // que devuelve OTRA ruta -- la de un servidor activo
+                        // DE UNA SESION VIEJA, si la habia (getActiveServerUrl
+                        // no sabe que ESTA sesion todavia no se logueo). Eso
+                        // hacia que el <Redirect> de quien llamo a esto
+                        // (RootIndex) peleara contra el push a TERMS_GATE que
+                        // ya se habia disparado, con la app quedando en blanco
+                        // -- reproducido con la app en segundo plano y sin
+                        // sesion, tocando un enlace nuevo. Se devuelve la
+                        // MISMA ruta que ya se empujo, para que si el redirect
+                        // llega a disparar, coincida en vez de pelear.
+                        return {
+                            route: getExpoRouterPath(Screens.TERMS_GATE, extra.data)!,
+                            params: propsToParams(extra.data),
+                        };
+                    }
                     if (result.error) {
                         props.launchError = true;
                     } else {
@@ -223,7 +247,15 @@ export async function determineRouteFromLaunchProps(props: LaunchProps): Promise
     };
 }
 
-async function determineAuthenticatedRoute(props: LaunchProps): Promise<ExpoRouterLaunchResult> {
+// Exportada para TermsGate (app/screens/terms_gate/index.tsx): despues de un
+// login exitoso via magic link, hay que navegar a mano -- ver el comentario en
+// ese archivo -- y hay que ir DIRECTO aca, no por determineRouteFromLaunchProps.
+// Esa entrada general exige encontrar credenciales en el Keychain
+// (getServerCredentials), y en el instante justo despues del login pueden
+// todavia no estar escritas ahi -- exactamente el mismo camino que sigue el
+// arranque en frio con deep link mas abajo (ver el case Launch.DeepLink en
+// determineRoute), que tambien salta directo aca por la misma razon.
+export async function determineAuthenticatedRoute(props: LaunchProps): Promise<ExpoRouterLaunchResult> {
     switch (props.launchType) {
         case Launch.DeepLink: {
             if (props.extra?.type !== DeepLink.MagicLink) {

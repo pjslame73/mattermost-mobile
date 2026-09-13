@@ -140,7 +140,20 @@ async function handleWarmMagicLink(path: string) {
         return null;
     }
 
-    const {error} = await handleDeepLink(parsed);
+    const result = await handleDeepLink(parsed);
+
+    // Faltan los terminos de uso: handleDeepLink YA empujo la pantalla de
+    // terminos (navigateToScreen(TERMS_GATE, ...), dentro de deep_link/index.ts)
+    // y devuelve error:false porque esperar la aceptacion no es un fallo. Sin
+    // este chequeo, el codigo de abajo veia ese mismo error:false, lo
+    // confundia con un login YA exitoso, y forzaba ir al Home por encima de la
+    // pantalla de terminos que se acababa de mostrar -- la app quedaba en
+    // blanco, peleando dos navegaciones casi simultaneas. Mismo bug que se
+    // encontro y arreglo en app/init/launch.ts (case Launch.DeepLink) para el
+    // arranque en frio; esta es la mitad "en caliente", codigo separado.
+    if (result.termsRequired) {
+        return null;
+    }
 
     // Canjear no alcanza: hay que LLEVAR a la app adentro.
     //
@@ -155,7 +168,7 @@ async function handleWarmMagicLink(path: string) {
     // el useDidMount de use_home_effects volveria a canjear el MISMO token que
     // se acaba de quemar, y fuera de la ventana de gracia eso da "este enlace ya
     // se uso" sobre un ingreso que estuvo bien.
-    if (!error) {
+    if (!result.error) {
         const serverUrl = await DatabaseManager.getActiveServerUrl();
         navigateToScreen(Screens.HOME, {serverUrl, launchType: Launch.Normal}, true);
     }
