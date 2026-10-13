@@ -4,6 +4,8 @@
 import React, {type ComponentProps} from 'react';
 import {defineMessage} from 'react-intl';
 
+import {SHOW_BOT_TAG} from '@constants/socratix';
+
 import Tag from './base_tag';
 
 const botMessage = defineMessage({
@@ -17,6 +19,10 @@ const BotTag = ({
     size,
     testID,
 }: BotTagProps) => {
+    if (!SHOW_BOT_TAG) {
+        return null;
+    }
+
     return (
         <Tag
             message={botMessage}

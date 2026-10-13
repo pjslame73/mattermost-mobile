@@ -43,6 +43,20 @@ export const SHOW_PLUS_MENU: boolean = false;
 export const SHOW_USERS_IN_CHANNEL_SEARCH: boolean = false;
 
 /**
+ * Etiqueta "BOT" junto al nombre de las cuentas bot.
+ *
+ * Mattermost no tiene configuracion para ocultarla: la app la dibuja siempre
+ * que el autor es una cuenta bot o el mensaje viene de un webhook. Se apaga en
+ * BotTag y no en cada pantalla que la usa (encabezado del mensaje, perfil,
+ * intro y titulo del mensaje directo, listas de usuarios) para tocar un solo
+ * archivo de upstream.
+ *
+ * En Socratix el alumno conversa con el motor socratico como con un docente;
+ * la etiqueta no le aporta nada y rompe esa experiencia.
+ */
+export const SHOW_BOT_TAG: boolean = false;
+
+/**
  * server_error_id con el que el puente avisa que faltan los terminos de uso.
  *
  * Lo define server/terminos.go del plugin com.conversa.mm-bridge. Se compara

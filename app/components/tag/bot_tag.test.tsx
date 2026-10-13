@@ -14,7 +14,28 @@ jest.mock('./base_tag', () => ({
 }));
 jest.mocked(Tag).mockImplementation((props) => React.createElement('Tag', {...props}));
 
+const mockFlags = {SHOW_BOT_TAG: true};
+jest.mock('@constants/socratix', () => ({
+    get SHOW_BOT_TAG() {
+        return mockFlags.SHOW_BOT_TAG;
+    },
+}));
+
 describe('BotTag', () => {
+    beforeEach(() => {
+        mockFlags.SHOW_BOT_TAG = true;
+    });
+
+    it('should render nothing when SHOW_BOT_TAG is off', () => {
+        mockFlags.SHOW_BOT_TAG = false;
+
+        const {queryByTestId} = renderWithIntlAndTheme(
+            <BotTag testID='bot-tag'/>,
+        );
+
+        expect(queryByTestId('bot-tag')).toBeNull();
+    });
+
     it('should render with the correct props', () => {
         const {getByTestId} = renderWithIntlAndTheme(
             <BotTag
